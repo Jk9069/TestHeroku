@@ -18,7 +18,7 @@ def WeatherWebhook():
 
 	#prints out the post request (viewing purposes only)
 	print("Request:\n");
-	print(json.dumps(req, indent=4))
+	print(json.dumps(postReq, indent=4))
 
 	#pass the post request to another function to obtain a result from API
 	apiResult = getWebhookResult(postReq)
