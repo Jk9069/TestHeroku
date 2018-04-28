@@ -1,7 +1,7 @@
 {
 	"name": "API.AI Test",
 	"description": "Test Heroku deployment for API.AI",
-	"repository": "",
-	"logo": "",
+	"repository": "https://github.com/Jk9069/TestHeroku",
+	"logo": "http://xvir.github.io/img/apiai.png",
 	"keywords": ["static", "express"] 
 }
