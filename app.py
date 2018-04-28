@@ -38,9 +38,10 @@ def getWebhookResult(postReq):
 		speech = "The weather is clear";
 
 		return {
-			"speech": speech,
-			"displayText": speech,
-
+			#"speech": speech,
+			#"displayText": speech,
+			"fulfillmentText": speech,
+			"source": 'Ju'	
 		}
 
 
