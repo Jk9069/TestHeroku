@@ -33,7 +33,7 @@ def WeatherWebhook():
 	return finResult
 
 def getWebhookResult(postReq):
-	if req.get("result").get("action") == "weather":
+	if postReq.get("queryResult").get("action") == "weather":
 		
 		speech = "The weather is clear";
 
