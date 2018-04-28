@@ -25,7 +25,7 @@ def WeatherWebhook():
 
 	#print out result (viewing purposes only)
 	apiResult = json.dumps(apiResult, indent=4)
-	print(result)
+	print(apiResult)
 
 	#return result to chatbot to respond to user
 	finResult = make_response(apiResult)
