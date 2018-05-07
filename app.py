@@ -35,13 +35,18 @@ def WeatherWebhook():
 def getWebhookResult(postReq):
 	if postReq.get("queryResult").get("action") == "weather":
 		
-		speech = "The weather is clear";
+		#making request to OpenWeather API		
+		#speech = "The weather is clear";
+		weatherUrl = "api.openweathermap.org/data/2.5/weather?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
+		weatherResult = json.loads(urllib.urlopen(weatherUrl).read())
+
+		speech = "Today, the weather is " + weatherResult.get('weather').get('main')
 
 		return {
 			#"speech": speech,
 			#"displayText": speech,
 			"fulfillmentText": speech,
-			"source": 'Ju'	
+			"source": 'OpenWeatherAPI'	
 		}
 
 
