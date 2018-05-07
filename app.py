@@ -77,6 +77,7 @@ def getWebhookResult(postReq):
 			#weatherData is a JSON list
 			weatherData = weatherResult.get('list')
 			shortlistedData = []
+			shortlistedTemp = []
 			found = False
 			for item in weatherData:
 				#get date of the forecast
@@ -90,18 +91,21 @@ def getWebhookResult(postReq):
 					found = True
 					if (forecastTime >= startTime and forecastTime <= endTime):
 						shortlistedData.append(item['weather'])
+						shortlistedTemp.append(item['main'].get('temp'))
 				elif (found == True):
 					break
 
 			#randomly select shortlisted data and get the weather
 			#provided range is between -1 and the size of the shortlisted data
-			mainWeather = shortlistedData[random.randint(0, (len(shortlistedData)-1))]
+			randomInt = random.randint(0, (len(shortlistedData)-1))
+			mainWeather = shortlistedData[randomInt]
 			for item in mainWeather:
 				mainWeather = item['main']
+				mainTemp = shortlistedTemp[randomInt]
 
 
 			speech = (
-				"Expected weather is " + mainWeather
+				"Expected weather is " + mainWeather + " at " + mainTemp + " Celsius."
 			)
 
 		return {
