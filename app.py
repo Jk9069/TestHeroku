@@ -105,7 +105,7 @@ def getWebhookResult(postReq):
 
 
 			speech = (
-				"Expected weather is " + mainWeather + " at " + mainTemp + " Celsius."
+				"Expected weather is " + mainWeather + " at " + str(mainTemp) + " Celsius."
 			)
 
 		return {
