@@ -39,12 +39,18 @@ def getWebhookResult(postReq):
 		#speech = "The weather is clear";
 		weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
 		weatherResult = json.loads(urllib.request.urlopen(weatherUrl).read())
+		print(weatherResult)
 
+		#weatherData is a JSON list
 		weatherData = weatherResult.get('weather')
 		for item in weatherData:
 			mainWeather = item['main']
 
-		speech = "Today, the weather is " + mainWeather
+		tempMinRange = weatherResult.get('main').get('temp_min')
+		tempMaxRange = weatherResult.get('main').get('temp_max')
+
+		speech = mainWeather + " with temperatures ranging from " + tempMinRange +
+				" to " + tempMaxRange + " Celsius in " + weatherResult.get('name')
 
 		return {
 			#"speech": speech,
