@@ -1,6 +1,7 @@
 import urllib
 import json
 import os
+import random
 
 from flask import Flask
 from flask import request
@@ -33,27 +34,69 @@ def WeatherWebhook():
 	return finResult
 
 def getWebhookResult(postReq):
-	if postReq.get("queryResult").get("action") == "weather":
-		
-		#making request to OpenWeather API		
-		#speech = "The weather is clear";
-		weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
-		weatherResult = json.loads(urllib.request.urlopen(weatherUrl).read())
-		print(weatherResult)
+	postedReq = postReq.get("queryResult")
+	postedReqParams = postReq.get("queryResult").get("parameters")
 
-		#weatherData is a JSON list
-		weatherData = weatherResult.get('weather')
-		for item in weatherData:
-			mainWeather = item['main']
+	if postedReq.get("action") == "weather":
+		if (postedReqParams.get("date") == "" && postedReqParams.get("time-period") == "" && postedReqParams.get("location") == ""):
+			#making request to OpenWeather API		
+			#speech = "The weather is clear";
+			weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
+			weatherResult = json.loads(urllib.request.urlopen(weatherUrl).read())
+			print(weatherResult)
 
-		tempMinRange = weatherResult.get('main').get('temp_min')
-		tempMaxRange = weatherResult.get('main').get('temp_max')
+			#weatherData is a JSON list
+			weatherData = weatherResult.get('weather')
+			for item in weatherData:
+				mainWeather = item['main']
 
-		speech = (
-			mainWeather + " with temperatures ranging from " 
-			+ str(tempMinRange) + " to " + str(tempMaxRange) + " Celsius in " 
-			+ weatherResult.get('name')
-		)
+			tempMinRange = weatherResult.get('main').get('temp_min')
+			tempMaxRange = weatherResult.get('main').get('temp_max')
+
+			speech = (
+				mainWeather + " with temperatures ranging from " 
+				+ str(tempMinRange) + " to " + str(tempMaxRange) + " Celsius right now in " 
+				+ weatherResult.get('name')
+			)
+
+		elif (postedReqParams.get("time-period") != ""):
+			startTime = postedReqParams.get("time-period").get("startTime")
+			#slice the string to get hour, slice 11 characters from front and 12 from the back
+			startTime = startTime[11:-12]
+			print(startTime)
+			endTime = postedReqParams.get("time-period").get("endTime")
+			endTime = endTime[11:-12]
+			print(endTime)
+
+			weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
+			weatherResult = json.loads(urllib.request.urlopen(weatherUrl).read())
+			print(weatherResult)
+
+			#get date of the forecast
+			forecastDate = weatherResult.get('dt_txt') 
+			forecastDate = forecastDate[11:-6]
+			print(forecastDate)
+
+			#weatherData is a JSON list
+			weatherData = weatherResult.get('list')
+			shortlistedData = []
+			for item in weatherData:
+				if (forecastDate >= startTime && forecastDate <= endTime):
+					for data_item in item['weather']:
+						#mainWeather = data_item['main']
+						shortlistedData.append(item['weather'])
+
+
+			#randomly select shortlisted data and get the weather
+			#provided range is between -1 and the size of the shortlisted data
+			mainWeather = shortlistedData[random.randint(-1, len(shortlistedData))]
+			for item in mainWeather:
+				mainWeather = item['main']
+
+
+			speech = (
+				"Expected weather is " + mainWeather
+			)
 
 		return {
 			#"speech": speech,
