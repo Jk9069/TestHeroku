@@ -90,7 +90,7 @@ def getWebhookResult(postReq):
 					found = True
 					if (forecastTime >= startTime and forecastTime <= endTime):
 						shortlistedData.append(item['weather'])
-				elif (found == True)
+				elif (found == True):
 					break
 
 			#randomly select shortlisted data and get the weather
