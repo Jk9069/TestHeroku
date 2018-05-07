@@ -108,6 +108,36 @@ def getWebhookResult(postReq):
 				"Expected weather is " + mainWeather + " at " + str(mainTemp) + " Celsius."
 			)
 
+		elif (postedReqParams.get("date") != ""):
+			queryDate = postedReqParams.get("date")
+			queryDate = queryDate[0:-15]
+
+			weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
+			weatherResult = json.loads(urllib.request.urlopen(weatherUrl).read())
+			print(weatherResult)
+
+			#weatherData is a JSON list
+			weatherData = weatherResult.get('list')
+			found = False
+			for item in weatherData:
+				#get date of the forecast
+				forecastTime = item['dt_txt']
+				forecastDate = forecastTime[0:-9]
+				print(forecastDate)
+
+				if (queryDate == forecastDate):
+					found = True
+					mainWeather = item['weather'].get('main')
+					mainTemp = item['main'].get('temp')
+					break;
+				elif (found == True):
+					break
+
+
+			speech = (
+				"Expected weather is " + mainWeather + " at " + str(mainTemp) + " Celsius."
+			)
+
 		return {
 			#"speech": speech,
 			#"displayText": speech,
