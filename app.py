@@ -49,8 +49,7 @@ def getWebhookResult(postReq):
 		tempMinRange = weatherResult.get('main').get('temp_min')
 		tempMaxRange = weatherResult.get('main').get('temp_max')
 
-		speech = mainWeather + " with temperatures ranging from " + tempMinRange +
-				" to " + tempMaxRange + " Celsius in " + weatherResult.get('name')
+		speech = mainWeather + " with temperatures ranging from " + tempMinRange + " to " + tempMaxRange + " Celsius in " + weatherResult.get('name')
 
 		return {
 			#"speech": speech,
