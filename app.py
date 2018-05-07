@@ -61,6 +61,8 @@ def getWebhookResult(postReq):
 
 		elif (postedReqParams.get("time-period") != ""):
 			startTime = postedReqParams.get("time-period").get("startTime")
+			queryDate = startTime[0:-15]
+			print(queryDate)
 			#slice the string to get hour, slice 11 characters from front and 12 from the back
 			startTime = startTime[11:-12]
 			print(startTime)
@@ -77,12 +79,15 @@ def getWebhookResult(postReq):
 			shortlistedData = []
 			for item in weatherData:
 				#get date of the forecast
-				forecastDate = item['dt_txt']
-				forecastDate = forecastDate[11:-6]
+				forecastTime = item['dt_txt']
+				forecastDate = forecastTime[0:-9]
 				print(forecastDate)
+				forecastTime = forecastTime[11:-6]
+				print(forecastTime)
 
-				if (forecastDate >= startTime and forecastDate <= endTime):
-					shortlistedData.append(item['weather'])
+				if (queryDate == forecastDate):
+					if (forecastTime >= startTime and forecastTime <= endTime):
+						shortlistedData.append(item['weather'])
 
 
 			#randomly select shortlisted data and get the weather
