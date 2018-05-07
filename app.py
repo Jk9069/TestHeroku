@@ -127,7 +127,9 @@ def getWebhookResult(postReq):
 
 				if (queryDate == forecastDate):
 					found = True
-					mainWeather = item['weather'].get('main')
+					for data_items in item['weather']:
+						mainWeather = data_items['main']
+						
 					mainTemp = item['main'].get('temp')
 					break;
 				elif (found == True):
