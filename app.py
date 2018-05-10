@@ -57,8 +57,10 @@ def getOutputContextTimePeriod(postReq):
 
 	if (timePeriod == ""):
 		speech = (" " + date)
-	else:
+	elif (timePeriod != "" and date != ""):
 		speech = (" " + date + " " + timePeriod)
+	elif (date == ""):
+		speech = (" " + timePeriod)
 
 	return speech
 
@@ -141,7 +143,7 @@ def getWebhookResult(postReq):
 			forecastDetail = getOutputContextTimePeriod(postedReq)
 
 			speech = (
-				"It is going to be " + hotCold + " for " + forecastDetail
+				"It is going to be " + hotCold + forecastDetail
 				+ ". Expected weather is " + mainWeather + " at " + str(mainTemp) + " Celsius."
 			)
 
