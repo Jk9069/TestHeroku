@@ -138,7 +138,7 @@ def getWebhookResult(postReq):
 				mainTemp = shortlistedTemp[randomInt]
 
 			hotCold = getHotCold(mainTemp)
-			forecastDetail = getOutputContextTimePeriod(postReq)
+			forecastDetail = getOutputContextTimePeriod(postedReq)
 
 			speech = (
 				"It is going to be " + hotCold + " for " + forecastDetail
@@ -173,7 +173,7 @@ def getWebhookResult(postReq):
 					break
 
 			hotCold = getHotCold(mainTemp)
-			forecastDetail = getOutputContextTimePeriod(postReq)
+			forecastDetail = getOutputContextTimePeriod(postedReq)
 
 			speech = (
 				"It is going to be " + hotCold + forecastDetail
