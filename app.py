@@ -38,9 +38,9 @@ def getHotCold(temp):
 
 	if (temp >= 30):
 		hotCold = "hot"
-	elif (temp <= 23)
+	elif (temp <= 23):
 		hotCold = "cool"
-	elif (temp > 23 and temp < 30)
+	elif (temp > 23 and temp < 30):
 		hotCold = "moderately hot"
 
 	return hotCold
@@ -57,7 +57,7 @@ def getOutputContextTimePeriod(postReq):
 
 	if (timePeriod == ""):
 		speech = (" on " + date)
-	else
+	else:
 		speech = (" " + date + " " + timePeriod)
 
 	return speech
