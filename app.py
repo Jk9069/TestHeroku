@@ -48,7 +48,7 @@ def getHotCold(temp):
 def getOutputContextTimePeriod(postReq):
 	outputContexts = postReq.get("outputContexts")
 	for item in outputContexts:
-		paramters = item["parameters"]
+		parameters = item["parameters"]
 
 	#ex: morning, afternoon, night
 	timePeriod = parameters.get("time-period.original")
