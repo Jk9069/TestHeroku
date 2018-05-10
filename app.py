@@ -56,7 +56,7 @@ def getOutputContextTimePeriod(postReq):
 	date = parameters.get("date.original")
 
 	if (timePeriod == ""):
-		speech = (" on " + date)
+		speech = (" " + date)
 	else:
 		speech = (" " + date + " " + timePeriod)
 
