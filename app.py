@@ -2,7 +2,6 @@ import urllib
 import json
 import os
 import random
-import string
 
 from flask import Flask
 from flask import request
@@ -57,9 +56,9 @@ def getOutputContextTimePeriod(postReq):
 	date = parameters.get("date.original")
 
 	if ('?' in timePeriod):
-		timePeriod = set(timePeriod.punctuation.replace('?',''))
+		timePeriod = timePeriod.replace('?','')
 	if ('?' in date):
-		date = set(date.punctuation.replace('?', ''))
+		date = date.replace('?', '')
 
 	if (timePeriod == ""):
 		speech = (" " + date)
