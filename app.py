@@ -65,7 +65,7 @@ def getOutputContextTimePeriod(postReq):
 	elif (timePeriod != "" and date != ""):
 		speech = (" " + date + " " + timePeriod)
 	elif (date == ""):
-		if (timePeriod != "tonight")
+		if (timePeriod != "tonight"):
 			speech = (" in the " + timePeriod)
 		else
 			speech = (" " + timePeriod)
