@@ -41,7 +41,7 @@ def getHotCold(temp):
 	elif (temp <= 23):
 		hotCold = "cool"
 	elif (temp > 23 and temp < 30):
-		hotCold = "moderately hot"
+		hotCold = "warm"
 
 	return hotCold
 
