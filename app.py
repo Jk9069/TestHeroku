@@ -33,6 +33,35 @@ def WeatherWebhook():
 	finResult.headers['Content_Type'] = 'application/json'
 	return finResult
 
+def getHotCold(temp):
+	hotCold = ""
+
+	if (temp >= 30):
+		hotCold = "hot"
+	elif (temp <= 23)
+		hotCold = "cool"
+	elif (temp > 23 and temp < 30)
+		hotCold = "moderately hot"
+
+	return hotCold
+
+def getOutputContextTimePeriod(postReq):
+	outputContexts = postReq.get("outputContexts")
+	for item in outputContexts:
+		paramters = item["parameters"]
+
+	#ex: morning, afternoon, night
+	timePeriod = parameters.get("time-period.original")
+	#ex: tomorrow, in 3 days
+	date = parameters.get("date.original")
+
+	if (timePeriod == ""):
+		speech = (" on " + date)
+	else
+		speech = (" " + date + " " + timePeriod)
+
+	return speech
+
 def getWebhookResult(postReq):
 	postedReq = postReq.get("queryResult")
 	postedReqParams = postReq.get("queryResult").get("parameters")
@@ -54,12 +83,16 @@ def getWebhookResult(postReq):
 			tempMinRange = weatherResult.get('main').get('temp_min')
 			tempMaxRange = weatherResult.get('main').get('temp_max')
 
+			hotCold = getHotCold(tempMaxRange)
+
 			speech = (
-				mainWeather + " with temperatures ranging from " 
-				+ str(tempMinRange) + " to " + str(tempMaxRange) + " Celsius right now in " 
-				+ weatherResult.get('name')
+				"It is going to be " + hotCold + " today. Weather is " + mainWeather + 
+				" with temperatures ranging from " 
+				+ str(tempMinRange) + " to " + str(tempMaxRange) 
+				+ " Celsius in " + weatherResult.get('name')
 			)
 
+		#handles forecasts
 		elif (postedReqParams.get("time-period") != ""):
 			startTime = postedReqParams.get("time-period").get("startTime")
 			queryDate = startTime[0:-15]
@@ -104,9 +137,12 @@ def getWebhookResult(postReq):
 				mainWeather = item['main']
 				mainTemp = shortlistedTemp[randomInt]
 
+			hotCold = getHotCold(mainTemp)
+			forecastDetail = getOutputContextTimePeriod(postReq)
 
 			speech = (
-				"Expected weather is " + mainWeather + " at " + str(mainTemp) + " Celsius."
+				"It is going to be " + hotCold + " for " + forecastDetail
+				+ ". Expected weather is " + mainWeather + " at " + str(mainTemp) + " Celsius."
 			)
 
 		elif (postedReqParams.get("date") != ""):
@@ -132,13 +168,16 @@ def getWebhookResult(postReq):
 						mainWeather = data_items['main']
 
 					mainTemp = item['main'].get('temp')
-					break;
+					break
 				elif (found == True):
 					break
 
+			hotCold = getHotCold(mainTemp)
+			forecastDetail = getOutputContextTimePeriod(postReq)
 
 			speech = (
-				"Expected weather is " + mainWeather + " at " + str(mainTemp) + " Celsius."
+				"It is going to be " + hotCold + forecastDetail
+				+ ". Expected weather is " + mainWeather + " at " + str(mainTemp) + " Celsius."
 			)
 
 		return {
