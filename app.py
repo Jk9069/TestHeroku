@@ -38,7 +38,7 @@ def getWebhookResult(postReq):
 	postedReqParams = postReq.get("queryResult").get("parameters")
 
 	if postedReq.get("action") == "weather":
-		if (postedReqParams.get("date") == "" and postedReqParams.get("time-period") == "" and postedReqParams.get("location") == ""):
+		if (postedReqParams.get("date") == "" and postedReqParams.get("time-period") == "" and postedReqParams.get("customLocation") == ""):
 			#making request to OpenWeather API		
 			#speech = "The weather is clear";
 			weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
@@ -123,13 +123,13 @@ def getWebhookResult(postReq):
 				#get date of the forecast
 				forecastTime = item['dt_txt']
 				forecastDate = forecastTime[0:-9]
-				print(forecastDate)
+				#print(forecastDate)
 
 				if (queryDate == forecastDate):
 					found = True
 					for data_items in item['weather']:
 						mainWeather = data_items['main']
-						
+
 					mainTemp = item['main'].get('temp')
 					break;
 				elif (found == True):
