@@ -55,12 +55,17 @@ def getOutputContextTimePeriod(postReq):
 	#ex: tomorrow, in 3 days
 	date = parameters.get("date.original")
 
+	if ('?' in timePeriod):
+		timePeriod = set(timePeriod.punctuation.replace('?',''))
+	if ('?' in date):
+		date = set(date.punctuation.replace('?', ''))
+
 	if (timePeriod == ""):
 		speech = (" " + date)
 	elif (timePeriod != "" and date != ""):
 		speech = (" " + date + " " + timePeriod)
 	elif (date == ""):
-		speech = (" " + timePeriod)
+		speech = (" in the " + timePeriod)
 
 	return speech
 
