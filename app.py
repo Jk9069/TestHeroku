@@ -191,10 +191,23 @@ def getWebhookResult(postReq):
 			)
 
 		return {
-			#"speech": speech,
-			#"displayText": speech,
-			"fulfillmentText": speech,
-			"source": 'OpenWeatherAPI'	
+			#"fulfillmentText": speech,
+			#"source": 'OpenWeatherAPI'
+			"fulfillmentMessages": [
+				{
+					"messages": [
+						{
+            				"displayText": "peter Got around 28 marks in maths. which is ranked 1 among 3 candidate in class 1", 
+            				"type": "simple_response"
+						},
+						{
+            				"displayText": "Amy Got around 80 marks in maths. which is ranked 1 among 3 candidate in class 1", 
+            				"type": "simple_response"
+						}
+					]
+				}
+			]
+			#"source": 'OpenWeatherAPI'	
 		}
 
 
