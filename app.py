@@ -195,9 +195,10 @@ def getWebhookResult(postReq):
 			#"displayText": speech,
 			"fulfillmentText": speech,
 			"source": 'OpenWeatherAPI',
-			"followupEvent": {
+			"followupEventInput": {
     			"name": "jk-travelPurpose",
-    			"data": {
+    			"languageCode": "en-US",
+    			"parameters": {
       				"mainWeather": mainWeather
     			}
   			}	
