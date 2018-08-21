@@ -46,7 +46,7 @@ def getWebhookResult(postReq):
 	if postedReq.get("action") == "weather":
 		weatherInfo = weatherHandler.weatherResponse()
 		weatherInfo.setter(postedReqParams, postedReq)
-		return weatherInfo.getWeatherResponse(postedReqParams, postedReq)
+		return weatherInfo.getWeatherResponse()
 
 	#elif postedReq.get("action") == "":
 
