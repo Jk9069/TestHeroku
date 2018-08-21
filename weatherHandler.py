@@ -31,7 +31,7 @@ class weatherResponse():
 
 	#perform housekeeping to value of the parameter
 	def getOutputContextTimePeriod(self, postReq):
-		outputContexts = self.postReq.get("outputContexts")
+		outputContexts = postReq.get("outputContexts")
 		for item in outputContexts:
 			parameters = item["parameters"]
 
