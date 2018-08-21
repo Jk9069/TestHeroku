@@ -72,6 +72,9 @@ def getOutputContextTimePeriod(postReq):
 
 	return speech
 
+#def indoorOutdoor(mainWeather):
+
+
 def getWebhookResult(postReq):
 	postedReq = postReq.get("queryResult")
 	postedReqParams = postReq.get("queryResult").get("parameters")
@@ -89,6 +92,7 @@ def getWebhookResult(postReq):
 			weatherData = weatherResult.get('weather')
 			for item in weatherData:
 				mainWeather = item['main']
+				icon = item['icon']
 
 			tempMinRange = weatherResult.get('main').get('temp_min')
 			tempMaxRange = weatherResult.get('main').get('temp_max')
@@ -145,6 +149,7 @@ def getWebhookResult(postReq):
 			mainWeather = shortlistedData[randomInt]
 			for item in mainWeather:
 				mainWeather = item['main']
+				icon = item['icon']
 				mainTemp = shortlistedTemp[randomInt]
 
 			hotCold = getHotCold(mainTemp)
@@ -176,6 +181,7 @@ def getWebhookResult(postReq):
 					found = True
 					for data_items in item['weather']:
 						mainWeather = data_items['main']
+						icon = data_items['icon']
 
 					mainTemp = item['main'].get('temp')
 					break
@@ -200,13 +206,13 @@ def getWebhookResult(postReq):
 					"card": {
 						"title": "Weather forecast",
 						"subtitle": speech,
-						"imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
-						"buttons": [
-							{
-								"text": "button text",
-								"postback": "https://assistant.google.com/"
-							}
-						]
+						"imageUri": "http://openweathermap.org/img/w/" + icon + ".png"
+						#"buttons": [
+						#	{
+						#		"text": "button text",
+						#		"postback": ""
+						#	}
+						#]
 					}
 				},
 				{
@@ -217,6 +223,7 @@ def getWebhookResult(postReq):
 					}
 				},
 				{
+					#have to change to quick replies
 					"text":{
 						"text": [
 							"Do you want me to suggest indoor places to visit?"
