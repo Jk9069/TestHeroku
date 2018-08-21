@@ -3,8 +3,6 @@ import json
 import os
 import random
 
-import weatherHandler
-
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -44,6 +42,7 @@ def getWebhookResult(postReq):
 
 	#action / context will be used to determine what action is taken
 	if postedReq.get("action") == "weather":
+		import weatherHandler
 		return weatherHandler.getWeatherResponse(postedReqParams, postedReq)
 
 	#elif postedReq.get("action") == "":
