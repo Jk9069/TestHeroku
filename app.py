@@ -212,7 +212,13 @@ def getWebhookResult(postReq):
 				{
 					"text": {
 						"text": [
-							"Might be better to stay dry indoors.",
+							"Might be better to stay dry indoors."
+						]
+					}
+				},
+				{
+					"text":{
+						"text": [
 							"Do you want me to suggest indoor places to visit?"
 						]
 					}
