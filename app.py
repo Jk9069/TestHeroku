@@ -193,7 +193,33 @@ def getWebhookResult(postReq):
 		return {
 			#"speech": speech,
 			#"displayText": speech,
-			"fulfillmentText": speech,
+			#"fulfillmentText": speech,
+			"fulfillmentText": "This is optional",
+			"fulfillmentMessages": [
+				{
+					"card": {
+						"title": "Weather forecast",
+						"subtitle": speech,
+						"imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
+						"buttons": [
+							{
+								"text": "button text",
+								"postback": "https://assistant.google.com/"
+							}
+						]
+					}
+				},
+				{
+					"messages": {
+						"replies": [
+							"Yes",
+							"No"
+						],
+						"title": "Might be better to stay indoors. Would you like me to suggest indoor places for you to visit?",
+						"type": 2
+					}
+				}
+			],
 			"source": 'OpenWeatherAPI'	
 		}
 
