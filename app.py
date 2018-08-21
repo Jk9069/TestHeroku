@@ -210,13 +210,11 @@ def getWebhookResult(postReq):
 					}
 				},
 				{
-					"messages": {
-						"replies": [
-							"Yes",
-							"No"
-						],
-						"title": "Might be better to stay indoors. Would you like me to suggest indoor places for you to visit?",
-						"type": 2
+					"text": {
+						"text": [
+							"Might be better to stay dry indoors.",
+							"Do you want me to suggest indoor places to visit?"
+						]
 					}
 				}
 			],
