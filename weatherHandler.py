@@ -17,7 +17,7 @@ class weatherResponse():
 		self.postedReq = postedReq
 
 	#define what temperature is considered hot / cool / warm
-	def getHotCold(temp):
+	def getHotCold(self, temp):
 		hotCold = ""
 
 		if (temp >= 30):
@@ -30,7 +30,7 @@ class weatherResponse():
 		return hotCold
 
 	#perform housekeeping to value of the parameter
-	def getOutputContextTimePeriod(postReq):
+	def getOutputContextTimePeriod(self, postReq):
 		outputContexts = self.postReq.get("outputContexts")
 		for item in outputContexts:
 			parameters = item["parameters"]
