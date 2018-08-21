@@ -5,7 +5,7 @@ class weatherResponse():
 #		self.postedReqParams = postedReqParams
 #		self.postedReq = postedReq
 
-	def setter(postedReqParams, postedReq):
+	def setter(self, postedReqParams, postedReq):
 		self.postedReqParams = postedReqParams
 		self.postedReq = postedReq
 
