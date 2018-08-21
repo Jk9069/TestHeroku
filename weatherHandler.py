@@ -1,7 +1,11 @@
 
 
-class weatherResponse(postedReqParams, postedReq):
-	def __init__(self, params):
+class weatherResponse():
+#	def __init__(self, postedReqParams, postedReq):
+#		self.postedReqParams = postedReqParams
+#		self.postedReq = postedReq
+
+	def setter(postedReqParams, postedReq):
 		self.postedReqParams = postedReqParams
 		self.postedReq = postedReq
 
