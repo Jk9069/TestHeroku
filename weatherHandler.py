@@ -53,7 +53,7 @@ class weatherResponse():
 
 	def getWeatherResponse(self):
 		#user just says 'weather'
-			if ((postedReqParams.get("date") == "" and postedReqParams.get("time-period") == "" and postedReqParams.get("customLocation") == "") or (postedReqParams.get("customLocation") == "Penang" or postedReqParams.get("customLocation") == "Pulau Pinang")):
+			if ((self.postedReqParams.get("date") == "" and self.postedReqParams.get("time-period") == "" and self.postedReqParams.get("customLocation") == "") or (self.postedReqParams.get("customLocation") == "Penang" or self.postedReqParams.get("customLocation") == "Pulau Pinang")):
 				#making request to OpenWeather API		
 				#speech = "The weather is clear";
 				weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
@@ -79,14 +79,14 @@ class weatherResponse():
 				)
 
 			#handles forecasts
-			elif (postedReqParams.get("time-period") != ""):
-				startTime = postedReqParams.get("time-period").get("startTime")
+			elif (self.postedReqParams.get("time-period") != ""):
+				startTime = self.postedReqParams.get("time-period").get("startTime")
 				queryDate = startTime[0:-15]
 				print(queryDate)
 				#slice the string to get hour, slice 11 characters from front and 12 from the back
 				startTime = startTime[11:-12]
 				print(startTime)
-				endTime = postedReqParams.get("time-period").get("endTime")
+				endTime = self.postedReqParams.get("time-period").get("endTime")
 				endTime = endTime[11:-12]
 				print(endTime)
 
@@ -125,15 +125,15 @@ class weatherResponse():
 					mainTemp = shortlistedTemp[randomInt]
 
 				hotCold = getHotCold(mainTemp)
-				forecastDetail = getOutputContextTimePeriod(postedReq)
+				forecastDetail = getOutputContextTimePeriod(self.postedReq)
 
 				speech = (
 					"It is going to be " + hotCold + forecastDetail
 					+ ". Expected weather is " + mainWeather + " at " + str(mainTemp) + " Celsius."
 				)
 
-			elif (postedReqParams.get("date") != ""):
-				queryDate = postedReqParams.get("date")
+			elif (self.postedReqParams.get("date") != ""):
+				queryDate = self.postedReqParams.get("date")
 				queryDate = queryDate[0:-15]
 
 				weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
@@ -161,7 +161,7 @@ class weatherResponse():
 						break
 
 				hotCold = getHotCold(mainTemp)
-				forecastDetail = getOutputContextTimePeriod(postedReq)
+				forecastDetail = getOutputContextTimePeriod(self.postedReq)
 
 				speech = (
 					"It is going to be " + hotCold + forecastDetail
