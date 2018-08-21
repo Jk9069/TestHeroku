@@ -16,7 +16,7 @@ class weatherResponse():
 		self.postedReq = postedReq
 
 	#define what temperature is considered hot / cool / warm
-	def getHotCold(self, temp):
+	def getHotCold(temp):
 		hotCold = ""
 
 		if (temp >= 30):
@@ -29,8 +29,8 @@ class weatherResponse():
 		return hotCold
 
 	#perform housekeeping to value of the parameter
-	def getOutputContextTimePeriod(self, postReq):
-		outputContexts = postReq.get("outputContexts")
+	def getOutputContextTimePeriod(postReq):
+		outputContexts = self.postReq.get("outputContexts")
 		for item in outputContexts:
 			parameters = item["parameters"]
 
@@ -75,7 +75,7 @@ class weatherResponse():
 				tempMinRange = weatherResult.get('main').get('temp_min')
 				tempMaxRange = weatherResult.get('main').get('temp_max')
 
-				hotCold = getHotCold(tempMaxRange)
+				hotCold = self.getHotCold(tempMaxRange)
 
 				speech = (
 					"It is going to be " + hotCold + " today. Weather is " + mainWeather + 
@@ -130,8 +130,8 @@ class weatherResponse():
 					icon = item['icon']
 					mainTemp = shortlistedTemp[randomInt]
 
-				hotCold = getHotCold(mainTemp)
-				forecastDetail = getOutputContextTimePeriod(self.postedReq)
+				hotCold = self.getHotCold(mainTemp)
+				forecastDetail = self.getOutputContextTimePeriod(self.postedReq)
 
 				speech = (
 					"It is going to be " + hotCold + forecastDetail
@@ -166,8 +166,8 @@ class weatherResponse():
 					elif (found == True):
 						break
 
-				hotCold = getHotCold(mainTemp)
-				forecastDetail = getOutputContextTimePeriod(self.postedReq)
+				hotCold = self.getHotCold(mainTemp)
+				forecastDetail = self.getOutputContextTimePeriod(self.postedReq)
 
 				speech = (
 					"It is going to be " + hotCold + forecastDetail
