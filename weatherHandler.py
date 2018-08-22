@@ -60,7 +60,7 @@ class weatherResponse():
 
 	def mainWeatherMessage(self, mainWeather):
 		if ('Clear' in mainWeather):
-			text = "What a great day for a picnic."
+			text = "Any plans for such weather?"
 		elif ('Clouds' in mainWeather):
 			text = "Let's hope it doesn't rain anytime soon!"
 		elif ('Rain' in mainWeather or 'drizzle' in mainWeather):
@@ -224,5 +224,16 @@ class weatherResponse():
 						}
 					}
 				],
-				"source": 'OpenWeatherAPI'	
+				"source": 'OpenWeatherAPI',
+				"outputContexts": [
+					{
+					    "lifespanCount": 5,
+					    "parameters": {
+					    	"mainWeather": mainWeather
+					    }
+					}
+				]	
 			}
+
+
+
