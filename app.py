@@ -55,10 +55,25 @@ def getWebhookResult(postReq):
 		for item in outputContexts:
 			parameters = item["parameters"]
 
+		#obtained weather condition from prev intent, 
+		#based on weather condition, decide what kind of place to suggest
 		weather = parameters.get("mainWeather")
+		#array to store place types
+		placeTypes = []
+
+		if ('Clear' in weather):
+			placeTypes.append('zoo')
+			placeTypes.append('park')
+		elif ('Clouds'):
+			placeTypes.append('library')
+		elif ('Rain'):
+			placeTypes.append('shopping_mall')
+		elif ('Thunderstorm'):
+			placeTypes.append('movie_theater')
+
 
 		return {
-			"fulfillmentText": weather
+			"fulfillmentText": placeTypes
 		}
 
 
