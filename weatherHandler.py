@@ -211,7 +211,7 @@ class weatherResponse():
 					{
 						"text": {
 							"text": [
-								self.mainWeatherMessage(mainWeather);
+								self.mainWeatherMessage(mainWeather)
 							]
 						}
 					},
