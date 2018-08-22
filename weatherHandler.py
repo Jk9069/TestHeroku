@@ -59,13 +59,13 @@ class weatherResponse():
 		return speech
 
 	def mainWeatherMessage(self, mainWeather):
-		if ('clear' in mainWeather):
+		if ('Clear' in mainWeather):
 			text = "What a great day for a picnic."
-		elif ('clouds' in mainWeather):
+		elif ('Clouds' in mainWeather):
 			text = "Let's hope it doesn't rain anytime soon!"
-		elif ('rain' in mainWeather or 'drizzle' in mainWeather):
+		elif ('Rain' in mainWeather or 'drizzle' in mainWeather):
 			text = "Aww, I miss the sun already."
-		elif ('thunderstorm' in mainWeather):
+		elif ('Thunderstorm' in mainWeather):
 			text = "Yikes! Remember to stay dry indoors."
 		else:
 			text = "Weather in Penang is so predictable.. as long as it doesn't snow."
