@@ -52,7 +52,7 @@ def getWebhookResult(postReq):
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes":
 		return {
-			"fulfillmentText": "#weather.mainWeather"
+			"fulfillmentText": "#" + "{weather.mainWeather}"
 		}
 
 

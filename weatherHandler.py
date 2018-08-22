@@ -60,7 +60,7 @@ class weatherResponse():
 
 	def mainWeatherMessage(self, mainWeather):
 		if ('Clear' in mainWeather):
-			text = "Any plans for such weather?"
+			text = "Clear skies are the best!"
 		elif ('Clouds' in mainWeather):
 			text = "Let's hope it doesn't rain anytime soon!"
 		elif ('Rain' in mainWeather or 'drizzle' in mainWeather):
