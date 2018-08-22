@@ -43,12 +43,17 @@ def getWebhookResult(postReq):
 	postedReqParams = postReq.get("queryResult").get("parameters")
 
 	#action / context will be used to determine what action is taken
+	#user asks for weather
 	if postedReq.get("action") == "weather":
 		weatherInfo = weatherHandler.weatherResponse()
 		weatherInfo.setter(postedReqParams, postedReq)
 		return weatherInfo.getWeatherResponse()
 
-	#elif postedReq.get("action") == "":
+	#user responded 'yes' to obtain place suggestions
+	elif postedReq.get("action") == "GetWeather.GetWeather-yes":
+		return {
+			"fulfillmentText": "#weather.mainWeather"
+		}
 
 
 #main
