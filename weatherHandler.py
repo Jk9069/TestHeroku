@@ -227,7 +227,7 @@ class weatherResponse():
 				"source": 'OpenWeatherAPI',
 				"outputContexts": [
 					{
-						"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather",
+						"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/weather",
 					    "lifespanCount": 5,
 					    "parameters": {
 					    	"mainWeather": mainWeather
