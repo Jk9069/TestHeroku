@@ -45,6 +45,9 @@ class weatherPlaceRecommendations():
 
 		#pluck information from placeResult, open now?
 		results = placeResult.get("results")
+
+		print(results)
+
 		for items in results:
 			print(item["name"])
 
