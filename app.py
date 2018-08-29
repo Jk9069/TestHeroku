@@ -46,46 +46,13 @@ def getWebhookResult(postReq):
 	#user asks for weather
 	if postedReq.get("action") == "weather":
 		weatherInfo = weatherHandler.weatherResponse(postedReqParams, postedReq)
-		#weatherInfo.setter(postedReqParams, postedReq)
 		return weatherInfo.getWeatherResponse()
 
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes":
-		outputContexts = postReq.get("queryResult").get("outputContexts")
-		for item in outputContexts:
-			parameters = item["parameters"]
-
-		#obtained weather condition saved from prev intent, 
-		#based on weather condition, decide what kind of place to suggest
-		weather = parameters.get("mainWeather")
-		
-		#array to store place types, 
-		#stores places that user can go on sunny weather
-		placeTypes = [
-			'zoo', 'park', 'amusement_park', 'aquarium', 'art_gallery',
-			'bar', 'bowling_alley', 'cafe', 'department_store',
-			'library', 'movie_theater', 'museum', 'night_club', 'restaurant',
-			'shopping_mall', 'spa', 'points of interest'
-		]
-
-		if ('Clear' in weather):
-			placeTypes.append('zoo')
-			placeTypes.append('park')
-			placeTypes.append('amusement_park')
-
-		elif ('Clouds'):
-			placeTypes.append('library')
-		elif ('Rain'):
-			placeTypes.append('shopping_mall')
-		elif ('Thunderstorm'):
-			placeTypes.append('movie_theater')
-			placeTypes.append('')
-
-
-		return {
-			"fulfillmentText": placeTypes
-		}
-
+		weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(postedReq)
+		return weatherRecommend.requestPlaces()
+					
 
 #main
 if __name__ == "__main__":

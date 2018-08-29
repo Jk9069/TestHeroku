@@ -12,10 +12,6 @@ class weatherResponse():
 		self.postedReqParams = postedReqParams
 		self.postedReq = postedReq
 
-	#def setter(self, postedReqParams, postedReq):
-	#	self.postedReqParams = postedReqParams
-	#	self.postedReq = postedReq
-
 	#define what temperature is considered hot / cool / warm
 	def getHotCold(self, temp):
 		hotCold = ""
