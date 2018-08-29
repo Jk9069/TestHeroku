@@ -16,22 +16,15 @@ class weatherPlaceRecommendations():
 		'shopping_mall', 'spa', 'points of interest', 'casino'
 	]
 
-	def __init__ (self, postedReq):
-		self.postedReq = postedReq
-
-		outputContexts = postedReq.get("queryResult").get("outputContexts")
-		for item in outputContexts:
-			parameters = item["parameters"]
-
-		#obtained weather condition saved from prev intent, 
-		#based on weather condition, decide what kind of place to suggest
-		self.weather = parameters.get("mainWeather")
+	def __init__ (self, weather):
+		global placeTypes
+		self.weather = weather
 
 		#remove outdoor places from recommendations
 		if ('Rain' in self.weather or 'Thunderstorm' in self.weather):
-			self.placeTypes.remove('zoo')
-			self.placeTypes.remove('park')
-			self.placeTypes.remove('amusement_park')
+			placeTypes.remove('zoo')
+			placeTypes.remove('park')
+			placeTypes.remove('amusement_park')
 
 	#from placeTypes search for places in Google Places API
 	def requestPlaces(self):
