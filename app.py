@@ -4,6 +4,7 @@ import os
 import random
 
 import weatherHandler
+import weatherRecommendations
 
 from flask import Flask
 from flask import request
