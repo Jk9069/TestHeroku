@@ -8,13 +8,13 @@ from flask import request
 from flask import make_response
 
 class weatherResponse():
-#	def __init__(self, postedReqParams, postedReq):
-#		self.postedReqParams = postedReqParams
-#		self.postedReq = postedReq
-
-	def setter(self, postedReqParams, postedReq):
+	def __init__(self, postedReqParams, postedReq):
 		self.postedReqParams = postedReqParams
 		self.postedReq = postedReq
+
+	#def setter(self, postedReqParams, postedReq):
+	#	self.postedReqParams = postedReqParams
+	#	self.postedReq = postedReq
 
 	#define what temperature is considered hot / cool / warm
 	def getHotCold(self, temp):
