@@ -30,7 +30,8 @@ class weatherPlaceRecommendations():
 
 	#from placeTypes search for places in Google Places API
 	def requestPlaces(self):
-		global placeTypes, placeNames
+		global placeTypes
+		global placeNames
 
 		#coordinates of penang: 5.285153 (lat), 100.456238 (long) - search Penang in general 
 		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs"
