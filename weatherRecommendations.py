@@ -19,21 +19,22 @@ class weatherPlaceRecommendations():
 	placeNames = []
 
 	def __init__ (self, weather):
+		global placeTypes
 		self.weather = weather
 
-	#from placeTypes search for places in Google Places API
-	def requestPlaces(self):
-		#coordinates of penang: 5.285153 (lat), 100.456238 (long) - search Penang in general 
-		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs"
-		
-		global placeTypes, placeNames
-		
 		#remove outdoor places from recommendations
 		if ('Rain' in self.weather or 'Thunderstorm' in self.weather):
 			placeTypes.remove('zoo')
 			placeTypes.remove('park')
 			placeTypes.remove('amusement_park')
 
+	#from placeTypes search for places in Google Places API
+	def requestPlaces(self):
+		global placeTypes, placeNames
+
+		#coordinates of penang: 5.285153 (lat), 100.456238 (long) - search Penang in general 
+		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs"
+		
 		#generate random placeType and append to requestLink
 		requestLink = requestLink + "&type=" + placeTypes[random.randint(0, len(placeTypes))]
 		#post url
