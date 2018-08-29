@@ -46,7 +46,7 @@ class weatherPlaceRecommendations():
 		#pluck information from placeResult, open now?
 		results = placeResult.get("results")
 		for items in results:
-			placeNames.append(item["name"])
+			print(item["name"])
 
 		#get place ID and get image, website
 
@@ -58,13 +58,8 @@ class weatherPlaceRecommendations():
 							"Okay, here goes nothing!"
 						]
 					}
-				},
-				{
-					"text": {
-						"text": [
-							placeNames[0]
-						]
-					}
+				}
+				#{
 					#"card": {
 						#	"title": "name",
 						#	"subtitle": rating? address?,
@@ -76,7 +71,7 @@ class weatherPlaceRecommendations():
 							#	}
 							#]
 						#}
-				}
+				#}
 			],
 
 			"source": 'Google Places API'
