@@ -31,7 +31,7 @@ class weatherPlaceRecommendations():
 
 	#from placeTypes search for places in Google Places API
 	def requestPlaces(self):
-		definedTypes = definePlaceTypes();
+		definedTypes = self.definePlaceTypes();
 
 		placeNames = []
 
