@@ -2,7 +2,6 @@ import urllib
 import json
 import os
 import random
-import emoji
 
 from flask import Flask
 from flask import request
@@ -75,15 +74,15 @@ class weatherResponse():
 
 	def weatherEmoji (self, mainWeather):
 		if ('Clear' in mainWeather):
-			emoji = emoji.emojize(':sunny::sunny::sunny:')
+			emoji = '☀️☀️☀️'
 		elif ('Clouds' in mainWeather):
-			emoji = emoji.emojize(':cloud::cloud::cloud:')
+			emoji = '☁️☁️☁️'
 		elif ('Rain' in mainWeather):
-			emoji = emoji.emojize(':umbrella::umbrella::umbrella:')
+			emoji = '🌧️🌧️🌧️'
 		elif ('Thunderstorm' in mainWeather):
-			emoji = emoji.emojize(':zap::zap::zap:')
+			emoji = '⛈️⛈️⛈️'
 		else:
-			emoji = emoji.emojize(':bulb:')
+			emoji = '💡'
 
 		return emoji
 
