@@ -55,7 +55,7 @@ def getWebhookResult(postReq):
 		for item in outputContexts:
 			parameters = item["parameters"]
 
-		#obtained weather condition from prev intent, 
+		#obtained weather condition saved from prev intent, 
 		#based on weather condition, decide what kind of place to suggest
 		weather = parameters.get("mainWeather")
 		#array to store place types

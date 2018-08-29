@@ -2,6 +2,7 @@ import urllib
 import json
 import os
 import random
+import emoji
 
 from flask import Flask
 from flask import request
@@ -71,6 +72,20 @@ class weatherResponse():
 			text = "Weather in Penang is so predictable.. as long as it doesn't snow."
 
 		return text
+
+	def weatherEmoji (self, mainWeather):
+		if ('Clear' in mainWeather):
+			emoji = emoji.emojize(':sunny::sunny::sunny:')
+		elif ('Clouds' in mainWeather):
+			emoji = emoji.emojize(':cloud::cloud::cloud:')
+		elif ('Rain' in mainWeather):
+			emoji = emoji.emojize(':umbrella::umbrella::umbrella:')
+		elif ('Thunderstorm' in mainWeather):
+			emoji = emoji.emojize(':zap::zap::zap:')
+		else:
+			emoji = emoji.emojize(':bulb:')
+
+		return emoji
 
 	def getWeatherResponse(self):
 		#user just says 'weather'
@@ -196,16 +211,28 @@ class weatherResponse():
 				"fulfillmentText": "This is optional",
 				"fulfillmentMessages": [
 					{
-						"card": {
-							"title": "Weather forecast",
-							"subtitle": speech,
-							"imageUri": "http://openweathermap.org/img/w/" + icon + ".png"
+						"text": {
+							"text": [
+								self.weatherEmoji(mainWeather)
+							]
+						}
+						#"card": {
+						#	"title": "Weather forecast",
+						#	"subtitle": speech,
+						#	"imageUri": "http://openweathermap.org/img/w/" + icon + ".png"
 							#"buttons": [
 							#	{
 							#		"text": "button text",
 							#		"postback": ""
 							#	}
 							#]
+						#}
+					},
+					{
+						"text": {
+							"text": [
+								speech
+							]
 						}
 					},
 					{
