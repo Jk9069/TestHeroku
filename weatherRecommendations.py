@@ -19,7 +19,7 @@ class weatherPlaceRecommendations():
 	def __init__ (self, postedReq):
 		self.postedReq = postedReq
 
-		outputContexts = self.postedReq.get("queryResult").get("outputContexts")
+		outputContexts = postedReq.get("queryResult").get("outputContexts")
 		for item in outputContexts:
 			parameters = item["parameters"]
 
