@@ -8,12 +8,8 @@ from flask import request
 from flask import make_response
 
 class weatherPlaceRecommendations():
-	def __init__ (self, weather):
-		self.weather = weather
-		print(self.weather)
-
 	#from placeTypes search for places in Google Places API
-	def requestPlaces(self):
+	def requestPlaces(self, weather):
 		placeTypes = [
 			'park', 'amusement_park', 'aquarium', 'art_gallery',
 			'bar', 'bowling_alley', 'cafe', 'department_store',
@@ -22,12 +18,12 @@ class weatherPlaceRecommendations():
 		]
 
 		#remove outdoor places from recommendations
-		if ('Rain' in self.weather or 'Thunderstorm' in self.weather):
+		if ('Rain' in weather or 'Thunderstorm' in weather):
 			placeTypes.remove('park')
 			placeTypes.remove('amusement_park')
 
 		#weather not printed?
-		print(self.weather)
+		print(weather)
 		print(len(placeTypes)) #shuold be 17 if weather is sunnt
 
 		#coordinates of penang: 5.4356 (lat), 100.3091 (long) - search Penang in general 
@@ -58,6 +54,9 @@ class weatherPlaceRecommendations():
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
 			#???
+
+		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
+			responseText = "Over query limit. Please try again in a few moments"
 
 		#get place ID and get image, website
 
