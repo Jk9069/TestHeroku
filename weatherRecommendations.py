@@ -38,12 +38,14 @@ class weatherPlaceRecommendations():
 		#coordinates of penang: 5.285153 (lat), 100.456238 (long) - search Penang in general 
 		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs"
 		#generate random placeType and append to requestLink
-		requestLink = requestLink + "&type=" + definedTypes[random.randint(0, len(definedTypes))]
+		requestLink = (requestLink + "&type=" + definedTypes[random.randint(0, len(definedTypes))])
 
 		print(requestLink)
 		
 		#post url
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
+
+		print(placeResult)
 
 		#pluck information from placeResult, open now?
 		results = placeResult.get("results")
