@@ -29,7 +29,6 @@ class weatherPlaceRecommendations():
 
 		#coordinates of penang: 5.4356 (lat), 100.3091 (long) - search Penang in general 
 		#generate random placeTypes and append to requestLink
-		response.header["x-api-key"] = "MbSr78YZnbagZpgKINcfb16CcksWk7zyIF8FMzm5"
 		requestLink = "https://api.sygictravelapi.com/1.0/en/places/list?parents=city:186&level=poi&limit=100"
 		#requestLink = (requestLink + "&type=" + placeTypes[random.randint(0, len(placeTypes))])
 
