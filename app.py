@@ -68,7 +68,7 @@ def getWebhookResult(postReq):
 	elif postedReq.get('action') == "getTravelPurpose":
 		purpose = postedReqParams.get('purpose')
 
-		eturn {
+		return {
 			"fulfillmentMessages": [
 				{
 					"text":{
