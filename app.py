@@ -51,12 +51,13 @@ def getWebhookResult(postReq):
 
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes":
-		#obtained weather condition saved from prev intent, 
 		outputContexts = postedReq.get("outputContexts")
 		weather = outputContexts[2].get("parameters").get("mainWeather")
 		# for item in outputContexts:
 		# 	parameters = item["parameters"]
-		
+
+		#obtained weather condition saved from prev intent, 
+		#weather = outputContextsData['queryResult']['outputContexts'][2]['parameters']['mainW']
 		print(weather)
 		
 		#based on weather condition, decide what kind of place to suggest
