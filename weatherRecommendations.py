@@ -53,7 +53,7 @@ class weatherPlaceRecommendations():
 
 		jsonResult = json.dumps(json.loads(placeResult.decode('utf8')), indent=4, sort_keys=True)
 
-		print(jsonResult)
+		print(s)
 
 		#if there are results
 		responseText = ""
