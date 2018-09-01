@@ -50,12 +50,10 @@ class weatherPlaceRecommendations():
 		#post url, with headers for sygic travel api key
 		request = urllib.request.Request(requestLink, headers={'x-api-key':'MbSr78YZnbagZpgKINcfb16CcksWk7zyIF8FMzm5'})
 		placeResult = (urllib.request.urlopen(request)).read()
-		#json.loads convert from bytes attribute to json
 		jsonResult = json.loads(placeResult.decode('utf8'))
 
-		#for viewing only 
-		#json.dumps converts to string
 		s = json.dumps(jsonResult, indent=4, sort_keys=True)
+
 		print(s)
 
 		#if there are results
@@ -67,7 +65,7 @@ class weatherPlaceRecommendations():
 			results = jsonResult.get("data").get("places")
 
 			for items in results:
-				print(items["name"])
+				print(item["name"])
 
 		#what about when no results found?
 		else:
