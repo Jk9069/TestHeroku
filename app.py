@@ -53,10 +53,7 @@ def getWebhookResult(postReq):
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes":
 		outputContexts = postedReq.get("outputContexts")
 		for item in outputContexts:
-			try: 
-				parameters = item["parameters"]
-			except KeyError:
-				continue
+			parameters = item.get('parameters', 'empty')
 
 		#obtained weather condition saved from prev intent, 
 		weather = parameters.get("mainWeather")
