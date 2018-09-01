@@ -36,9 +36,9 @@ class weatherPlaceRecommendations():
 		print(requestLink)
 		
 		# #post url
-		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
+		# placeResult = json.loads(urllib.request.urlopen(requestLink).read())
 
-		print(placeResult)
+		# print(placeResult)
 
 		# #if there are results
 		# responseText = ""
