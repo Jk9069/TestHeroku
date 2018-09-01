@@ -14,7 +14,7 @@ class weatherPlaceRecommendations():
 			'park', 'amusement_park', 'aquarium', 'art_gallery',
 			'bar', 'bowling_alley', 'cafe', 'department_store',
 			'library', 'movie_theater', 'museum', 'night_club', 'restaurant',
-			'shopping_mall', 'spa', 'points of interest', 'casino'
+			'shopping_mall', 'spa', 'points_of_interest', 'casino'
 		]
 
 		#remove outdoor places from recommendations
@@ -24,7 +24,7 @@ class weatherPlaceRecommendations():
 
 		#weather not printed?
 		print(weather)
-		print(len(placeTypes)) #shuold be 17 if weather is sunnt
+		print(len(placeTypes)) #shuold be 17 if weather is sunny
 
 		#coordinates of penang: 5.4356 (lat), 100.3091 (long) - search Penang in general 
 		#generate random placeTypes and append to requestLink
@@ -36,8 +36,9 @@ class weatherPlaceRecommendations():
 		#post url
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
 
-		print(placeResult)
-
+		s = json.dumps(placeResult, indent=4, sort_keys = True)
+		print(s)
+ 
 		responseText = ""
 
 		#if there are results
