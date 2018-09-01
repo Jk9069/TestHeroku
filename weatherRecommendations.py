@@ -35,10 +35,8 @@ class weatherPlaceRecommendations():
 		#so that can view actual results on web browser
 		print(requestLink)
 		
-		#post url
-		#placeResult = json.loads(urllib.request.urlopen(requestLink).read())
-		request = urllib.request.Request(requestLink, headers={'x-api-key':'MbSr78YZnbagZpgKINcfb16CcksWk7zyIF8FMzm5'})
-		placeResult = (urllib.request.urlopen(request)).read()
+		# #post url
+		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
 
 		print(placeResult)
 
