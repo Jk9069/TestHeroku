@@ -17,7 +17,7 @@ class weatherPlaceRecommendations():
 		placeCategory = [
 			'discovering', 'eating', 'going_out', 'hiking',
 			'playing', 'relaxing', 'shopping', 'sightseeing',
-			'doing_sports', 'traveling'			
+			'doing_sports'			
 		]
 
 		# placeTags = [
@@ -35,11 +35,11 @@ class weatherPlaceRecommendations():
 
 		#generate random placeCategory and append to requestLink
 		#&bounds=5.237559,100.347503,5.479325,100.173052
-		requestLink = "https://api.sygictravelapi.com/1.0/en/places/list?parents=city:3350&limit=20"
+		requestLink = "https://api.sygictravelapi.com/1.0/en/places/list?parents=city:3350&limit=20&location=5.4356,100.3091"
 
 		#"level=poi&"
 		#get random place category 
-		requestLink = requestLink + "&categories=" + placeCategory[random.randint(0, len(placeCategory))]
+		requestLink = requestLink + "&categories=" + placeCategory[random.randint(0, len(placeCategory)-1)]
 
 		if (stayIndoor == True):
 			requestLink = requestLink + "&tags=indoor"
