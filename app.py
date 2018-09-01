@@ -35,6 +35,7 @@ def WeatherWebhook():
 	finResult = make_response(apiResult)
 	#set HTTP headers
 	finResult.headers['Content_Type'] = 'application/json'
+	#api key for sygic travel api
 	finResult.headers["x-api-key"] = "MbSr78YZnbagZpgKINcfb16CcksWk7zyIF8FMzm5"
 
 
