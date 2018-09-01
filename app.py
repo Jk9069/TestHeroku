@@ -51,7 +51,6 @@ def getWebhookResult(postReq):
 
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes":
-		outputContextsData = json.loads(postReq)
 		outputContexts = postedReq.get("outputContexts")
 		weather = outputContexts[2].get("parameters").get("mainWeather")
 		# for item in outputContexts:
