@@ -54,8 +54,9 @@ def getWebhookResult(postReq):
 
 		outputContexts = postedReq.get("outputContexts")
 		for item in outputContexts:
-			if ('parameters' in item):
-				print (item.get('mainWeather', 'empty'))
+			if ("parameters" in item):
+				weather = item.get("parameters").get("mainWeather", 'empty')
+				print (item.get("parameters").get("mainWeather", 'empty'))
 
 		# #obtained weather condition saved from prev intent, 
 		# weather = parameters.get("mainWeather")
