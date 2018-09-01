@@ -50,10 +50,11 @@ class weatherPlaceRecommendations():
 		#post url, with headers for sygic travel api key
 		request = urllib.request.Request(requestLink, headers={'x-api-key':'MbSr78YZnbagZpgKINcfb16CcksWk7zyIF8FMzm5'})
 		placeResult = (urllib.request.urlopen(request)).read()
+		jsonResult = json.loads(placeResult.decode('utf8'))
 
-		jsonResult = json.dumps(json.loads(placeResult.decode('utf8')), indent=4, sort_keys=True)
+		s = json.dumps(jsonResult, indent=4, sort_keys=True)
 
-		print(jsonResult)
+		print(s)
 
 		#if there are results
 		responseText = ""
