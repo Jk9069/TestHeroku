@@ -28,6 +28,9 @@ class weatherPlaceRecommendations():
 		if ('Rain' in weather or 'Thunderstorm' in weather):
 			#append indoor tag?
 			stayIndoor = True
+			placeCategory.remove('going_out')
+			placeCategory.remove('hiking')
+			placeCategory.remove('doing_sports')
 
 
 		#generate random placeCategory and append to requestLink
@@ -47,19 +50,18 @@ class weatherPlaceRecommendations():
 		#post url, with headers for sygic travel api key
 		request = urllib.request.Request(requestLink, headers={'x-api-key':'MbSr78YZnbagZpgKINcfb16CcksWk7zyIF8FMzm5'})
 		placeResult = (urllib.request.urlopen(request)).read()
-		jsonResult = json.loads(placeResult.decode('utf8'))
 
-		s = json.dumps(jsonResult, indent=4, sort_keys=True)
+		jsonResult = json.dumps(json.loads(placeResult.decode('utf8')), indent=4, sort_keys=True)
 
 		print(s)
 
 		#if there are results
 		responseText = ""
-		if (placeResult.get("status_code") == 200):
+		if (jsonResult.get("status_code") == 200):
 			responseText = "Here it comes!"
 
 			#pluck information from placeResult, open now?
-			results = placeResult.get("data").get("places")
+			results = jsonResult.get("data").get("places")
 
 			for items in results:
 				print(item["name"])
