@@ -64,6 +64,21 @@ def getWebhookResult(postReq):
 		#based on weather condition, decide what kind of place to suggest
 		weatherRecommend = weatherRecommendations.weatherPlaceRecommendations()
 		return weatherRecommend.requestPlaces(weather)
+
+	elif postedReq.get('action') == "getTravelPurpose":
+		purpose = postedReqParams.get('purpose')
+
+		eturn {
+			"fulfillmentMessages": [
+				{
+					"text":{
+						"text":[
+							"Your purpose is " + purpose
+						]
+					}
+				}
+			]
+		} 
 					
 
 #main
