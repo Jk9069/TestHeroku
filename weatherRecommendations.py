@@ -37,7 +37,7 @@ class weatherPlaceRecommendations():
 		#get random place category 
 		requestLink = requestLink + "&categories=" + placeCategory[random.randint(0, len(placeCategory))]
 
-		if (stayIndoor == True):
+		if (stayIndoor == True)
 			requestLink = requestLink + "&tags=indoor"
 
 		#so that can view actual results on web browser
