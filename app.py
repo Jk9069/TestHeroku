@@ -16,11 +16,10 @@ app = Flask(__name__);
 #routes the app to webhook function
 @app.route('/WeatherWebhook', methods=['POST'])
 
-intent = 0
-
 def WeatherWebhook():
 	#get post request
 	postReq = request.get_json(silent=True, force=True)
+	setattr(x, 'intent', None)
 
 	#prints out the post request (viewing purposes only)
 	print("Request:\n");
@@ -38,8 +37,7 @@ def WeatherWebhook():
 	#set HTTP headers
 	finResult.headers['Content_Type'] = 'application/json'
 
-	global intent
-	if (intent == 1):
+	if (x.intent == 1):
 		finResult.headers["x-api-key"] = "MbSr78YZnbagZpgKINcfb16CcksWk7zyIF8FMzm5"
 
 
@@ -60,8 +58,7 @@ def getWebhookResult(postReq):
 
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes":
-		global intent
-		intent = 1
+		setattr(x, 'intent', 1)
 		# outputContexts = postedReq.get("outputContexts")
 		# for item in outputContexts:
 		# 	parameters = item["parameters"]
