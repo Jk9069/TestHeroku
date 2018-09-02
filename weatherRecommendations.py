@@ -65,7 +65,7 @@ class weatherPlaceRecommendations():
 					#add to array to be displayed
 					if (counter < 10):
 						shortlistPlaces.append(newPlace)
-						counter++
+						counter += 1
 						print(rating)
 					else:
 						break
