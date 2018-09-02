@@ -125,7 +125,4 @@ class weatherPlaceRecommendations():
 			# 	# 		}
 			# 	# }
 			# ]
-
-			data
-
 		}
