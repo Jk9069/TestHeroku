@@ -58,7 +58,11 @@ class weatherPlaceRecommendations():
 				
 				placeName = items["name"]
 				placeID = items["place_id"]
-				rating = items["rating"]
+
+				if ("rating" in items):
+					rating = items["rating"]
+				else
+					rating = '0'
 				
 				newPlace = Place(placeID, placeName, rating, openNow)
 
@@ -99,7 +103,7 @@ class weatherPlaceRecommendations():
 			responseText = "Over query limit. Please try again in a few moments"
 
 		print(json.dumps(data, indent=4))
-		
+
 		return json.dumps(data, indent=4)
 			
 			# "fulfillmentMessages": [

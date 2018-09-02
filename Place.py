@@ -23,7 +23,7 @@ class Place():
 			starEmoji = "⭐⭐"
 		elif (numRating == 1 or numRating >= 0.5):
 			starEmoji = "⭐"
-		else:
+		elif (numRating == 0):
 			starEmoji = "No ratings yet."
 
 		return starEmoji
