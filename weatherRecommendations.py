@@ -101,7 +101,7 @@ class weatherPlaceRecommendations():
 		return {
 			"source": "Google Place API",
 	
-			data
+			print(json.dumps(data, indent=4))
 			# "fulfillmentMessages": [
 			# 	{
 			# 		"text":{
