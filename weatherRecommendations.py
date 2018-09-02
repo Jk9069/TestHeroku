@@ -66,9 +66,30 @@ class weatherPlaceRecommendations():
 				if (counter < 10):
 					shortlistPlaces.append(newPlace)
 					counter += 1
-					print(rating)
+					print(newPlace.getRating())
 				else:
 					break
+
+			data = {"fulfillmentMessages":[{"text":{"text":[responseText]}} ]}
+
+			for x in range(len(shortlistPlaces)-1):
+				place = shortlistPlaces[x]
+
+				data["fulfillmentMessages"].append(
+					{
+						"card": { 
+							 "title": place.getPlaceName(),
+							 "subtitle": place.getRating() + "\n" + place.getOpenNow(),
+							 "imageUri": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+							 "buttons": [
+							 	{
+							 		"text": "More details",
+							 		"postback": "https://www.google.com/maps/@5.3590784,100.1863997,11z"
+							 	}
+							 ]
+						}
+					}
+				)
 
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
@@ -78,28 +99,31 @@ class weatherPlaceRecommendations():
 			responseText = "Over query limit. Please try again in a few moments"
 
 		return {
-			"fulfillmentMessages": [
-				{
-					"text":{
-						"text":[
-							responseText
-						]
-					}
-				}
-				#{
-					#"card": {
-						#	"title": "name",
-						#	"subtitle": rating? address?,
-						#	"imageUri": "image"
-							#"buttons": [
-							#	{
-							#		"text": "More details",
-							#		"postback": "url "
-							#	}
-							#]
-						#}
-				#}
-			],
+			# "fulfillmentMessages": [
+			# 	{
+			# 		"text":{
+			# 			"text":[
+			# 				responseText
+			# 			]
+			# 		}
+			# 	},
 
-			"source": 'Google Places API'
+			# 	# {
+			# 	# 	"card": {
+			# 	# 			"title": "name",
+			# 	# 			"subtitle": rating? address?,
+			# 	# 			"imageUri": "image"
+			# 	# 			"buttons": [
+			# 	# 				{
+			# 	# 					"text": "More details",
+			# 	# 					"postback": "url "
+			# 	# 				}
+			# 	# 			]
+			# 	# 		}
+			# 	# }
+			# ]
+
+			data
+
+			,"source": 'Google Places API'
 		}
