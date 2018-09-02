@@ -3,7 +3,7 @@ import json
 import os
 import random
 
-import Place
+from Place import Place
 
 from flask import Flask
 from flask import request
