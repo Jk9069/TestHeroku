@@ -53,22 +53,22 @@ class weatherPlaceRecommendations():
 
 			for items in results:
 				#only get places that are opened now?
-				openNow = items["opening_hours"].get("open_now")
+				if ("opening_hours" in items):
+					openNow = items["opening_hours"].get("open_now", 'false')
+				
+				placeName = items["name"]
+				placeID = items["place_id"]
+				rating = items["rating"]
+				
+				newPlace = Place(placeID, placeName, rating, openNow)
 
-				if (openNow == 'true'):
-					placeName = items["name"]
-					placeID = items["place_id"]
-					rating = items["rating"]
-					
-					newPlace = Place(placeID, placeName, rating, openNow)
-
-					#add to array to be displayed
-					if (counter < 10):
-						shortlistPlaces.append(newPlace)
-						counter += 1
-						print(rating)
-					else:
-						break
+				#add to array to be displayed
+				if (counter < 10):
+					shortlistPlaces.append(newPlace)
+					counter += 1
+					print(rating)
+				else:
+					break
 
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
