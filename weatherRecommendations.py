@@ -72,7 +72,6 @@ class weatherPlaceRecommendations():
 				if (counter < 10):
 					shortlistPlaces.append(newPlace)
 					counter += 1
-					print(newPlace.getRating())
 				else:
 					break
 
@@ -106,7 +105,7 @@ class weatherPlaceRecommendations():
 
 		#print(json.dumps(data, indent=4))
 
-		return json.dumps(data, indent=4)
+		return data
 			
 			# "fulfillmentMessages": [
 			# 	{
