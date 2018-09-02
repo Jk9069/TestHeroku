@@ -3,6 +3,8 @@ import json
 import os
 import random
 
+import Place
+
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -12,9 +14,8 @@ class weatherPlaceRecommendations():
 	def requestPlaces(self, weather):
 		placeTypes = [
 			'park', 'amusement_park', 'aquarium', 'art_gallery',
-			'bar', 'bowling_alley', 'cafe', 'department_store',
-			'library', 'movie_theater', 'museum', 'night_club', 'restaurant',
-			'shopping_mall', 'spa', 'points_of_interest', 'casino'
+			'bowling_alley', 'library', 'movie_theater', 'museum',
+			'shopping_mall', 'spa', 'points_of_interest'
 		]
 
 		#remove outdoor places from recommendations
@@ -24,7 +25,6 @@ class weatherPlaceRecommendations():
 
 		#weather not printed?
 		print(weather)
-		print(len(placeTypes)) #shuold be 17 if weather is sunny
 
 		#coordinates of penang: 5.4356 (lat), 100.3091 (long) - search Penang in general 
 		#generate random placeTypes and append to requestLink
@@ -40,17 +40,35 @@ class weatherPlaceRecommendations():
 		print(s)
  
 		responseText = ""
+		shortlistPlaces = []
 
 		#if there are results
 		if (placeResult.get("status") == "OK"):
 			responseText = "Okay, here goes nothing!"
-			#pluck information from placeResult, open now?
-			results = placeResult.get("results")
 
-			print(results)
+			#pluck information from placeResult, open now?
+			#get place ID and get image, website
+			results = placeResult.get("results")
+			counter = 0;
 
 			for items in results:
-				print(items["name"])
+				#only get places that are opened now?
+				openNow = items["opening_hours"].get("open_now")
+
+				if (openNow == 'true'):
+					placeName = items["name"]
+					placeID = items["place_id"]
+					rating = items["rating"]
+					
+					newPlace = Place(placeID, placeName, rating, openNow)
+
+					#add to array to be displayed
+					if (counter < 10):
+						shortlistPlaces.append(newPlace)
+						counter++
+						print(rating)
+					else:
+						break
 
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
@@ -58,8 +76,6 @@ class weatherPlaceRecommendations():
 
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
 			responseText = "Over query limit. Please try again in a few moments"
-
-		#get place ID and get image, website
 
 		return {
 			"fulfillmentMessages": [
