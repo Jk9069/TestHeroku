@@ -55,6 +55,8 @@ class weatherPlaceRecommendations():
 				#only get places that are opened now?
 				if ("opening_hours" in items):
 					openNow = items["opening_hours"].get("open_now", 'false')
+				else:
+					openNow = 'false'
 				
 				placeName = items["name"]
 				placeID = items["place_id"]
