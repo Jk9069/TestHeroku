@@ -98,8 +98,9 @@ class weatherPlaceRecommendations():
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
 			responseText = "Over query limit. Please try again in a few moments"
 
-		return 
-			print(json.dumps(data, indent=4))
+		print(json.dumps(data, indent=4))
+		
+		return json.dumps(data, indent=4)
 			
 			# "fulfillmentMessages": [
 			# 	{
