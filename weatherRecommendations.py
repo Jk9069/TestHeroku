@@ -91,9 +91,6 @@ class weatherPlaceRecommendations():
 					}
 				)
 
-				if (x == 9):
-					data["fulfillmentMessages"].append(, "source": 'Google Places API')
-
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
 			#???
@@ -102,6 +99,9 @@ class weatherPlaceRecommendations():
 			responseText = "Over query limit. Please try again in a few moments"
 
 		return {
+			"source": "Google Place API",
+	
+			data
 			# "fulfillmentMessages": [
 			# 	{
 			# 		"text":{
