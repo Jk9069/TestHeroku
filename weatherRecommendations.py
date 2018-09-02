@@ -61,7 +61,7 @@ class weatherPlaceRecommendations():
 
 				if ("rating" in items):
 					rating = items["rating"]
-				else
+				else:
 					rating = '0'
 				
 				newPlace = Place(placeID, placeName, rating, openNow)
