@@ -70,7 +70,7 @@ class weatherPlaceRecommendations():
 				else:
 					break
 
-			data = {"fulfillmentMessages":[{"text":{"text":[responseText]}} ]}
+			data = {"source": "Google Places API", "fulfillmentMessages":[{"text":{"text":[responseText]}} ]}
 
 			for x in range(len(shortlistPlaces)-1):
 				place = shortlistPlaces[x]
@@ -98,10 +98,9 @@ class weatherPlaceRecommendations():
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
 			responseText = "Over query limit. Please try again in a few moments"
 
-		return {
-			"source": "Google Place API",
-	
+		return 
 			print(json.dumps(data, indent=4))
+			
 			# "fulfillmentMessages": [
 			# 	{
 			# 		"text":{
@@ -125,4 +124,4 @@ class weatherPlaceRecommendations():
 			# 	# 		}
 			# 	# }
 			# ]
-		}
+		
