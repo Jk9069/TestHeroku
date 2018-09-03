@@ -4,7 +4,7 @@ import os
 import random
 
 #Python Image Library
-import Image 
+from PIL import Image 
 from Place import Place
 
 from flask import Flask
