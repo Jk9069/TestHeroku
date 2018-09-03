@@ -75,8 +75,6 @@ class weatherPlaceRecommendations():
 					for x in photoDeets:
 						if ("photo_reference" in x):
 							photoRef = x.get("photo_reference", 'none')
-						else:
-							photoRef = 'none'
 
 				#using photo reference to get image
 				if (photoRef != 'none'):
@@ -102,7 +100,7 @@ class weatherPlaceRecommendations():
 					break
 
 				
-			googleLogo = Image.open("/Users/ju/Documents/College/Degree/playground/Testing/TestHeroku/powered_by_google_on_white.png")
+			googleLogo = Image.open("powered_by_google_on_white.png")
 			data = {"source": "Google Places API", "fulfillmentMessages":[{"text":{"text":[responseText]}} ]}
 
 			for x in range(len(shortlistPlaces)-1):
