@@ -80,17 +80,27 @@ class weatherPlaceRecommendations():
 				if (photoRef != 'none'):
 					photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
 					photoURL = urllib.request.urlopen(photoRequest).geturl()
-					print(photoURL)
+					#print(photoURL)
 
 				else:
 					photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
-					print(photoURL)
 
 				#maybe i should go get types?
+				stringTypes = ""
+				if ("types" in items):
+					types = items["types"]
 
+					for x in types:
+						if "_" in x:
+							x.replace("_", " ")
+
+						stringTypes.append(x)
+
+						if (x < (len(x) - 1)):
+							stringTypes.append(", ")
 
 				#create the Place object containing all required values
-				newPlace = Place(placeID, placeName, rating, openNow, photoRef, photoURL)
+				newPlace = Place(placeID, placeName, rating, openNow, photoRef, photoURL, stringTypes)
 
 				#add to array to be displayed
 				if (counter < 10):
@@ -110,7 +120,7 @@ class weatherPlaceRecommendations():
 					{
 						"card": { 
 							 "title": place.getPlaceName(),
-							 "subtitle": place.getRating() + "\n" + place.getOpenNow(), #+ "\n" + googleLogo.show(),
+							 "subtitle": place.getRating() + "\n" + place.getOpenNow() + "\n" + place.getPlaceTypes(), #+ "\n" + googleLogo.show(),
 							 "imageUri": place.getPhotoURL(),
 							 "buttons": [
 							 	{

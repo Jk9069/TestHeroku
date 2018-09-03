@@ -1,7 +1,7 @@
 import random
 
 class Place():
-	def __init__(self, placeID, placeName, rating, openNow, photoRef, photoURL):
+	def __init__(self, placeID, placeName, rating, openNow, photoRef, photoURL, placeTypes):
 		self.placeID = placeID
 		self.placeName = placeName
 		self.rating = rating
@@ -48,4 +48,7 @@ class Place():
 
 	def getPhotoURL(self):
 		return self.photoURL
+
+	def getPlaceTypes(self):
+		return self.placeTypes
 		
