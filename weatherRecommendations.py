@@ -91,14 +91,14 @@ class weatherPlaceRecommendations():
 					types = items["types"]
 
 					for x in types:
-						if "_" in x:
-							x.replace("_", " ")
-
 						stringTypes += x + ", "
 
 					#remove last 2 characters of the string
 					stringTypes = stringTypes[:-2]
 					
+					if '_' in stringTypes:
+						stringTypes = stringTypes.replace('_', " ")
+
 				#create the Place object containing all required values
 				newPlace = Place(placeID, placeName, rating, openNow, photoRef, photoURL, stringTypes)
 
