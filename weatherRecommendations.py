@@ -73,8 +73,10 @@ class weatherPlaceRecommendations():
 					photoDeets = items["photos"]
 
 					for x in photoDeets:
-						if ("photo_reference" in photoDeets):
+						if ("photo_reference" in x):
 							photoRef = photoDeets.get("photo_reference", 'none')
+						else:
+							photoRef = 'none'
 
 				#using photo reference to get image
 				if (photoRef != 'none'):
