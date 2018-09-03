@@ -3,10 +3,10 @@ import json
 import os
 import random
 
+#Python Image Library
+import Image 
 from Place import Place
 
-#Python Image Library
-from PIL import Image 
 from flask import Flask
 from flask import request
 from flask import make_response
