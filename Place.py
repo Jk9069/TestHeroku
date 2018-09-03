@@ -8,6 +8,7 @@ class Place():
 		self.openNow = openNow
 		self.photoRef = photoRef
 		self.photoURL = photoURL
+		self.placeTypes = placeTypes
 
 	def getPlaceName(self):
 		return self.placeName
