@@ -1,11 +1,13 @@
 import random
 
 class Place():
-	def __init__(self, placeID, placeName, rating, openNow):
+	def __init__(self, placeID, placeName, rating, openNow, photoRef, photoURL):
 		self.placeID = placeID
 		self.placeName = placeName
 		self.rating = rating
 		self.openNow = openNow
+		self.photoRef = photoRef
+		self.photoURL = photoURL
 
 	def getPlaceName(self):
 		return self.placeName
@@ -37,4 +39,10 @@ class Place():
 			openStatus = "Closed."
 
 		return openStatus
+
+	def getPhotoRef(self):
+		return self.photoRef
+
+	def getPhotoURL(self):
+		return self.photoURL
 		

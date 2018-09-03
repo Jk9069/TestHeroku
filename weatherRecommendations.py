@@ -65,8 +65,24 @@ class weatherPlaceRecommendations():
 					rating = items["rating"]
 				else:
 					rating = '0'
-				
-				newPlace = Place(placeID, placeName, rating, openNow)
+
+				#obtain photo reference to get image to display in cards
+				if ("photos" in items):
+					photoDeets = items["photos"]
+
+					for x in photoDeets:
+						if ("photo_reference" in photoDeets):
+							photoRef = photoDeets["photo_reference"]
+						else 
+							photoRef = 'none'
+
+				#using photo reference to get image
+				if (photoRef != 'none'):
+					photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
+					photoURL = json.loads(urllib.request.urlopen(photoRequest).geturl())
+
+				#create the Place object containing all required values
+				newPlace = Place(placeID, placeName, rating, openNow, photoRef, photoURL)
 
 				#add to array to be displayed
 				if (counter < 10):
@@ -74,6 +90,8 @@ class weatherPlaceRecommendations():
 					counter += 1
 				else:
 					break
+
+				#get photo and compose link to google maps app
 
 			data = {"source": "Google Places API", "fulfillmentMessages":[{"text":{"text":[responseText]}} ]}
 
@@ -85,11 +103,11 @@ class weatherPlaceRecommendations():
 						"card": { 
 							 "title": place.getPlaceName(),
 							 "subtitle": place.getRating() + "\n" + place.getOpenNow(),
-							 "imageUri": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+							 "imageUri": place.getPhotoURL(),
 							 "buttons": [
 							 	{
 							 		"text": "More details",
-							 		"postback": "https://www.google.com/maps/@5.3590784,100.1863997,11z"
+							 		"postback": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
 							 	}
 							 ]
 						}
@@ -103,7 +121,10 @@ class weatherPlaceRecommendations():
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
 			responseText = "Over query limit. Please try again in a few moments"
 
-		#print(json.dumps(data, indent=4))
+		else 
+			responseText = ""
+
+		print(len(shortlistPlaces))
 
 		return data
 			
