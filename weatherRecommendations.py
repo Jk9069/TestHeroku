@@ -94,10 +94,10 @@ class weatherPlaceRecommendations():
 						if "_" in x:
 							x.replace("_", " ")
 
-						stringTypes.append(x)
+						stringTypes += x
 
 						if (x < (len(x) - 1)):
-							stringTypes.append(", ")
+							stringTypes += ", "
 
 				#create the Place object containing all required values
 				newPlace = Place(placeID, placeName, rating, openNow, photoRef, photoURL, stringTypes)
