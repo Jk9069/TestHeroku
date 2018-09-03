@@ -74,15 +74,18 @@ class weatherPlaceRecommendations():
 
 					for x in photoDeets:
 						if ("photo_reference" in photoDeets):
-							photoRef = photoDeets["photo_reference"]
-						else: 
-							photoRef = 'none'
+							photoRef = photoDeets.get("photo_reference", 'none')
 
 				#using photo reference to get image
 				if (photoRef != 'none'):
 					photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
 					photoURL = urllib.request.urlopen(photoRequest).geturl()
 					print(photoURL)
+
+				else:
+					photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+					print(photoURL)
+
 				#maybe i should go get types?
 
 

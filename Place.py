@@ -12,6 +12,9 @@ class Place():
 	def getPlaceName(self):
 		return self.placeName
 
+	def getPlaceID(self):
+		return self.placeID
+
 	def getRating(self):
 		numRating = float(self.rating)
 
