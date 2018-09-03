@@ -6,7 +6,7 @@ import random
 from Place import Place
 
 #Python Image Library
-from PIL import Image as PImage
+import Image
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -97,7 +97,7 @@ class weatherPlaceRecommendations():
 					break
 
 				
-			googleLogo = PImage("/Users/ju/Documents/College/Degree/playground/Testing/TestHeroku/powered_by_google_on_white.png")
+			googleLogo = Image("/Users/ju/Documents/College/Degree/playground/Testing/TestHeroku/powered_by_google_on_white.png")
 			data = {"source": "Google Places API", "fulfillmentMessages":[{"text":{"text":[responseText]}} ]}
 
 			for x in range(len(shortlistPlaces)-1):
