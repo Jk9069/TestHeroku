@@ -81,8 +81,8 @@ class weatherPlaceRecommendations():
 				#using photo reference to get image
 				if (photoRef != 'none'):
 					photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
-					photoURL = json.loads(urllib.request.urlopen(photoRequest).geturl())
-
+					photoURL = urllib.request.urlopen(photoRequest).geturl()
+					print(photoURL)
 				#maybe i should go get types?
 
 
