@@ -5,6 +5,8 @@ import random
 
 from Place import Place
 
+#Python Image Library
+from PIL import Image as PImage
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -73,13 +75,16 @@ class weatherPlaceRecommendations():
 					for x in photoDeets:
 						if ("photo_reference" in photoDeets):
 							photoRef = photoDeets["photo_reference"]
-						else 
+						else: 
 							photoRef = 'none'
 
 				#using photo reference to get image
 				if (photoRef != 'none'):
 					photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
 					photoURL = json.loads(urllib.request.urlopen(photoRequest).geturl())
+
+				#maybe i should go get types?
+
 
 				#create the Place object containing all required values
 				newPlace = Place(placeID, placeName, rating, openNow, photoRef, photoURL)
@@ -91,8 +96,8 @@ class weatherPlaceRecommendations():
 				else:
 					break
 
-				#get photo and compose link to google maps app
-
+				
+			googleLogo = PImage("/Users/ju/Documents/College/Degree/playground/Testing/TestHeroku/powered_by_google_on_white.png")
 			data = {"source": "Google Places API", "fulfillmentMessages":[{"text":{"text":[responseText]}} ]}
 
 			for x in range(len(shortlistPlaces)-1):
@@ -102,11 +107,12 @@ class weatherPlaceRecommendations():
 					{
 						"card": { 
 							 "title": place.getPlaceName(),
-							 "subtitle": place.getRating() + "\n" + place.getOpenNow(),
+							 "subtitle": place.getRating() + "\n" + place.getOpenNow() + "\n" + googleLogo.show(),
 							 "imageUri": place.getPhotoURL(),
 							 "buttons": [
 							 	{
 							 		"text": "More details",
+							 		#link to open in google maps
 							 		"postback": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
 							 	}
 							 ]
@@ -121,7 +127,7 @@ class weatherPlaceRecommendations():
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
 			responseText = "Over query limit. Please try again in a few moments"
 
-		else 
+		else: 
 			responseText = ""
 
 		print(len(shortlistPlaces))
