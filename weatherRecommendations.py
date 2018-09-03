@@ -74,7 +74,7 @@ class weatherPlaceRecommendations():
 
 					for x in photoDeets:
 						if ("photo_reference" in x):
-							photoRef = photoDeets["photo_reference"]
+							photoRef = photoDeets[2]
 						else:
 							photoRef = 'none'
 
