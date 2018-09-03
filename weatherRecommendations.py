@@ -110,7 +110,7 @@ class weatherPlaceRecommendations():
 					{
 						"card": { 
 							 "title": place.getPlaceName(),
-							 "subtitle": place.getRating() + "\n" + place.getOpenNow() + "\n" + googleLogo.show(),
+							 "subtitle": place.getRating() + "\n" + place.getOpenNow(), #+ "\n" + googleLogo.show(),
 							 "imageUri": place.getPhotoURL(),
 							 "buttons": [
 							 	{
