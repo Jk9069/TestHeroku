@@ -41,7 +41,7 @@ class weatherPlaceRecommendations():
 		print(requestLink)
 		print(s)
 		
-		return readnFormatResults(placeResult)
+		return self.readnFormatResults(placeResult)
 			
 			# "fulfillmentMessages": [
 			# 	{
@@ -188,5 +188,5 @@ class weatherPlaceRecommendations():
 		print(requestLink)
 		print(s)
  
-		return readnFormatResults(placeResult)
+		return self.readnFormatResults(placeResult)
 
