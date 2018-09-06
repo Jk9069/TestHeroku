@@ -31,7 +31,8 @@ class weatherPlaceRecommendations():
 		#coordinates of penang: 5.4356 (lat), 100.3091 (long) - search Penang in general 
 		#generate random placeTypes and append to requestLink
 		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
-		requestLink = (requestLink + "&type=" + placeTypes[random.randint(0, len(placeTypes)-1)])
+		randomCategory = placeTypes[random.randint(0, len(placeTypes)-1)]
+		requestLink = (requestLink + "&type=" + randomCategory)
 
 		#post url
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
@@ -41,7 +42,7 @@ class weatherPlaceRecommendations():
 		print(requestLink)
 		print(s)
 		
-		return self.readnFormatResults(placeResult)
+		return self.readnFormatResults(placeResult, randomCategory)
 			
 			# "fulfillmentMessages": [
 			# 	{
@@ -67,7 +68,7 @@ class weatherPlaceRecommendations():
 			# 	# }
 			# ]
 
-	def readnFormatResults(self, placeResult):
+	def readnFormatResults(self, placeResult, selectedCategory):
 		responseText = ""
 		shortlistPlaces = []
 
@@ -137,7 +138,33 @@ class weatherPlaceRecommendations():
 					break
 				
 			googleLogo = Image.open("powered_by_google_on_white.png")
-			data = {"source": "Google Places API", "fulfillmentMessages":[{"text":{"text":[responseText]}} ]}
+			data = {
+				"source": "Google Places API", 
+				"event":{  
+					  "name":"Weather-MorePlace",
+					  "data":{
+					      "chosenPlaceCategory": selectedCategory
+					  }
+				}, 
+				# "outputContexts": [
+				# 	{
+				# 		"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather.GetWeather-yes",
+				# 	    "lifespanCount": 5,
+				# 	    "parameters": {
+				# 	    	"placeCategory": selectedCategory
+				# 	    }
+				# 	}
+				# ],	
+				"fulfillmentMessages":[
+					{
+						"text":{
+							"text":[
+								responseText
+							]
+						}
+					} 
+				]
+			}
 
 			for x in range(len(shortlistPlaces)-1):
 				place = shortlistPlaces[x]
@@ -150,7 +177,7 @@ class weatherPlaceRecommendations():
 							 "imageUri": place.getPhotoURL(),
 							 "buttons": [
 							 	{
-							 		"text": "More details",
+							 		"text": "Map",
 							 		#link to open in google maps
 							 		"postback": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
 							 	}
@@ -188,5 +215,5 @@ class weatherPlaceRecommendations():
 		print(requestLink)
 		print(s)
  
-		return self.readnFormatResults(placeResult)
+		return self.readnFormatResults(placeResult, chosenCategory)
 
