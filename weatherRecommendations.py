@@ -140,7 +140,7 @@ class weatherPlaceRecommendations():
 			googleLogo = Image.open("powered_by_google_on_white.png")
 			data = {
 				"source": "Google Places API", 
-				"event":{  
+				"followupEvent":{  
 					  "name":"Weather-MorePlace",
 					  "data":{
 					      "chosenPlaceCategory": selectedCategory
