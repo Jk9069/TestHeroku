@@ -8,11 +8,7 @@ from flask import request
 from flask import make_response
 
 class weatherResponse():
-#	def __init__(self, postedReqParams, postedReq):
-#		self.postedReqParams = postedReqParams
-#		self.postedReq = postedReq
-
-	def setter(self, postedReqParams, postedReq):
+	def __init__(self, postedReqParams, postedReq):
 		self.postedReqParams = postedReqParams
 		self.postedReq = postedReq
 
@@ -72,6 +68,20 @@ class weatherResponse():
 
 		return text
 
+	def weatherEmoji (self, mainWeather):
+		if ('Clear' in mainWeather):
+			emoji = '☀️☀️☀️'
+		elif ('Clouds' in mainWeather):
+			emoji = '☁️☁️☁️'
+		elif ('Rain' in mainWeather):
+			emoji = '🌧️🌧️🌧️'
+		elif ('Thunderstorm' in mainWeather):
+			emoji = '⛈️⛈️⛈️'
+		else:
+			emoji = '💡'
+
+		return emoji
+
 	def getWeatherResponse(self):
 		#user just says 'weather'
 			if ((self.postedReqParams.get("date") == "" and self.postedReqParams.get("time-period") == "" and self.postedReqParams.get("customLocation") == "") or (self.postedReqParams.get("customLocation") == "Penang" or self.postedReqParams.get("customLocation") == "Pulau Pinang")):
@@ -79,7 +89,7 @@ class weatherResponse():
 				#speech = "The weather is clear";
 				weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
 				weatherResult = json.loads(urllib.request.urlopen(weatherUrl).read())
-				print(weatherResult)
+				#print(weatherResult)
 
 				#weatherData is a JSON list
 				weatherData = weatherResult.get('weather')
@@ -103,17 +113,17 @@ class weatherResponse():
 			elif (self.postedReqParams.get("time-period") != ""):
 				startTime = self.postedReqParams.get("time-period").get("startTime")
 				queryDate = startTime[0:-15]
-				print(queryDate)
+				#print(queryDate)
 				#slice the string to get hour, slice 11 characters from front and 12 from the back
 				startTime = startTime[11:-12]
-				print(startTime)
+				#print(startTime)
 				endTime = self.postedReqParams.get("time-period").get("endTime")
 				endTime = endTime[11:-12]
-				print(endTime)
+				#print(endTime)
 
 				weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
 				weatherResult = json.loads(urllib.request.urlopen(weatherUrl).read())
-				print(weatherResult)
+				#print(weatherResult)
 
 				#weatherData is a JSON list
 				weatherData = weatherResult.get('list')
@@ -124,9 +134,9 @@ class weatherResponse():
 					#get date of the forecast
 					forecastTime = item['dt_txt']
 					forecastDate = forecastTime[0:-9]
-					print(forecastDate)
+					#print(forecastDate)
 					forecastTime = forecastTime[11:-6]
-					print(forecastTime)
+					#print(forecastTime)
 
 					if (queryDate == forecastDate):
 						found = True
@@ -159,7 +169,7 @@ class weatherResponse():
 
 				weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=Penang&APPID=5b39dc8cce894f4233c14ed2ad3d7c44&units=metric"
 				weatherResult = json.loads(urllib.request.urlopen(weatherUrl).read())
-				print(weatherResult)
+				#print(weatherResult)
 
 				#weatherData is a JSON list
 				weatherData = weatherResult.get('list')
@@ -196,16 +206,28 @@ class weatherResponse():
 				"fulfillmentText": "This is optional",
 				"fulfillmentMessages": [
 					{
-						"card": {
-							"title": "Weather forecast",
-							"subtitle": speech,
-							"imageUri": "http://openweathermap.org/img/w/" + icon + ".png"
+						"text": {
+							"text": [
+								self.weatherEmoji(mainWeather)
+							]
+						}
+						#"card": {
+						#	"title": "Weather forecast",
+						#	"subtitle": speech,
+						#	"imageUri": "http://openweathermap.org/img/w/" + icon + ".png"
 							#"buttons": [
 							#	{
 							#		"text": "button text",
 							#		"postback": ""
 							#	}
 							#]
+						#}
+					},
+					{
+						"text": {
+							"text": [
+								speech
+							]
 						}
 					},
 					{

@@ -4,6 +4,7 @@ import os
 import random
 
 import weatherHandler
+import weatherRecommendations
 
 from flask import Flask
 from flask import request
@@ -45,37 +46,44 @@ def getWebhookResult(postReq):
 	#action / context will be used to determine what action is taken
 	#user asks for weather
 	if postedReq.get("action") == "weather":
-		weatherInfo = weatherHandler.weatherResponse()
-		weatherInfo.setter(postedReqParams, postedReq)
+		weatherInfo = weatherHandler.weatherResponse(postedReqParams, postedReq)
 		return weatherInfo.getWeatherResponse()
 
 	#user responded 'yes' to obtain place suggestions
-	elif postedReq.get("action") == "GetWeather.GetWeather-yes":
-		outputContexts = postReq.get("queryResult").get("outputContexts")
+	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.GetWeather-yes.GetWeather-yes-more" or postedReq.get("action") == "GetWeather.GetWeather-yes.GetWeather-yes-more.GetWeather-yes-more-more":
+		outputContexts = postedReq.get("outputContexts")
+		
 		for item in outputContexts:
-			parameters = item["parameters"]
-
-		#obtained weather condition from prev intent, 
+			if ("parameters" in item):
+				weather = item.get("parameters").get("mainWeather", 'empty')
+		
 		#based on weather condition, decide what kind of place to suggest
-		weather = parameters.get("mainWeather")
-		#array to store place types
-		placeTypes = []
+		weatherRecommend = weatherRecommendations.weatherPlaceRecommendations()
 
-		if ('Clear' in weather):
-			placeTypes.append('zoo')
-			placeTypes.append('park')
-		elif ('Clouds'):
-			placeTypes.append('library')
-		elif ('Rain'):
-			placeTypes.append('shopping_mall')
-		elif ('Thunderstorm'):
-			placeTypes.append('movie_theater')
+		#if user asks for more
+		if postedReq.get("action") == "GetWeather.GetWeather-yes.GetWeather-yes-more" or postedReq.get("action") == "GetWeather.GetWeather-yes.GetWeather-yes-more.GetWeather-yes-more-more":
+			chosenCategory = postedReq.get("queryText")
+			x = weatherRecommend.requestMore(chosenCategory)
+		else: #default get place recommendation
+			x = weatherRecommend.requestPlaces(weather)
 
+		return x
+
+	elif postedReq.get('action') == "getTravelPurpose":
+		purpose = postedReqParams.get('purpose')
 
 		return {
-			"fulfillmentText": placeTypes
-		}
-
+			"fulfillmentMessages": [
+				{
+					"text":{
+						"text":[
+							"Your purpose is " + purpose
+						]
+					}
+				}
+			]
+		} 
+					
 
 #main
 if __name__ == "__main__":
