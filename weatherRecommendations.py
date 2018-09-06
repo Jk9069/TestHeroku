@@ -40,7 +40,34 @@ class weatherPlaceRecommendations():
 		s = json.dumps(placeResult, indent=4, sort_keys = True)
 		print(requestLink)
 		print(s)
- 
+		
+		return readnFormatResults(placeResult)
+			
+			# "fulfillmentMessages": [
+			# 	{
+			# 		"text":{
+			# 			"text":[
+			# 				responseText
+			# 			]
+			# 		}
+			# 	},
+
+			# 	# {
+			# 	# 	"card": {
+			# 	# 			"title": "name",
+			# 	# 			"subtitle": rating? address?,
+			# 	# 			"imageUri": "image"
+			# 	# 			"buttons": [
+			# 	# 				{
+			# 	# 					"text": "More details",
+			# 	# 					"postback": "url "
+			# 	# 				}
+			# 	# 			]
+			# 	# 		}
+			# 	# }
+			# ]
+
+	def readnFormatResults(self, placeResult):
 		responseText = ""
 		shortlistPlaces = []
 
@@ -108,7 +135,6 @@ class weatherPlaceRecommendations():
 					counter += 1
 				else:
 					break
-
 				
 			googleLogo = Image.open("powered_by_google_on_white.png")
 			data = {"source": "Google Places API", "fulfillmentMessages":[{"text":{"text":[responseText]}} ]}
@@ -133,9 +159,9 @@ class weatherPlaceRecommendations():
 					}
 				)
 
-		elif (placeResult.get("status") == "ZERO_RESULTS"):
-			responseText = "No results found :("
-			#???
+		# elif (placeResult.get("status") == "ZERO_RESULTS"):
+		# 	responseText = "No results found :("
+		# 	#???
 
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
 			responseText = "Over query limit. Please try again in a few moments"
@@ -143,31 +169,24 @@ class weatherPlaceRecommendations():
 		else: 
 			responseText = ""
 
-		print(len(shortlistPlaces))
-
 		return data
-			
-			# "fulfillmentMessages": [
-			# 	{
-			# 		"text":{
-			# 			"text":[
-			# 				responseText
-			# 			]
-			# 		}
-			# 	},
 
-			# 	# {
-			# 	# 	"card": {
-			# 	# 			"title": "name",
-			# 	# 			"subtitle": rating? address?,
-			# 	# 			"imageUri": "image"
-			# 	# 			"buttons": [
-			# 	# 				{
-			# 	# 					"text": "More details",
-			# 	# 					"postback": "url "
-			# 	# 				}
-			# 	# 			]
-			# 	# 		}
-			# 	# }
-			# ]
-		
+	def requestMore(self, chosenCategory):
+		print ("CHOSEN CATEGORY IS: " + chosenCategory)
+
+		if chosenCategory == 'More':
+			chosenCategory == 'points_of_interest'
+
+		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+		requestLink = (requestLink + "&type=" + chosenCategory)
+
+		#post url
+		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
+
+		#for viewing purposes in logs only
+		s = json.dumps(placeResult, indent=4, sort_keys = True)
+		print(requestLink)
+		print(s)
+ 
+		return readnFormatResults(placeResult)
+
