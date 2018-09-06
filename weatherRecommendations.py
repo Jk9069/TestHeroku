@@ -140,12 +140,12 @@ class weatherPlaceRecommendations():
 			googleLogo = Image.open("powered_by_google_on_white.png")
 			data = {
 				"source": "Google Places API", 
-				"followupEvent":{  
-					  "name":"Weather-MorePlace",
-					  "data":{
-					      "chosenPlaceCategory": selectedCategory
-					  }
-				}, 
+				# "followupEvent":{  
+				# 	  "name":"Weather-MorePlace",
+				# 	  "data":{
+				# 	      "chosenPlaceCategory": selectedCategory
+				# 	  }
+				# }, 
 				# "outputContexts": [
 				# 	{
 				# 		"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather.GetWeather-yes",
