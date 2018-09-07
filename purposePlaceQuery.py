@@ -14,7 +14,7 @@ class purposePlaceQuery():
 	def __init__(self, travelPurpose):
 		self.travelPurpose = travelPurpose
 
-	def requestPurposePlace():
+	def requestPurposePlace(self):
 		#search based on what purpose user enters
 		#user location ????
 		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
