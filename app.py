@@ -73,8 +73,8 @@ def getWebhookResult(postReq):
 	elif postedReq.get('action') == "getTravelPurpose":
 		purpose = postedReqParams.get('purpose')
 
-		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose)
-		placeRecommend.requestPurposePlace()
+		#placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose)
+		#placeRecommend.requestPurposePlace()
 
 		return {
 			"fulfillmentMessages": [
