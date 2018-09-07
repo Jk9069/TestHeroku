@@ -80,19 +80,19 @@ def getWebhookResult(postReq):
 		purpose = postedReqParams.get('purpose')
 
 		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose)
-		placeRecommend.requestPurposePlace()
+		return placeRecommend.requestPurposePlace()
 
-		return {
-			"fulfillmentMessages": [
-				{
-					"text":{
-						"text":[
-							"Your purpose is " + purpose
-						]
-					}
-				}
-			]
-		} 
+		# return {
+		# 	"fulfillmentMessages": [
+		# 		{
+		# 			"text":{
+		# 				"text":[
+		# 					"Your purpose is " + purpose
+		# 				]
+		# 			}
+		# 		}
+		# 	]
+		# } 
 					
 
 #main
