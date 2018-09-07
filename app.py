@@ -62,7 +62,7 @@ def getWebhookResult(postReq):
 		weatherRecommend = weatherRecommendations.weatherPlaceRecommendations()
 
 		#if user asks for more, search based on text input, not type
-		if ostedReq.get("action") == "GetWeather.searchCategoryRecommendation":
+		if postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 			chosenCategory = postedReq.get("queryText")
 			x = weatherRecommend.requestMore(chosenCategory)
 		else: #default get place recommendation, search based on type
