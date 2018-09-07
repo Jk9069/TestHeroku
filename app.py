@@ -5,6 +5,7 @@ import random
 
 import weatherHandler
 import weatherRecommendations
+import purposePlaceQuery
 
 from flask import Flask
 from flask import request
@@ -71,6 +72,9 @@ def getWebhookResult(postReq):
 
 	elif postedReq.get('action') == "getTravelPurpose":
 		purpose = postedReqParams.get('purpose')
+
+		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose)
+		placeRecommend.requestPurposePlace()
 
 		return {
 			"fulfillmentMessages": [
