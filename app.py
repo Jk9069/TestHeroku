@@ -51,7 +51,7 @@ def getWebhookResult(postReq):
 		return weatherInfo.getWeatherResponse()
 
 	#user responded 'yes' to obtain place suggestions
-	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.GetWeather-yes.GetWeather-yes-more" or postedReq.get("action") == "GetWeather.GetWeather-yes.GetWeather-yes-more.GetWeather-yes-more-more":
+	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 		outputContexts = postedReq.get("outputContexts")
 		
 		for item in outputContexts:
@@ -61,11 +61,11 @@ def getWebhookResult(postReq):
 		#based on weather condition, decide what kind of place to suggest
 		weatherRecommend = weatherRecommendations.weatherPlaceRecommendations()
 
-		#if user asks for more
-		if postedReq.get("action") == "GetWeather.GetWeather-yes.GetWeather-yes-more" or postedReq.get("action") == "GetWeather.GetWeather-yes.GetWeather-yes-more.GetWeather-yes-more-more":
+		#if user asks for more, search based on text input, not type
+		if ostedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 			chosenCategory = postedReq.get("queryText")
 			x = weatherRecommend.requestMore(chosenCategory)
-		else: #default get place recommendation
+		else: #default get place recommendation, search based on type
 			x = weatherRecommend.requestPlaces(weather)
 
 		return x

@@ -74,7 +74,7 @@ class weatherPlaceRecommendations():
 
 		#if there are results
 		if (placeResult.get("status") == "OK"):
-			responseText = "Okay, here goes nothing!"
+			responseText = "Okay, showing " + selectedCategory.replace('_', ' ') + 's'
 
 			#pluck information from placeResult, open now?
 			#get place ID and get image, website
@@ -140,21 +140,6 @@ class weatherPlaceRecommendations():
 			googleLogo = Image.open("powered_by_google_on_white.png")
 			data = {
 				"source": "Google Places API", 
-				# "followupEventInput":{  
-				# 	  "name":"Weather-MorePlace",
-				# 	  "parameters":{
-				# 	      "chosenPlaceCategory": selectedCategory
-				# 	  }
-				# }, 
-				# "outputContexts": [
-				# 	{
-				# 		"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather.GetWeather-yes",
-				# 	    "lifespanCount": 5,
-				# 	    "parameters": {
-				# 	    	"placeCategory": selectedCategory
-				# 	    }
-				# 	}
-				# ],	
 				"fulfillmentMessages":[
 					{
 						"text":{
@@ -201,6 +186,7 @@ class weatherPlaceRecommendations():
 	def requestMore(self, chosenCategory):
 		print ("CHOSEN CATEGORY IS: " + chosenCategory)
 
+		#just in case things get complicated and this happensx
 		if chosenCategory == 'More':
 			chosenCategory == 'points_of_interest'
 
