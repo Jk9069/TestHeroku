@@ -142,7 +142,7 @@ class weatherPlaceRecommendations():
 				"source": "Google Places API", 
 				"followupEventInput":{  
 					  "name":"Weather-MorePlace",
-					  "data":{
+					  "parameters":{
 					      "chosenPlaceCategory": selectedCategory
 					  }
 				}, 
