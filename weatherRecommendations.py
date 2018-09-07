@@ -56,7 +56,7 @@ class weatherPlaceRecommendations():
 
 		#if there are results
 		if (placeResult.get("status") == "OK"):
-			responseText = "Okay, fancy going to " + categoryText + '?'
+			responseText = "Okay, showing " + categoryText 
 
 			#pluck information from placeResult, open now?
 			#get place ID and get image, website
@@ -153,9 +153,8 @@ class weatherPlaceRecommendations():
 					}
 				)
 
-		# elif (placeResult.get("status") == "ZERO_RESULTS"):
-		# 	responseText = "No results found :("
-		# 	#???
+		elif (placeResult.get("status") == "ZERO_RESULTS"):
+			responseText = "No results found :("
 
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
 			responseText = "Over query limit. Please try again in a few moments"
@@ -166,6 +165,7 @@ class weatherPlaceRecommendations():
 		return data
 
 	def requestMore(self, chosenCategory):
+		#have to remove emojis before appending to the requestLink
 		chosenCategory = chosenCategory.replace(' ', '_')
 		print ("CHOSEN CATEGORY IS: " + chosenCategory)
 

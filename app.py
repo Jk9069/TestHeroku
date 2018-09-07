@@ -65,6 +65,11 @@ def getWebhookResult(postReq):
 		#if user asks for more, search based on text input, not type
 		if postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 			chosenCategory = postedReq.get("queryText")
+			
+			#how to get that place category????
+			# if chosenCategory == 'Same as above':
+			# 	chosenCategory = ''
+
 			x = weatherRecommend.requestMore(chosenCategory)
 		else: #default get place recommendation, search based on type
 			x = weatherRecommend.requestPlaces(weather)
@@ -74,8 +79,8 @@ def getWebhookResult(postReq):
 	elif postedReq.get('action') == "getTravelPurpose":
 		purpose = postedReqParams.get('purpose')
 
-		#placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose)
-		#placeRecommend.requestPurposePlace()
+		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose)
+		placeRecommend.requestPurposePlace()
 
 		return {
 			"fulfillmentMessages": [

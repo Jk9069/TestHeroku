@@ -15,12 +15,10 @@ class purposePlaceQuery():
 		self.travelPurpose = travelPurpose
 
 	def requestPurposePlace():
-		#coordinates of penang: 5.4356 (lat), 100.3091 (long) - search Penang in general 
-		#generate random placeTypes and append to requestLink
+		#search based on what purpose user enters
+		#user location ????
 		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
-		
-		#based on text append to request link to search
-		requestLink = (requestLink + "&type=" + randomCategory)
+		requestLink = (requestLink + "&keyword=" + self.travelPurpose)
 
 		#post url
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
@@ -30,4 +28,44 @@ class purposePlaceQuery():
 		print(requestLink)
 		print(s)
 		
-		return self.readnFormatResults(placeResult, randomCategory)
+		results = placeResult.get("results")
+		counter = 0;
+		listPlaceNames = []
+
+		for items in results:
+			placeName = items["name"]
+			listPlaceNames.append(placeName)
+			counter += 1
+
+			if counter > 9:
+				break;
+
+		return {
+			"fulfillmentText": "This is optional",
+			"fulfillmentMessages": [
+				{
+					"text": {
+						"text": [
+							listPlaceNames[0]
+						]
+					}
+				},
+				{
+					"text": {
+						"text": [
+							listPlaceNames[1]
+						]
+					}
+				},
+				{
+					"text": {
+						"text": [
+							listPlaceNames[2]
+						]
+					}
+				}
+			],
+			"source": "Google Places API"
+		}
+
+	#function to read and format json results? 
