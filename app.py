@@ -46,6 +46,7 @@ def getWebhookResult(postReq):
 
 	#action / context will be used to determine what action is taken
 	#user asks for weather
+	#what about user location????
 	if postedReq.get("action") == "weather":
 		weatherInfo = weatherHandler.weatherResponse(postedReqParams, postedReq)
 		return weatherInfo.getWeatherResponse()
@@ -94,4 +95,29 @@ if __name__ == "__main__":
 	port = int(os.getenv('PORT', 5000))
 	#print ("Starting app on port %d" %(port))
 	app.run(debug=True, port=port, host='0.0.0.0')
+
+
+	# "fulfillmentMessages": [
+			# 	{
+			# 		"text":{
+			# 			"text":[
+			# 				responseText
+			# 			]
+			# 		}
+			# 	},
+
+			# 	# {
+			# 	# 	"card": {
+			# 	# 			"title": "name",
+			# 	# 			"subtitle": rating? address?,
+			# 	# 			"imageUri": "image"
+			# 	# 			"buttons": [
+			# 	# 				{
+			# 	# 					"text": "More details",
+			# 	# 					"postback": "url "
+			# 	# 				}
+			# 	# 			]
+			# 	# 		}
+			# 	# }
+			# ]
 

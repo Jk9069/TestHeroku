@@ -43,38 +43,20 @@ class weatherPlaceRecommendations():
 		print(s)
 		
 		return self.readnFormatResults(placeResult, randomCategory)
-			
-			# "fulfillmentMessages": [
-			# 	{
-			# 		"text":{
-			# 			"text":[
-			# 				responseText
-			# 			]
-			# 		}
-			# 	},
-
-			# 	# {
-			# 	# 	"card": {
-			# 	# 			"title": "name",
-			# 	# 			"subtitle": rating? address?,
-			# 	# 			"imageUri": "image"
-			# 	# 			"buttons": [
-			# 	# 				{
-			# 	# 					"text": "More details",
-			# 	# 					"postback": "url "
-			# 	# 				}
-			# 	# 			]
-			# 	# 		}
-			# 	# }
-			# ]
 
 	def readnFormatResults(self, placeResult, selectedCategory):
 		responseText = ""
 		shortlistPlaces = []
 
+		categoryText = selectedCategory.replace('_', ' ')
+		if categoryText == 'library':
+			categoryText = 'libraries'
+		else:
+			categoryText = categoryText + 's'
+
 		#if there are results
 		if (placeResult.get("status") == "OK"):
-			responseText = "Okay, showing " + selectedCategory.replace('_', ' ') + 's'
+			responseText = "Okay, fancy going to " + categoryText + '?'
 
 			#pluck information from placeResult, open now?
 			#get place ID and get image, website
@@ -184,14 +166,16 @@ class weatherPlaceRecommendations():
 		return data
 
 	def requestMore(self, chosenCategory):
+		chosenCategory = chosenCategory.replace(' ', '_')
 		print ("CHOSEN CATEGORY IS: " + chosenCategory)
 
 		#just in case things get complicated and this happensx
 		if chosenCategory == 'More':
 			chosenCategory == 'points_of_interest'
 
+		#initiate search using keyword from nearby search
 		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
-		requestLink = (requestLink + "&type=" + chosenCategory)
+		requestLink = (requestLink + "&keyword=" + chosenCategory)
 
 		#post url
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
