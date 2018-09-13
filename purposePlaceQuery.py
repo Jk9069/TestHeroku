@@ -67,7 +67,7 @@ class purposePlaceQuery():
 					for x in photoDeets:
 						if ("photo_reference" in x):
 							photoRef = x.get("photo_reference", 'none')
-						else
+						else:
 							photoRef = 'none'
 
 				#using photo reference to get image
