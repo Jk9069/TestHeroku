@@ -71,14 +71,14 @@ class purposePlaceQuery():
 						else:
 							photoRef = 'none'
 
-				#using photo reference to get image
-				if (photoRef != 'none'):
-					photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
-					photoURL = urllib.request.urlopen(photoRequest).geturl()
-					#print(photoURL)
+					#using photo reference to get image
+					if (photoRef != 'none'):
+						photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
+						photoURL = urllib.request.urlopen(photoRequest).geturl()
+						#print(photoURL)
 
-				else:
-					photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+					else:
+						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 
 				#maybe i should go get types?
 				stringTypes = ""
@@ -160,5 +160,7 @@ class purposePlaceQuery():
 			}
 
 		return data	
+
+		
 
 

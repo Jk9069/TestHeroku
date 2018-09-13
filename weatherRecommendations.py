@@ -7,6 +7,7 @@ import re
 #Python Image Library
 from PIL import Image 
 from Place import Place
+from emoji import UNICODE_EMOJI
 
 from flask import Flask
 from flask import request
@@ -93,14 +94,14 @@ class weatherPlaceRecommendations():
 						else:
 							photoRef = 'none'
 
-				#using photo reference to get image
-				if (photoRef != 'none'):
-					photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
-					photoURL = urllib.request.urlopen(photoRequest).geturl()
-					#print(photoURL)
+					#using photo reference to get image
+					if (photoRef != 'none'):
+						photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
+						photoURL = urllib.request.urlopen(photoRequest).geturl()
+						#print(photoURL)
 
-				else:
-					photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+					else:
+						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 
 				#maybe i should go get types?
 				stringTypes = ""
@@ -210,18 +211,17 @@ class weatherPlaceRecommendations():
 		return self.readnFormatResults(placeResult, chosenCategory)
 
 	def remove_emoji(self, data):
-		emoji_pattern = re.compile(
-			"["
-			u"\U0001F600-\U0001F64F"  # emoticons
-			u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-			u"\U0001F680-\U0001F6FF"  # transport & map symbols
-			u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-			"]+", flags=re.UNICODE
-		)
-
-		text = emoji_pattern.sub(r'', data)
+		count = 0
+		found = False
 		
-		if (text[0] == ' '):
-			text = text[1:]
+		for emoji in UNICODE_EMOJI:
+			#count occurences of emoji
+			count += data.count(emoji)
+				if count >= 1:
+					found = True
+					break
 
-		return text
+		if found == True:
+			data = data[2:]
+
+		return data
