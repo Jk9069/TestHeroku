@@ -102,6 +102,9 @@ class weatherPlaceRecommendations():
 
 					else:
 						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+				else:
+					photoRef = 'none'
+					photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 
 				#maybe i should go get types?
 				stringTypes = ""
