@@ -48,6 +48,7 @@ class weatherPlaceRecommendations():
 	def readnFormatResults(self, placeResult, selectedCategory):
 		responseText = ""
 		shortlistPlaces = []
+		data = {}
 
 		categoryText = selectedCategory.replace('_', ' ')
 		if categoryText == 'library':
@@ -156,8 +157,6 @@ class weatherPlaceRecommendations():
 					}
 				)
 
-			return data
-
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
 
@@ -178,6 +177,8 @@ class weatherPlaceRecommendations():
 			return {
 				"fulfillmentText": responseText
 			}
+
+		return data
 
 	def requestMore(self, chosenCategory):
 		#have to remove emojis before appending to the requestLink

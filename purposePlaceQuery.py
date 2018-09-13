@@ -34,6 +34,7 @@ class purposePlaceQuery():
 	def readnFormatResults(self, placeResult):
 		responseText = ""
 		shortlistPlaces = []
+		data = {}
 
 		#if there are results
 		if (placeResult.get("status") == "OK"):
@@ -137,8 +138,6 @@ class purposePlaceQuery():
 					}
 				)
 
-			return data
-
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
 
@@ -159,5 +158,7 @@ class purposePlaceQuery():
 			return {
 				"fulfillmentText": responseText
 			}
+
+		return data	
 
 
