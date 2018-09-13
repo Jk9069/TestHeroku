@@ -156,21 +156,35 @@ class weatherPlaceRecommendations():
 					}
 				)
 
+			return data
+
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
+
+			return {
+				"fulfillmentText": responseText
+			}
 
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
 			responseText = "Over query limit. Please try again in a few moments"
 
-		else: 
-			responseText = ""
+			return {
+				"fulfillmentText": responseText
+			}
 
-		return data
+		else:
+			responseText = "API Error encountered"
+
+			return {
+				"fulfillmentText": responseText
+			}
 
 	def requestMore(self, chosenCategory):
 		#have to remove emojis before appending to the requestLink
+		chosenCategory = chosenCategory[2:]
 		chosenCategory = chosenCategory.replace(' ', '_')
-		chosenCategory = self.remove_emoji(chosenCategory)
+		#remove_emoji works but isnt removing first 2 chars easier? ._.
+		#chosenCategory = self.remove_emoji(chosenCategory)
 		print ("CHOSEN CATEGORY IS: " + chosenCategory)
 
 		#just in case things get complicated and this happensx

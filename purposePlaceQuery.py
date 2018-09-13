@@ -135,13 +135,27 @@ class purposePlaceQuery():
 					}
 				)
 
+			return data
+
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
+
+			return {
+				"fulfillmentText": responseText
+			}
 
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
 			responseText = "Over query limit. Please try again in a few moments"
 
-		else: 
-			responseText = ""
+			return {
+				"fulfillmentText": responseText
+			}
 
-		return data
+		else: 
+			responseText = "API Error encountered"
+
+			return {
+				"fulfillmentText": responseText
+			}
+
+
