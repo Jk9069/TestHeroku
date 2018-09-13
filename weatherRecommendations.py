@@ -119,7 +119,7 @@ class weatherPlaceRecommendations():
 				else:
 					break
 				
-			googleLogo = Image.open("powered_by_google_on_white.png")
+			#googleLogo = Image.open("powered_by_google_on_white.png")
 			data = {
 				"source": "Google Places API", 
 				"fulfillmentMessages":[
