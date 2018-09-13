@@ -217,9 +217,9 @@ class weatherPlaceRecommendations():
 		for emoji in UNICODE_EMOJI:
 			#count occurences of emoji
 			count += data.count(emoji)
-				if count >= 1:
-					found = True
-					break
+			if count >= 1:
+				found = True
+				break
 
 		if found == True:
 			data = data[2:]
