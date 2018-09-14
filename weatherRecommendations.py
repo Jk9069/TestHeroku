@@ -133,6 +133,15 @@ class weatherPlaceRecommendations():
 			#googleLogo = Image.open("powered_by_google_on_white.png")
 			data = {
 				"source": "Google Places API", 
+				"outputContexts": [
+					{
+						"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather-followup",
+					    "lifespanCount": 2,
+					    "parameters": {
+					    	"prevCategory": categoryText
+					    }
+					}
+				],	
 				"fulfillmentMessages":[
 					{
 						"text":{
@@ -198,6 +207,11 @@ class weatherPlaceRecommendations():
 		#just in case things get complicated and this happensx
 		if chosenCategory == 'More':
 			chosenCategory == 'points_of_interest'
+		
+		#how to get same category as previous intent
+		# elif chosenCategory == 'Same as above':
+		# 	chosenCategory == 
+
 
 		#initiate search using keyword from nearby search
 		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
