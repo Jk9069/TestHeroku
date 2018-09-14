@@ -203,19 +203,15 @@ class weatherPlaceRecommendations():
 		#have to remove emojis before appending to the requestLink
 		chosenCategory = self.remove_emoji(chosenCategory)
 		chosenCategory = chosenCategory.lower()
-		chosenCategory = chosenCategory.replace(' ', '%20')
-		#remove_emoji works but isnt removing first 2 chars easier? ._.
+		chosenCategory = chosenCategory.replace('_', ' ')
+		chosenCategory = chosenCategory.replace('%20', ' ')
+		
 		#chosenCategory = self.remove_emoji(chosenCategory)
 		print ("CHOSEN CATEGORY IS: " + chosenCategory)
 
 		#just in case things get complicated and this happensx
 		if chosenCategory == 'More':
 			chosenCategory == 'points_of_interest'
-		
-		#how to get same category as previous intent
-		# elif chosenCategory == 'Same as above':
-		# 	chosenCategory == 
-
 
 		#initiate search using keyword from nearby search
 		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
