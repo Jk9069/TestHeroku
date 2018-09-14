@@ -51,6 +51,8 @@ class weatherPlaceRecommendations():
 		shortlistPlaces = []
 		data = {}
 
+		contextCategory = selectedCategory
+
 		if selectedCategory == 'library':
 			selectedCategory = 'libraries'
 		elif selectedCategory == 'art_gallery':
@@ -139,7 +141,7 @@ class weatherPlaceRecommendations():
 						"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather-followup",
 					    "lifespanCount": 2,
 					    "parameters": {
-					    	"prevCategory": categoryText
+					    	"prevCategory": contextCategory
 					    }
 					}
 				],	
