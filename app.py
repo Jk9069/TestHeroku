@@ -65,11 +65,12 @@ def getWebhookResult(postReq):
 		#if user asks for more, search based on text input, not type
 		if postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 			chosenCategory = postedReq.get("queryText")
-
+			print(chosenCategory)
 			#if user choose same as above, have to get prev intent category
 			for item in outputContexts:
 				if ("parameters" in item):
 					prevCategory = item.get("parameters").get("prevCategory", 'empty')
+					print(prevCategory)
 
 			if prevCategory != 'empty':
 				chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
@@ -77,6 +78,7 @@ def getWebhookResult(postReq):
 				if 'same as above' in chosenCategory or 'same' in chosenCategory: 
 					chosenCategory = prevCategory
 
+			print(chosenCategory)
 			x = weatherRecommend.requestMore(chosenCategory)
 		else: 
 			#default get place recommendation, search based on type

@@ -51,14 +51,16 @@ class weatherPlaceRecommendations():
 		shortlistPlaces = []
 		data = {}
 
-		categoryText = selectedCategory.replace('_', ' ')
-		categoryText = selectedCategory.replace('%20', ' ')
+
 		if categoryText == 'library':
 			categoryText = 'libraries'
 		elif categoryText == 'art_gallery':
 			categoryText = 'art_galleries'
 		else:
 			categoryText = categoryText + 's'
+
+		categoryText = selectedCategory.replace('_', ' ')
+		categoryText = selectedCategory.replace('%20', ' ')
 
 		#if there are results
 		if (placeResult.get("status") == "OK"):
