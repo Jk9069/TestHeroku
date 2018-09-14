@@ -2,6 +2,7 @@ import urllib
 import json
 import os
 import random
+import re
 
 import weatherHandler
 import weatherRecommendations
@@ -10,6 +11,7 @@ import purposePlaceQuery
 from flask import Flask
 from flask import request
 from flask import make_response
+from emoji import UNICODE_EMOJI
 
 #global var 
 app = Flask(__name__);
@@ -71,7 +73,7 @@ def getWebhookResult(postReq):
 				if ("parameters" in item):
 					if ("prevCategory" in item.get("parameters")):
 						prevCategory = item.get("parameters").get("prevCategory")
-						print('outputContexts PREV CATEOGRY' + prevCategory)
+						print('outputContexts PREV CATEOGRY ' + prevCategory)
 
 			if prevCategory != None:
 				chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
