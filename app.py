@@ -69,10 +69,15 @@ def getWebhookResult(postReq):
 			#if user choose same as above, have to get prev intent category
 			for item in outputContexts:
 				if ("parameters" in item):
-					prevCategory = item.get("parameters").get("prevCategory")
+					if ("prevCategory" in item.get("parameters")):
+						prevCategory = item.get("parameters").get("prevCategory")
+						print('outputContexts PREV CATEOGRY' + prevCategory)
 
 			if prevCategory != None:
 				chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
+				chosenCategory = chosenCategory.replace('%20', ' ')
+				chosenCategory = chosenCategory.replace('_', ' ')
+				print('NOT NONE' + chosenCategory)
 				
 				if 'same as above' in chosenCategory or 'same' in chosenCategory: 
 					chosenCategory = prevCategory

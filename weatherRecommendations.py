@@ -56,7 +56,7 @@ class weatherPlaceRecommendations():
 		if selectedCategory == 'library':
 			selectedCategory = 'libraries'
 		elif selectedCategory == 'art_gallery':
-			selectedCategory = 'art_galleries'
+			selectedCategory = 'art galleries'
 		else:
 			selectedCategory = selectedCategory + 's'
 
@@ -202,6 +202,7 @@ class weatherPlaceRecommendations():
 	def requestMore(self, chosenCategory):
 		#have to remove emojis before appending to the requestLink
 		chosenCategory = self.remove_emoji(chosenCategory)
+		chosenCategory = chosenCategory.lower()
 		chosenCategory = chosenCategory.replace(' ', '%20')
 		#remove_emoji works but isnt removing first 2 chars easier? ._.
 		#chosenCategory = self.remove_emoji(chosenCategory)
