@@ -64,6 +64,7 @@ def getWebhookResult(postReq):
 				weather = item.get("parameters").get("mainWeather", 'empty')
 
 		#if action is GetWeather.GetWeather-yes, get location from facebook payload
+		# and then perform search
 		if postedReq.get("action") == "GetWeather.GetWeather-yes":
 			latitude = fbPayload.get("data").get("lat")
 			longitude = fbPayload.get("data").get("long")
@@ -71,9 +72,10 @@ def getWebhookResult(postReq):
 			#default get place recommendation, search based on type
 			#based on weather condition, decide what kind of place to suggest
 			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
-			x = weatherRecommend.requestPlaces(weather)
+			x = weatherRecommend.requestPlaces()
 
 		#if not, get location from output contexts
+		#and then perform search 
 		elif postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 			for item in outputContexts:
 				if ("parameters" in item):
@@ -102,7 +104,7 @@ def getWebhookResult(postReq):
 					chosenCategory = prevCategory
 
 			#print(chosenCategory)
-					#based on weather condition, decide what kind of place to suggest
+			#based on weather condition, decide what kind of place to suggest
 			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
 			x = weatherRecommend.requestMore(chosenCategory)
 
