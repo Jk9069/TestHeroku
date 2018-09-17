@@ -43,7 +43,7 @@ class weatherPlaceRecommendations():
 		else:
 			#this one to search when coordinates are provided 
 			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?opennow=true&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=10000&location="
-			requestLink = requestLink + str(latitude) + ',' + str(longitude)	
+			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
 		
 		#both request links will need this
 		#generate random placeTypes and append to requestLink
