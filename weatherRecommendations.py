@@ -173,8 +173,8 @@ class weatherPlaceRecommendations():
 			}
 
 
-			if self.latitude != None and self.longitude != None:
-				data["outputContexts"]["parameters"].append(', latitude': self.latitude + ', longitude': self.longitude)
+			# if self.latitude != None and self.longitude != None:
+			# 	data["outputContexts"]["parameters"].append(', latitude': self.latitude + ', longitude': self.longitude)
 
 			for x in range(len(shortlistPlaces)-1):
 				place = shortlistPlaces[x]
