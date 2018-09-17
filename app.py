@@ -57,63 +57,75 @@ def getWebhookResult(postReq):
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 		outputContexts = postedReq.get("outputContexts")
-		latitude = fbPayload.get("data").get("lat")
-		longitude = fbPayload.get("data").get("long")
 		
-		# for item in outputContexts:
-		# 	if ("parameters" in item):
-		# 		weather = item.get("parameters").get("mainWeather", 'empty')
+		#if action is GetWeather.GetWeather-yes, get location from facebook payload
+		if postedReq.get("action") == "GetWeather.GetWeather-yes":
+			latitude = fbPayload.get("data").get("lat")
+			longitude = fbPayload.get("data").get("long")
+
+		#if not, get location from output contexts
+		else:
+			for item in outputContexts:
+				if ("parameters" in item):
+					if ("latitude" in item.get("parameters") and "longitude" in item.get("parameters")):
+						latitude = item.get("parameters").get("latitude")
+						longitude = item.get("parameters").get("longitude")
 		
-		# #based on weather condition, decide what kind of place to suggest
-		# weatherRecommend = weatherRecommendations.weatherPlaceRecommendations()
+		#get weather condition
+		for item in outputContexts:
+			if ("parameters" in item):
+				weather = item.get("parameters").get("mainWeather", 'empty')
+		
+		#based on weather condition, decide what kind of place to suggest
+		weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(latitude, longitude)
 
-		# #if user asks for more, search based on text input, not type
-		# if postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
-		# 	chosenCategory = postedReq.get("queryText")
-		# 	print(chosenCategory)
+		#if user asks for more, search based on text input, not type
+		if postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
+			chosenCategory = postedReq.get("queryText")
+			print(chosenCategory)
 
-		# 	#if user choose same as above, get prev intent category
-		# 	for item in outputContexts:
-		# 		if ("parameters" in item):
-		# 			if ("prevCategory" in item.get("parameters")):
-		# 				prevCategory = item.get("parameters").get("prevCategory")
-		# 				print('outputContexts PREV CATEOGRY ' + prevCategory)
+			#if user choose same as above, get prev intent category
+			for item in outputContexts:
+				if ("parameters" in item):
+					if ("prevCategory" in item.get("parameters")):
+						prevCategory = item.get("parameters").get("prevCategory")
+						print('outputContexts PREV CATEOGRY ' + prevCategory)
 
-		# 	if prevCategory != None:
-		# 		chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
-		# 		chosenCategory = chosenCategory.replace('%20', ' ')
-		# 		chosenCategory = chosenCategory.replace('_', ' ')
-		# 		#print('NOT NONE' + chosenCategory)
+			if prevCategory != None:
+				chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
+				chosenCategory = chosenCategory.replace('%20', ' ')
+				chosenCategory = chosenCategory.replace('_', ' ')
+				#print('NOT NONE' + chosenCategory)
 				
-		# 		if 'same as above' in chosenCategory or 'same' in chosenCategory: 
-		# 			chosenCategory = prevCategory
+				if 'same as above' in chosenCategory or 'same' in chosenCategory: 
+					chosenCategory = prevCategory
 
-		# 	#print(chosenCategory)
-		# 	x = weatherRecommend.requestMore(chosenCategory)
-		# else: 
-		# 	#default get place recommendation, search based on type
-		# 	x = weatherRecommend.requestPlaces(weather)
+			#print(chosenCategory)
+			x = weatherRecommend.requestMore(chosenCategory)
+		else: 
+			#default get place recommendation, search based on type
+			x = weatherRecommend.requestPlaces(weather)
 
 
-		# return x
-		return {
-			"fulfillmentMessages": [
-				{
-					"text":{
-						"text":[
-							"latitude is " + str(latitude)
-						]
-					}
-				},
-				{
-					"text": {
-						"text":[
-							"longitude is " + str(longitude)
-						]
-					}
-				}
-			]
-		}
+		return x
+		# return {
+		# 	"fulfillmentMessages": [
+		# 		{
+		# 			"text":{
+		# 				"text":[
+		# 					"latitude is " + str(latitude)
+		# 				]
+		# 			}
+		# 		},
+		# 		{
+		# 			"text": {
+		# 				"text":[
+		# 					"longitude is " + str(longitude)
+		# 				]
+		# 			}
+		# 		}
+		# 	]
+		# }
 
 	#what happens after show places after recommendation????
 	elif postedReq.get('action') == "getTravelPurpose":
