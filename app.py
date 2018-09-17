@@ -111,16 +111,7 @@ def getWebhookResult(postReq):
 
 		return x
 
-	#what happens after show places after recommendation????
-	elif postedReq.get('action') == "jk-travelPurpose.jk-travelPurpose-coordinateSearch":
-		latitude = fbPayload.get("data").get("lat")
-		longitude = fbPayload.get("data").get("long")
-
-		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose, latitude, longitude)
-
-		return placeRecommend.requestPurposePlace()
-
-				# return {
+		# return {
 		# 	"fulfillmentMessages": [
 		# 		{
 		# 			"text":{
@@ -133,6 +124,27 @@ def getWebhookResult(postReq):
 		# 			"text": {
 		# 				"text":[
 		# 					"longitude is " + str(longitude)
+		# 				]
+		# 			}
+		# 		}
+		# 	]
+		# }
+
+	#what happens after show places after recommendation????
+	elif postedReq.get('action') == "jk-travelPurpose.jk-travelPurpose-coordinateSearch":
+		purpose = postedReqParams.get('purpose')
+		latitude = fbPayload.get("data").get("lat")
+		longitude = fbPayload.get("data").get("long")
+
+		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose, latitude, longitude)
+		return placeRecommend.requestPurposePlace()
+
+		# return {
+		# 	"fulfillmentMessages": [
+		# 		{
+		# 			"text":{
+		# 				"text":[
+		# 					"Your purpose is " + purpose
 		# 				]
 		# 			}
 		# 		}
