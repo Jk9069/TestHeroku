@@ -45,6 +45,7 @@ def WeatherWebhook():
 def getWebhookResult(postReq):
 	postedReq = postReq.get("queryResult")
 	postedReqParams = postReq.get("queryResult").get("parameters")
+	fbPayload = postReq.get("originalDetectIntentRequest")
 
 	#action / context will be used to determine what action is taken
 	#user asks for weather
@@ -56,43 +57,65 @@ def getWebhookResult(postReq):
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 		outputContexts = postedReq.get("outputContexts")
+		latitude = fbPayload.get("coordinates").get("lat")
+		longitude = fbPayload.get("coordinates").get("long")
 		
-		for item in outputContexts:
-			if ("parameters" in item):
-				weather = item.get("parameters").get("mainWeather", 'empty')
+		# for item in outputContexts:
+		# 	if ("parameters" in item):
+		# 		weather = item.get("parameters").get("mainWeather", 'empty')
 		
-		#based on weather condition, decide what kind of place to suggest
-		weatherRecommend = weatherRecommendations.weatherPlaceRecommendations()
+		# #based on weather condition, decide what kind of place to suggest
+		# weatherRecommend = weatherRecommendations.weatherPlaceRecommendations()
 
-		#if user asks for more, search based on text input, not type
-		if postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
-			chosenCategory = postedReq.get("queryText")
-			print(chosenCategory)
-			#if user choose same as above, have to get prev intent category
-			for item in outputContexts:
-				if ("parameters" in item):
-					if ("prevCategory" in item.get("parameters")):
-						prevCategory = item.get("parameters").get("prevCategory")
-						print('outputContexts PREV CATEOGRY ' + prevCategory)
+		# #if user asks for more, search based on text input, not type
+		# if postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
+		# 	chosenCategory = postedReq.get("queryText")
+		# 	print(chosenCategory)
 
-			if prevCategory != None:
-				chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
-				chosenCategory = chosenCategory.replace('%20', ' ')
-				chosenCategory = chosenCategory.replace('_', ' ')
-				print('NOT NONE' + chosenCategory)
+		# 	#if user choose same as above, get prev intent category
+		# 	for item in outputContexts:
+		# 		if ("parameters" in item):
+		# 			if ("prevCategory" in item.get("parameters")):
+		# 				prevCategory = item.get("parameters").get("prevCategory")
+		# 				print('outputContexts PREV CATEOGRY ' + prevCategory)
+
+		# 	if prevCategory != None:
+		# 		chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
+		# 		chosenCategory = chosenCategory.replace('%20', ' ')
+		# 		chosenCategory = chosenCategory.replace('_', ' ')
+		# 		#print('NOT NONE' + chosenCategory)
 				
-				if 'same as above' in chosenCategory or 'same' in chosenCategory: 
-					chosenCategory = prevCategory
+		# 		if 'same as above' in chosenCategory or 'same' in chosenCategory: 
+		# 			chosenCategory = prevCategory
 
-			print(chosenCategory)
-			x = weatherRecommend.requestMore(chosenCategory)
-		else: 
-			#default get place recommendation, search based on type
-			x = weatherRecommend.requestPlaces(weather)
+		# 	#print(chosenCategory)
+		# 	x = weatherRecommend.requestMore(chosenCategory)
+		# else: 
+		# 	#default get place recommendation, search based on type
+		# 	x = weatherRecommend.requestPlaces(weather)
 
 
-		return x
+		# return x
+		return {
+			"fulfillmentMessages": [
+				{
+					"text":{
+						"text":[
+							"latitude is " + latitude
+						]
+					}
+				},
+				{
+					"text": {
+						"text":[
+							"longitude is " + longitude
+						]
+					}
+				}
+			]
+		}
 
+	#what happens after show places after recommendation????
 	elif postedReq.get('action') == "getTravelPurpose":
 		purpose = postedReqParams.get('purpose')
 
@@ -109,7 +132,9 @@ def getWebhookResult(postReq):
 		# 			}
 		# 		}
 		# 	]
-		# } 
+		# }
+
+	elif postedReq.get('action') == "PenangInfo":
 					
 def remove_emoji(data):
 	count = 0
