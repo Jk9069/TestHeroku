@@ -77,28 +77,23 @@ def getWebhookResult(postReq):
 		#if not, get location from output contexts
 		#and then perform search 
 		elif postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
+			#get latitude, longitude and previous category from outputContexts
 			for item in outputContexts:
 				if ("parameters" in item):
 					if ("latitude" in item.get("parameters") and "longitude" in item.get("parameters")):
 						latitude = item.get("parameters").get("latitude")
 						longitude = item.get("parameters").get("longitude")
-					else:
-						latitude = None
-						longitude = None
+						print ("searchCategoryRecommendation LATITUDE: " + latitude)
+						print ("searchCategoryRecommendation longitude: " + longitude)
 
-			print ("searchCategoryRecommendation LATITUDE: " + latitude)
-			print ("searchCategoryRecommendation longitude: " + longitude)
+					#if user choose same as above, get prev intent category
+					if ("prevCategory" in item.get("parameters")):
+						prevCategory = item.get("parameters").get("prevCategory")
+						print('outputContexts PREV CATEOGRY ' + prevCategory)
 		
 			#get chosen category (can be either same or new category)
 			chosenCategory = postedReq.get("queryText")
 			print(chosenCategory)
-
-			#if user choose same as above, get prev intent category
-			for item in outputContexts:
-				if ("parameters" in item):
-					if ("prevCategory" in item.get("parameters")):
-						prevCategory = item.get("parameters").get("prevCategory")
-						print('outputContexts PREV CATEOGRY ' + prevCategory)
 
 			if prevCategory != None:
 				chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
