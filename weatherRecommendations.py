@@ -17,6 +17,8 @@ class weatherPlaceRecommendations():
 
 	def __init__(self, weather, latitude, longitude):
 		self.weather = weather
+		self.latitude = latitude
+		self.longitude = longitude
 
 	#from placeTypes search for places in Google Places API
 	def requestPlaces(self):
