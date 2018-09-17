@@ -179,8 +179,8 @@ class weatherPlaceRecommendations():
 						    "lifespanCount": 2,
 						    "parameters": {
 						    	"prevCategory": contextCategory,
-						    	"longitude": longitude,
-						    	"latitude": latitude
+						    	"longitude": self.longitude,
+						    	"latitude": self.latitude
 						    }
 						}
 					],	
