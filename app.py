@@ -101,14 +101,14 @@ def getWebhookResult(postReq):
 				{
 					"text":{
 						"text":[
-							"latitude is " + latitude
+							"latitude is " + str(latitude)
 						]
 					}
 				},
 				{
 					"text": {
 						"text":[
-							"longitude is " + longitude
+							"longitude is " + str(longitude)
 						]
 					}
 				}
