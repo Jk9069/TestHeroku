@@ -11,8 +11,10 @@ from flask import make_response
 
 class purposePlaceQuery():
 
-	def __init__(self, travelPurpose):
+	def __init__(self, travelPurpose, latitude, longitude):
 		self.travelPurpose = travelPurpose
+		self.latitude = latitude
+		self.longitude = longitude
 
 	def requestPurposePlace(self):
 		#search based on what purpose user enters
@@ -26,7 +28,9 @@ class purposePlaceQuery():
 		#for viewing purposes in logs only
 		s = json.dumps(placeResult, indent=4, sort_keys = True)
 		print(requestLink)
-		print(s)
+		print (self.latitude)
+		print(self.longitude)
+		# print(s)
 		
 		return self.readnFormatResults(placeResult)
 
