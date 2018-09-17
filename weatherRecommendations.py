@@ -55,7 +55,7 @@ class weatherPlaceRecommendations():
 
 		#for viewing purposes in logs only
 		# s = json.dumps(placeResult, indent=4, sort_keys = True)
-		# print(requestLink)
+		print(requestLink)
 		# print(s)
 		
 		return self.readnFormatResults(placeResult, randomCategory)
@@ -273,7 +273,7 @@ class weatherPlaceRecommendations():
 
 		#for viewing purposes in logs only
 		# s = json.dumps(placeResult, indent=4, sort_keys = True)
-		# print(requestLink)
+		print(requestLink)
 		# print(s)
  
 		return self.readnFormatResults(placeResult, chosenCategory)
