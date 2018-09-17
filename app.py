@@ -83,8 +83,8 @@ def getWebhookResult(postReq):
 					if ("latitude" in item.get("parameters") and "longitude" in item.get("parameters")):
 						latitude = item.get("parameters").get("latitude")
 						longitude = item.get("parameters").get("longitude")
-						print ("searchCategoryRecommendation LATITUDE: " + latitude)
-						print ("searchCategoryRecommendation longitude: " + longitude)
+						print ("searchCategoryRecommendation LATITUDE: " + str(latitude))
+						print ("searchCategoryRecommendation longitude: " + str(longitude))
 
 					#if user choose same as above, get prev intent category
 					if ("prevCategory" in item.get("parameters")):
