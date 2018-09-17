@@ -265,9 +265,19 @@ class weatherPlaceRecommendations():
 			chosenCategory == 'points_of_interest'
 
 		#initiate search using keyword from nearby search
-		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
-		requestLink = (requestLink + "&keyword=" + chosenCategory)
+		# requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 
+		# this one is to search penang when no coordinates provided
+		# hardcode location of penang as 5.4356 (lat), 100.3091 (long)
+		if self.latitude == None or self.longitude == None:
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=10000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+		else:
+			#this one to search when coordinates are provided 
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=10000&location="
+			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
+		
+		requestLink = (requestLink + "&keyword=" + chosenCategory)
+		
 		#post url
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
 
