@@ -52,9 +52,9 @@ class weatherPlaceRecommendations():
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
 
 		#for viewing purposes in logs only
-		s = json.dumps(placeResult, indent=4, sort_keys = True)
-		print(requestLink)
-		print(s)
+		# s = json.dumps(placeResult, indent=4, sort_keys = True)
+		# print(requestLink)
+		# print(s)
 		
 		return self.readnFormatResults(placeResult, randomCategory)
 
@@ -161,13 +161,13 @@ class weatherPlaceRecommendations():
 						{
 							"text":{
 								"text":[
-									responseText
+									"Showing results in Penang"
 								]
 							}
 						} 
 					]
 				}
-				
+
 			else:
 				data = {
 					"source": "Google Places API", 
@@ -217,7 +217,19 @@ class weatherPlaceRecommendations():
 			responseText = "No results found :("
 
 			return {
-				"fulfillmentText": responseText
+				"fulfillmentText": responseText,
+				"source": "Google Places API", 
+				"outputContexts": [
+					{
+						"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather-recommend",
+					    "lifespanCount": 2,
+					    "parameters": {
+					    	"prevCategory": contextCategory,
+					    	"longitude": longitude,
+					    	"latitude": latitude
+					    }
+					}
+				]
 			}
 
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
@@ -258,9 +270,9 @@ class weatherPlaceRecommendations():
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
 
 		#for viewing purposes in logs only
-		s = json.dumps(placeResult, indent=4, sort_keys = True)
-		print(requestLink)
-		print(s)
+		# s = json.dumps(placeResult, indent=4, sort_keys = True)
+		# print(requestLink)
+		# print(s)
  
 		return self.readnFormatResults(placeResult, chosenCategory)
 
