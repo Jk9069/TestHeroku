@@ -42,7 +42,7 @@ class weatherPlaceRecommendations():
 			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=10000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?opennow=true&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=10000&location="
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=10000&location="
 			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
 		
 		#both request links will need this
