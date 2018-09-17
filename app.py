@@ -45,7 +45,7 @@ def WeatherWebhook():
 def getWebhookResult(postReq):
 	postedReq = postReq.get("queryResult")
 	postedReqParams = postReq.get("queryResult").get("parameters")
-	fbPayload = postReq.get("originalDetectIntentRequest")
+	fbPayload = postReq.get("originalDetectIntentRequest").get("payload").get("data").get("postback")
 
 	#action / context will be used to determine what action is taken
 	#user asks for weather
@@ -57,8 +57,8 @@ def getWebhookResult(postReq):
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 		outputContexts = postedReq.get("outputContexts")
-		latitude = fbPayload.get("coordinates").get("lat")
-		longitude = fbPayload.get("coordinates").get("long")
+		latitude = fbPayload.get("data").get("lat")
+		longitude = fbPayload.get("data").get("long")
 		
 		# for item in outputContexts:
 		# 	if ("parameters" in item):
