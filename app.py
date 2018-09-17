@@ -71,8 +71,8 @@ def getWebhookResult(postReq):
 
 			#default get place recommendation, search based on type
 			#based on weather condition, decide what kind of place to suggest
-			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather)
-			x = weatherRecommend.requestPlaces(latitude, longitude)
+			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
+			x = weatherRecommend.requestPlaces()
 
 		#if not, get location from output contexts
 		#and then perform search 
@@ -82,8 +82,12 @@ def getWebhookResult(postReq):
 					if ("latitude" in item.get("parameters") and "longitude" in item.get("parameters")):
 						latitude = item.get("parameters").get("latitude")
 						longitude = item.get("parameters").get("longitude")
-						print ("searchCategoryRecommendation LATITUDE: " + latitude)
-						print ("searchCategoryRecommendation longitude: " + longitude)
+					else:
+						latitude = None
+						longitude = None
+
+			print ("searchCategoryRecommendation LATITUDE: " + latitude)
+			print ("searchCategoryRecommendation longitude: " + longitude)
 		
 			#get chosen category (can be either same or new category)
 			chosenCategory = postedReq.get("queryText")
@@ -107,7 +111,7 @@ def getWebhookResult(postReq):
 
 			#print(chosenCategory)
 			#based on weather condition, decide what kind of place to suggest
-			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather)
+			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
 			x = weatherRecommend.requestMore(chosenCategory)
 
 		return x

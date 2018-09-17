@@ -15,11 +15,11 @@ from flask import make_response
 
 class weatherPlaceRecommendations():
 
-	def __init__(self, weather):
+	def __init__(self, weather, latitude, longitude):
 		self.weather = weather
 
 	#from placeTypes search for places in Google Places API
-	def requestPlaces(self, latitude, longitude):
+	def requestPlaces(self):
 		placeTypes = [
 			'park', 'amusement_park', 'aquarium', 'art_gallery',
 			'bowling_alley', 'library', 'movie_theater', 'museum',
@@ -36,7 +36,7 @@ class weatherPlaceRecommendations():
 
 		# this one is to search penang when no coordinates provided
 		# hardcode location of penang as 5.4356 (lat), 100.3091 (long)
-		if latitude == None or longitude == None:
+		if self.latitude == None or self.longitude == None:
 			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=10000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
@@ -145,7 +145,7 @@ class weatherPlaceRecommendations():
 				else:
 					break
 				
-			if latitude == None or longitude == None:
+			if self.latitude == None or self.longitude == None:
 				data = {
 					"source": "Google Places API", 
 					"outputContexts": [
