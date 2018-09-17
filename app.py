@@ -134,7 +134,7 @@ def getWebhookResult(postReq):
 		# 	]
 		# }
 
-	elif postedReq.get('action') == "PenangInfo":
+	# elif postedReq.get('action') == "PenangInfo":
 					
 def remove_emoji(data):
 	count = 0
