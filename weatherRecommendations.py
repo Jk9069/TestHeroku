@@ -15,13 +15,11 @@ from flask import make_response
 
 class weatherPlaceRecommendations():
 
-	def __init__(self, weather, latitude, longitude):
-		self.latitude = latitude
-		self.longitude = longitude
+	def __init__(self, weather):
 		self.weather = weather
 
 	#from placeTypes search for places in Google Places API
-	def requestPlaces(self):
+	def requestPlaces(self, latitude, longitude):
 		placeTypes = [
 			'park', 'amusement_park', 'aquarium', 'art_gallery',
 			'bowling_alley', 'library', 'movie_theater', 'museum',
@@ -35,17 +33,15 @@ class weatherPlaceRecommendations():
 
 		#weather not printed?
 		print(self.weather)
-		print(self.latitude)
-		print(self.longitude)
 
 		# this one is to search penang when no coordinates provided
 		# hardcode location of penang as 5.4356 (lat), 100.3091 (long)
-		if self.latitude == None or self.longitude == None:
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+		if latitude == None or longitude == None:
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=10000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?opennow=true&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=6000&location="
-			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?opennow=true&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=10000&location="
+			requestLink = requestLink + str(latitude) + ',' + str(longitude)	
 		
 		#both request links will need this
 		#generate random placeTypes and append to requestLink
@@ -149,32 +145,53 @@ class weatherPlaceRecommendations():
 				else:
 					break
 				
-			#googleLogo = Image.open("powered_by_google_on_white.png")
-			data = {
-				"source": "Google Places API", 
-				"outputContexts": [
-					{
-						"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather-recommend",
-					    "lifespanCount": 2,
-					    "parameters": {
-					    	"prevCategory": contextCategory
-					    }
-					}
-				],	
-				"fulfillmentMessages":[
-					{
-						"text":{
-							"text":[
-								responseText
-							]
+			if latitude == None or longitude == None:
+				data = {
+					"source": "Google Places API", 
+					"outputContexts": [
+						{
+							"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather-recommend",
+						    "lifespanCount": 2,
+						    "parameters": {
+						    	"prevCategory": contextCategory
+						    }
 						}
-					} 
-				]
-			}
-
-
-			# if self.latitude != None and self.longitude != None:
-			# 	data["outputContexts"]["parameters"].append(', latitude': self.latitude + ', longitude': self.longitude)
+					],	
+					"fulfillmentMessages":[
+						{
+							"text":{
+								"text":[
+									responseText
+								]
+							}
+						} 
+					]
+				}
+				
+			else:
+				data = {
+					"source": "Google Places API", 
+					"outputContexts": [
+						{
+							"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather-recommend",
+						    "lifespanCount": 2,
+						    "parameters": {
+						    	"prevCategory": contextCategory,
+						    	"longitude": longitude,
+						    	"latitude": latitude
+						    }
+						}
+					],	
+					"fulfillmentMessages":[
+						{
+							"text":{
+								"text":[
+									responseText
+								]
+							}
+						} 
+					]
+				}
 
 			for x in range(len(shortlistPlaces)-1):
 				place = shortlistPlaces[x]
