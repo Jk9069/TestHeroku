@@ -58,29 +58,30 @@ def getWebhookResult(postReq):
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 		outputContexts = postedReq.get("outputContexts")
 		
+		#get weather condition
+		for item in outputContexts:
+			if ("parameters" in item):
+				weather = item.get("parameters").get("mainWeather", 'empty')
+
 		#if action is GetWeather.GetWeather-yes, get location from facebook payload
 		if postedReq.get("action") == "GetWeather.GetWeather-yes":
 			latitude = fbPayload.get("data").get("lat")
 			longitude = fbPayload.get("data").get("long")
 
+			#default get place recommendation, search based on type
+			#based on weather condition, decide what kind of place to suggest
+			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
+			x = weatherRecommend.requestPlaces(weather)
+
 		#if not, get location from output contexts
-		else:
+		elif postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 			for item in outputContexts:
 				if ("parameters" in item):
 					if ("latitude" in item.get("parameters") and "longitude" in item.get("parameters")):
 						latitude = item.get("parameters").get("latitude")
 						longitude = item.get("parameters").get("longitude")
 		
-		#get weather condition
-		for item in outputContexts:
-			if ("parameters" in item):
-				weather = item.get("parameters").get("mainWeather", 'empty')
-		
-		#based on weather condition, decide what kind of place to suggest
-		weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(latitude, longitude)
-
-		#if user asks for more, search based on text input, not type
-		if postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
+			#get chosen category (can be either same or new category)
 			chosenCategory = postedReq.get("queryText")
 			print(chosenCategory)
 
@@ -101,13 +102,12 @@ def getWebhookResult(postReq):
 					chosenCategory = prevCategory
 
 			#print(chosenCategory)
+					#based on weather condition, decide what kind of place to suggest
+			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
 			x = weatherRecommend.requestMore(chosenCategory)
-		else: 
-			#default get place recommendation, search based on type
-			x = weatherRecommend.requestPlaces(weather)
-
 
 		return x
+
 		# return {
 		# 	"fulfillmentMessages": [
 		# 		{
