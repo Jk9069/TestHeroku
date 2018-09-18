@@ -53,7 +53,7 @@ def getWebhookResult(postReq):
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
 		fbPayload = postReq.get("originalDetectIntentRequest").get("payload").get("data").get("postback")
-		
+
 		#get weather condition
 		for item in outputContexts:
 			if ("parameters" in item):
@@ -156,14 +156,14 @@ def getWebhookResult(postReq):
 					endDate = postedReqParams.get("endDate")
 					endDate = (endDate[:10]).replace('-', '') + '00'
 
-				requestLink = requestLink + "&date=" + str(startDate) + "-" + str(endDate)
+					requestLink = requestLink + "&date=" + str(startDate) + "-" + str(endDate)
 				
 			elif ("date" in postedReqParams):
 				if postedReqParams.get("date") != "":
 					date = postedReqParams.get("date")
 					date = (date[:10]).replace('-', '')+ "00"
 
-				requestLink = requestLink + "&date=" + str(date) + "-" + str(date)
+					requestLink = requestLink + "&date=" + str(date) + "-" + str(date)
 
 			#start search here, searh with no categories first
 			#requestLink = requestLink + "&category=" + "???"
