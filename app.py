@@ -151,17 +151,19 @@ def getWebhookResult(postReq):
 			# get the time period or date to search
 			if ("date-period" in postedReqParams):
 				if (postedReqParams.get("date-period") != ""):
-					startDate = postedReqParams.get("startDate")
+					startDate = postedReqParams.get("date-period").get("startDate")
 					startDate = (startDate[:10]).replace('-', '') + '00'
-					endDate = postedReqParams.get("endDate")
+					endDate = postedReqParams.get("date-period").get("endDate")
 					endDate = (endDate[:10]).replace('-', '') + '00'
+					print(startDate + '  ' + endDate)
 
 					requestLink = requestLink + "&date=" + str(startDate) + "-" + str(endDate)
 				
 			elif ("date" in postedReqParams):
 				if postedReqParams.get("date") != "":
 					date = postedReqParams.get("date")
-					date = (date[:10]).replace('-', '')+ "00"
+					date = (date[:10]).replace('-', '') + "00"
+					print(date)
 
 					requestLink = requestLink + "&date=" + str(date) + "-" + str(date)
 
