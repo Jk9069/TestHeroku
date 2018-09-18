@@ -126,7 +126,7 @@ def getWebhookResult(postReq):
 					if ("placeCategory.original" in item.get("parameters")):
 						purpose = item.get("parameters").get("placeCategory.original")
 
-		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose, latitude, longitude)
+		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose.replace(' ', '%20'), latitude, longitude)
 		return placeRecommend.requestPurposePlace()
 
 	# elif postedReq.get('action') == "PenangInfo":

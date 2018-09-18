@@ -69,13 +69,14 @@ class weatherPlaceRecommendations():
 
 		if selectedCategory == 'library':
 			selectedCategory = 'libraries'
-		elif selectedCategory == 'art_gallery':
+		elif selectedCategory == 'art gallery':
 			selectedCategory = 'art galleries'
 		else:
 			selectedCategory = selectedCategory + 's'
 
-		categoryText = selectedCategory.replace('_', ' ')
-		categoryText = selectedCategory.replace('%20', ' ')
+		# already replaced in app.py
+		# categoryText = selectedCategory.replace('_', ' ')
+		# categoryText = selectedCategory.replace('%20', ' ')
 
 		#if there are results
 		if (placeResult.get("status") == "OK"):
@@ -253,8 +254,8 @@ class weatherPlaceRecommendations():
 		#have to remove emojis before appending to the requestLink
 		chosenCategory = self.remove_emoji(chosenCategory)
 		chosenCategory = chosenCategory.lower()
-		chosenCategory = chosenCategory.replace('_', ' ')
-		chosenCategory = chosenCategory.replace('%20', ' ')
+		# chosenCategory = chosenCategory.replace('_', ' ')
+		# chosenCategory = chosenCategory.replace('%20', ' ')
 		
 		#chosenCategory = self.remove_emoji(chosenCategory)
 		print ("CHOSEN CATEGORY IS: " + chosenCategory)
@@ -275,7 +276,7 @@ class weatherPlaceRecommendations():
 			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=10000&location="
 			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
 		
-		requestLink = (requestLink + "&keyword=" + chosenCategory)
+		requestLink = (requestLink + "&keyword=" + chosenCategory.replace(' ', '%20'))
 		
 		print(requestLink)
 		#post url
