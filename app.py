@@ -152,18 +152,26 @@ def getWebhookResult(postReq):
 			if ("date-period" in postedReqParams):
 				if (postedReqParams.get("date-period") != ""):
 					startDate = postedReqParams.get("date-period").get("startDate")
+					print('STARTDATE: ' + startDate)
+
 					startDate = (startDate[:10]).replace('-', '') + '00'
+					print('REPLACED STARTDATE: ' + startDate)
+
 					endDate = postedReqParams.get("date-period").get("endDate")
+					print('ENDDATE: ' + endDate)
+
 					endDate = (endDate[:10]).replace('-', '') + '00'
-					print(startDate + '  ' + endDate)
+					print('REPLACED ENDDATE: ' + endDate)
 
 					requestLink = requestLink + "&date=" + str(startDate) + "-" + str(endDate)
 				
 			elif ("date" in postedReqParams):
 				if postedReqParams.get("date") != "":
 					date = postedReqParams.get("date")
+					print ('DATE: ' + date)
+
 					date = (date[:10]).replace('-', '') + "00"
-					print(date)
+					print('REPLACED DATE: ' + date)
 
 					requestLink = requestLink + "&date=" + str(date) + "-" + str(date)
 
@@ -171,7 +179,17 @@ def getWebhookResult(postReq):
 			#requestLink = requestLink + "&category=" + "???"
 
 		return {
-			"fulfillmentText": requestLink
+			"fulfillmentMessages": [
+				{
+					"text":{
+						"text":[
+							requestLink
+						]
+					}
+				}
+
+				
+			]
 		}
 
 	# elif postedReq.get('action') == "PenangInfo":
