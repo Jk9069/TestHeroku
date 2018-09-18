@@ -39,9 +39,6 @@ def WeatherWebhook():
 	finResult.headers['Content_Type'] = 'application/json'
 	return finResult
 
-
-#def indoorOutdoor(mainWeather):
-
 def getWebhookResult(postReq):
 	postedReq = postReq.get("queryResult")
 	postedReqParams = postReq.get("queryResult").get("parameters")
@@ -88,6 +85,8 @@ def getWebhookResult(postReq):
 					if ("prevCategory" in item.get("parameters")):
 						prevCategory = item.get("parameters").get("prevCategory")
 						print('outputContexts PREV CATEOGRY ' + prevCategory)
+					else:
+						prevCategory = None
 		
 			#get chosen category (can be either same or new category)
 			chosenCategory = postedReq.get("queryText")
@@ -115,7 +114,7 @@ def getWebhookResult(postReq):
 		for item in outputContexts:
 			if ("parameters" in item):
 				if ("purpose" in item.get("parameters")):
-					purpose = item.get("parameters").get("purpose")
+					purpose = item.get("parameters").get("purpose.original")
 
 		latitude = fbPayload.get("data").get("lat")
 		longitude = fbPayload.get("data").get("long")

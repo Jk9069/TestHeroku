@@ -88,7 +88,7 @@ class weatherPlaceRecommendations():
 			for items in results:
 				if ("opening_hours" in items):
 					openNow = items["opening_hours"].get("open_now")
-					print(openNow)
+					# print(openNow)
 				else:
 					openNow = 'false'
 				

@@ -48,7 +48,7 @@ class purposePlaceQuery():
 		#if there are results
 		if (placeResult.get("status") == "OK"):
 			#responseText = "Okay, showing " + categoryText 
-			responseText = "Your purpose is " + self.travelPurpose 
+			responseText = "Okay, here are some suggestions."
 
 			#pluck information from placeResult
 			#get place ID and get image, website
@@ -58,7 +58,7 @@ class purposePlaceQuery():
 			for items in results:
 				if ("opening_hours" in items):
 					openNow = items["opening_hours"].get("open_now")
-					print(openNow)
+					# print(openNow)
 				else:
 					openNow = 'false'
 				
