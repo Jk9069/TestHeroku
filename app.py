@@ -109,15 +109,22 @@ def getWebhookResult(postReq):
 		return x
 
 	#what happens after show places after recommendation????
-	elif postedReq.get('action') == "jk-travelPurpose.jk-travelPurpose-coordinateSearch":
-		#purpose not there after getting user location
-		for item in outputContexts:
-			if ("parameters" in item):
-				if ("purpose" in item.get("parameters")):
-					purpose = item.get("parameters").get("purpose.original")
-
+	elif postedReq.get('action') == "jk-travelPurpose.jk-travelPurpose-coordinateSearch" or postedReq.get('action') == "jk-travelPurpose-placeCategory-getResult":
+		
 		latitude = fbPayload.get("data").get("lat")
 		longitude = fbPayload.get("data").get("long")
+		
+		if postedReq.get('action') == "jk-travelPurpose.jk-travelPurpose-coordinateSearch":
+			for item in outputContexts:
+				if ("parameters" in item):
+					if ("purpose.original" in item.get("parameters")):
+						purpose = item.get("parameters").get("purpose.original")
+
+		elif postedReq.get('action') == "jk-travelPurpose-placeCategory-getResult":
+			for item in outputContexts:
+				if ("parameters" in item):
+					if ("placeCategory.original" in item.get("parameters")):
+						purpose = item.get("parameters").get("placeCategory.original")
 
 		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose, latitude, longitude)
 		return placeRecommend.requestPurposePlace()
