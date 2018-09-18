@@ -80,6 +80,9 @@ def getWebhookResult(postReq):
 						longitude = item.get("parameters").get("longitude")
 						print ("searchCategoryRecommendation LATITUDE: " + str(latitude))
 						print ("searchCategoryRecommendation longitude: " + str(longitude))
+					else:
+						latitude = None
+						longitude = None
 
 					#if user choose same as above, get prev intent category
 					if ("prevCategory" in item.get("parameters")):
@@ -128,6 +131,44 @@ def getWebhookResult(postReq):
 
 		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose.replace(' ', '%20'), latitude, longitude)
 		return placeRecommend.requestPurposePlace()
+
+	elif postedReq.get('action') == "getEvent":
+		categories = [
+			"learning_education", "music", "science", 
+			"business", "support", "outdoors_recreation", 
+			"performing_arts", "religion_spirituality",
+			"miscellaneous"
+		]
+
+		requestLink = "http://api.eventful.com/json/events/search?app_key=ccLj6sppM4RsQ4wX&location=George%20town,Pulau%20Pinang"
+
+		# search for event or concert, depending on user input
+		if ("eventConcert" in postedReqParams):
+			searchEvent = postedReqParams.get("eventConcert")
+
+			# get the time period or date to search
+			if ("date-period" in postedReqParams):
+				if (postedReqParams.get("date-period") != ""):
+					startDate = postedReqParams.get("startDate")
+					startDate = (startDate[:10]).replace('-', '') + '00'
+					endDate = postedReqParams.get("endDate")
+					endDate = (endDate[:10]).replace('-', '') + '00'
+
+				requestLink = requestLink + "&date=" + str(startDate) + "-" + str(endDate)
+				
+			elif ("date" in postedReqParams):
+				if postedReqParams.get("date") != "":
+					date = postedReqParams.get("date")
+					date = (date[:10]).replace('-', '')+ "00"
+
+				requestLink = requestLink + "&date=" + str(date) + "-" + str(date)
+
+			#start search here, searh with no categories first
+			#requestLink = requestLink + "&category=" + "???"
+
+		return {
+			"fulfillmentText": requestLink
+		}
 
 	# elif postedReq.get('action') == "PenangInfo":
 					

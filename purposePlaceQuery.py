@@ -22,7 +22,7 @@ class purposePlaceQuery():
 		# requestLink = (requestLink + "&keyword=" + self.travelPurpose)
 
 		#this one to search when coordinates are provided 
-		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=10000&location="
+		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=8000&location="
 		requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude) + "&keyword=" + self.travelPurpose	
 		
 		print(requestLink)

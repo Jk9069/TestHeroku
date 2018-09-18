@@ -38,10 +38,10 @@ class weatherPlaceRecommendations():
 		# this one is to search penang when no coordinates provided
 		# hardcode location of penang as 5.4356 (lat), 100.3091 (long)
 		if self.latitude == None or self.longitude == None:
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=10000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=8000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=10000&location="
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=8000&location="
 			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
 		
 		#both request links will need this
@@ -69,7 +69,7 @@ class weatherPlaceRecommendations():
 
 		if selectedCategory == 'library':
 			selectedCategory = 'libraries'
-		elif selectedCategory == 'art gallery':
+		elif selectedCategory == 'art_gallery':
 			selectedCategory = 'art galleries'
 		else:
 			selectedCategory = selectedCategory + 's'
@@ -270,10 +270,10 @@ class weatherPlaceRecommendations():
 		# this one is to search penang when no coordinates provided
 		# hardcode location of penang as 5.4356 (lat), 100.3091 (long)
 		if self.latitude == None or self.longitude == None:
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=10000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=8000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=10000&location="
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=8000&location="
 			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
 		
 		requestLink = (requestLink + "&keyword=" + chosenCategory.replace(' ', '%20'))
