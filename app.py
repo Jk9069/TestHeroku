@@ -145,35 +145,33 @@ def getWebhookResult(postReq):
 		requestLink = "http://api.eventful.com/json/events/search?app_key=ccLj6sppM4RsQ4wX&location=George%20town,Pulau%20Pinang"
 
 		# search for event or concert, depending on user input
-		if ("eventConcert" in postedReqParams):
-			searchEvent = postedReqParams.get("eventConcert")
+		# if ("eventConcert" in postedReqParams):
+		searchEvent = postedReqParams.get("eventConcert")
 
-			# get the time period or date to search
-			if ("date-period" in postedReqParams):
-				if (postedReqParams.get("date-period") != ""):
-					startDate = postedReqParams.get("date-period").get("startDate")
-					print('STARTDATE: ' + startDate)
+		# get the time period or date to search	
+		if (postedReqParams.get("date-period") != ""):
+			startDate = postedReqParams.get("date-period").get("startDate")
+			print('STARTDATE: ' + startDate)
 
-					startDate = (startDate[:10]).replace('-', '') + '00'
-					print('REPLACED STARTDATE: ' + startDate)
+			startDate = (startDate[:10]).replace('-', '') + '00'
+			print('REPLACED STARTDATE: ' + startDate)
 
-					endDate = postedReqParams.get("date-period").get("endDate")
-					print('ENDDATE: ' + endDate)
+			endDate = postedReqParams.get("date-period").get("endDate")
+			print('ENDDATE: ' + endDate)
 
-					endDate = (endDate[:10]).replace('-', '') + '00'
-					print('REPLACED ENDDATE: ' + endDate)
+			endDate = (endDate[:10]).replace('-', '') + '00'
+			print('REPLACED ENDDATE: ' + endDate)
 
-					requestLink = requestLink + "&date=" + str(startDate) + "-" + str(endDate)
-				
-			elif ("date" in postedReqParams):
-				if postedReqParams.get("date") != "":
-					date = postedReqParams.get("date")
-					print ('DATE: ' + date)
+			requestLink = requestLink + "&date=" + str(startDate) + "-" + str(endDate)
+		
+		elif postedReqParams.get("date") != "":
+			date = postedReqParams.get("date")
+			print ('DATE: ' + date)
 
-					date = (date[:10]).replace('-', '') + "00"
-					print('REPLACED DATE: ' + date)
+			date = (date[:10]).replace('-', '') + "00"
+			print('REPLACED DATE: ' + date)
 
-					requestLink = requestLink + "&date=" + str(date) + "-" + str(date)
+			requestLink = requestLink + "&date=" + str(date) + "-" + str(date)
 
 			#start search here, searh with no categories first
 			#requestLink = requestLink + "&category=" + "???"
@@ -183,12 +181,17 @@ def getWebhookResult(postReq):
 				{
 					"text":{
 						"text":[
+							searchEvent
+						]
+					}
+				},
+				{
+					"text":{
+						"text":[
 							requestLink
 						]
 					}
-				}
-
-				
+				}	
 			]
 		}
 
