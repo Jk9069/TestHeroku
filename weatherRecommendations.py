@@ -80,7 +80,7 @@ class weatherPlaceRecommendations():
 
 		#if there are results
 		if (placeResult.get("status") == "OK"):
-			responseText = "Okay, showing " + categoryText 
+			responseText = "Okay, showing " + selectedCategory 
 
 			#get place ID and get image, website
 			results = placeResult.get("results")
