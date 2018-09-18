@@ -39,7 +39,7 @@ class purposePlaceQuery():
 		
 		return self.readnFormatResults(placeResult)
 
-	#function to read and format json results? 
+	#function to read and format json results
 	def readnFormatResults(self, placeResult):
 		responseText = ""
 		shortlistPlaces = []
@@ -50,15 +50,15 @@ class purposePlaceQuery():
 			#responseText = "Okay, showing " + categoryText 
 			responseText = "Your purpose is " + self.travelPurpose 
 
-			#pluck information from placeResult, open now?
+			#pluck information from placeResult
 			#get place ID and get image, website
 			results = placeResult.get("results")
 			counter = 0;
 
 			for items in results:
-				#only get places that are opened now?
 				if ("opening_hours" in items):
-					openNow = items["opening_hours"].get("open_now", 'false')
+					openNow = items["opening_hours"].get("open_now")
+					print(openNow)
 				else:
 					openNow = 'false'
 				
@@ -91,7 +91,7 @@ class purposePlaceQuery():
 					photoRef = 'none'
 					photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 
-				#maybe i should go get types?
+				#get types that categorise the place
 				stringTypes = ""
 				if ("types" in items):
 					types = items["types"]

@@ -50,7 +50,6 @@ def getWebhookResult(postReq):
 
 	#action / context will be used to determine what action is taken
 	#user asks for weather
-	#what about user location????
 	if postedReq.get("action") == "weather":
 		weatherInfo = weatherHandler.weatherResponse(postedReqParams, postedReq)
 		return weatherInfo.getWeatherResponse()
@@ -162,7 +161,7 @@ if __name__ == "__main__":
 			# 	# {
 			# 	# 	"card": {
 			# 	# 			"title": "name",
-			# 	# 			"subtitle": rating? address?,
+			# 	# 			"subtitle": rating/address,
 			# 	# 			"imageUri": "image"
 			# 	# 			"buttons": [
 			# 	# 				{

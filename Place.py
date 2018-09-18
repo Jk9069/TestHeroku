@@ -37,7 +37,7 @@ class Place():
 	def getOpenNow(self):
 		openStatus = ""
 		
-		if (self.openNow == 'true'):
+		if (self.openNow == 'true' or self.openNow == True):
 			openStatus = "Open Now."
 		else:
 			openStatus = "Closed."

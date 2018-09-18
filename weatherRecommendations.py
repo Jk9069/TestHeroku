@@ -33,7 +33,6 @@ class weatherPlaceRecommendations():
 			placeTypes.remove('park')
 			placeTypes.remove('amusement_park')
 
-		#weather not printed?
 		print(self.weather)
 
 		# this one is to search penang when no coordinates provided
@@ -82,15 +81,14 @@ class weatherPlaceRecommendations():
 		if (placeResult.get("status") == "OK"):
 			responseText = "Okay, showing " + categoryText 
 
-			#pluck information from placeResult, open now?
 			#get place ID and get image, website
 			results = placeResult.get("results")
 			counter = 0;
 
 			for items in results:
-				#only get places that are opened now?
 				if ("opening_hours" in items):
-					openNow = items["opening_hours"].get("open_now", 'false')
+					openNow = items["opening_hours"].get("open_now")
+					print(openNow)
 				else:
 					openNow = 'false'
 				
@@ -124,7 +122,7 @@ class weatherPlaceRecommendations():
 					photoRef = 'none'
 					photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 
-				#maybe i should go get types?
+				# get type that categorise the places
 				stringTypes = ""
 				if ("types" in items):
 					types = items["types"]
