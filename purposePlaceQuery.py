@@ -18,12 +18,15 @@ class purposePlaceQuery():
 
 	def requestPurposePlace(self):
 		#search based on what purpose user enters
-		#user location ????
-		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
-		requestLink = (requestLink + "&keyword=" + self.travelPurpose)
+		# requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+		# requestLink = (requestLink + "&keyword=" + self.travelPurpose)
 
-		print(requestLink)
+		#this one to search when coordinates are provided 
+		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=10000&location="
+		requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude) + "&keyword=" + self.travelPurpose	
 		
+		print(requestLink)
+
 		#post url
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
 
@@ -115,6 +118,16 @@ class purposePlaceQuery():
 			#googleLogo = Image.open("powered_by_google_on_white.png")
 			data = {
 				"source": "Google Places API", 
+				"outputContexts": [
+					{
+						"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/jk-travelPurpose-followup",
+					    "lifespanCount": 2,
+					    "parameters": {
+					    	"longitude": self.longitude,
+					    	"latitude": self.latitude
+					    }
+					}
+				],	
 				"fulfillmentMessages":[
 					{
 						"text":{
@@ -150,7 +163,18 @@ class purposePlaceQuery():
 			responseText = "No results found :("
 
 			return {
-				"fulfillmentText": responseText
+				"fulfillmentText": responseText,
+				"source": "Google Places API", 
+				"outputContexts": [
+					{
+						"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/jk-travelPurpose-followup",
+					    "lifespanCount": 2,
+					    "parameters": {
+					    	"longitude": self.longitude,
+					    	"latitude": self.latitude
+					    }
+					}
+				]
 			}
 
 		elif (placeResult.get("status") == "OVER_QUERY_LIMIT"):
