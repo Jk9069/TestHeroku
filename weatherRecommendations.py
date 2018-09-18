@@ -50,12 +50,13 @@ class weatherPlaceRecommendations():
 		randomCategory = placeTypes[random.randint(0, len(placeTypes)-1)]
 		requestLink = (requestLink + "&type=" + randomCategory)
 
+		print(requestLink)
+
 		#post url
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
 
 		#for viewing purposes in logs only
 		# s = json.dumps(placeResult, indent=4, sort_keys = True)
-		print(requestLink)
 		# print(s)
 		
 		return self.readnFormatResults(placeResult, randomCategory)
@@ -278,12 +279,12 @@ class weatherPlaceRecommendations():
 		
 		requestLink = (requestLink + "&keyword=" + chosenCategory)
 		
+		print(requestLink)
 		#post url
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
 
 		#for viewing purposes in logs only
 		# s = json.dumps(placeResult, indent=4, sort_keys = True)
-		print(requestLink)
 		# print(s)
  
 		return self.readnFormatResults(placeResult, chosenCategory)

@@ -22,12 +22,14 @@ class purposePlaceQuery():
 		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		requestLink = (requestLink + "&keyword=" + self.travelPurpose)
 
+		print(requestLink)
+		
 		#post url
 		placeResult = json.loads(urllib.request.urlopen(requestLink).read())
 
 		#for viewing purposes in logs only
 		s = json.dumps(placeResult, indent=4, sort_keys = True)
-		print(requestLink)
+		
 		print (self.latitude)
 		print(self.longitude)
 		# print(s)
