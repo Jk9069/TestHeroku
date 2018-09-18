@@ -43,7 +43,6 @@ def getWebhookResult(postReq):
 	postedReq = postReq.get("queryResult")
 	postedReqParams = postReq.get("queryResult").get("parameters")
 	outputContexts = postedReq.get("outputContexts")
-	fbPayload = postReq.get("originalDetectIntentRequest").get("payload").get("data").get("postback")
 
 	#action / context will be used to determine what action is taken
 	#user asks for weather
@@ -53,6 +52,8 @@ def getWebhookResult(postReq):
 
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
+		fbPayload = postReq.get("originalDetectIntentRequest").get("payload").get("data").get("postback")
+		
 		#get weather condition
 		for item in outputContexts:
 			if ("parameters" in item):
@@ -113,7 +114,8 @@ def getWebhookResult(postReq):
 
 	#what happens after show places after recommendation????
 	elif postedReq.get('action') == "jk-travelPurpose.jk-travelPurpose-coordinateSearch" or postedReq.get('action') == "jk-travelPurpose-placeCategory-getResult":
-		
+		fbPayload = postReq.get("originalDetectIntentRequest").get("payload").get("data").get("postback")
+
 		latitude = fbPayload.get("data").get("lat")
 		longitude = fbPayload.get("data").get("long")
 		
