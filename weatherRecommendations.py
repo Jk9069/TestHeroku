@@ -87,7 +87,7 @@ class weatherPlaceRecommendations():
 			counter = 0;
 
 			for items in results:
-				if (counter != 8):
+				if (counter < 8):
 					if ("opening_hours" in items):
 						openNow = items["opening_hours"].get("open_now")
 						# print(openNow)
@@ -209,7 +209,7 @@ class weatherPlaceRecommendations():
 			for x in range(len(shortlistPlaces)-1):
 				place = shortlistPlaces[x]
 
-				if (x != 8):
+				if (x < 8):
 					data["fulfillmentMessages"].append(
 						{
 							"card": { 
@@ -226,7 +226,7 @@ class weatherPlaceRecommendations():
 							}
 						}
 					)
-				else:
+				elif (x == 8):
 					data["fulfillmentMessages"].append(
 						{
 							"card": { 
