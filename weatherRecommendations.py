@@ -233,7 +233,7 @@ class weatherPlaceRecommendations():
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": "Powered by Google"
-								 "imageUri": "",
+								 "imageUri": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
 								 "buttons": [
 								 	{
 								 		"text": "Map",
