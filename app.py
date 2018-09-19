@@ -235,7 +235,7 @@ def getWebhookResult(postReq):
 						{
 							"card": { 
 								 "title": event.getEventName(),
-								 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful"
+								 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
 								 "imageUri": event.getImgUrl(),
 								 "buttons": [
 								 	{
