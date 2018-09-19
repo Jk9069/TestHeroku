@@ -229,7 +229,7 @@ def getWebhookResult(postReq):
 			}
 
 			print(len(allEvents))
-			for x in range(len(allEvents)-1):
+			for x in range(len(allEvents)):
 				print(x)
 				event = allEvents[x]
 
@@ -250,7 +250,7 @@ def getWebhookResult(postReq):
 						}
 					}
 				)
-				
+
 		else:
 			data = {
 				"fulfillmentText": "No results found :("
