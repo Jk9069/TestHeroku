@@ -210,30 +210,18 @@ def getWebhookResult(postReq):
 					break
 
 			data = {
-				"source": "Eventful API", 
-				# "outputContexts": [
-				# 	{
-				# 		"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather-recommend",
-				# 	    "lifespanCount": 2,
-				# 	    "parameters": {
-				# 	    	"prevCategory": contextCategory,
-				# 	    	"longitude": self.longitude,
-				# 	    	"latitude": self.latitude
-				# 	    }
-				# 	}
-				# ],	
+				"source": "Eventful API", 	
 				"fulfillmentMessages":[
 					{
 						"text":{
 							"text":[
-								searchEvent
+								"Here's what I found."
 							]
 						}
 					} 
 				]
 			}
 
-			print(len(allEvents))
 			for x in range(len(allEvents)):
 				print(x)
 				event = allEvents[x]
@@ -260,25 +248,6 @@ def getWebhookResult(postReq):
 			data = {
 				"fulfillmentText": "No results found :("
 			}
-
-		# return {
-		# 	"fulfillmentMessages": [
-		# 		{
-		# 			"text":{
-		# 				"text":[
-		# 					searchEvent
-		# 				]
-		# 			}
-		# 		},
-		# 		{
-		# 			"text":{
-		# 				"text":[
-		# 					requestLink
-		# 				]
-		# 			}
-		# 		}	
-		# 	]
-		# }
 
 		return data
 
