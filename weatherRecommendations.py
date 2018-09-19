@@ -143,6 +143,7 @@ class weatherPlaceRecommendations():
 
 					#add to array to be displayed
 					shortlistPlaces.append(newPlace)
+					counter += 1
 
 				elif (counter == 8):
 					stringTypes = []
@@ -152,8 +153,7 @@ class weatherPlaceRecommendations():
 
 					#add to array to be displayed
 					shortlistPlaces.append(newPlace)					
-				
-				counter += 1
+					counter += 1
 				
 				else:
 					break
