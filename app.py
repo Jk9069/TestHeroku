@@ -228,6 +228,7 @@ def getWebhookResult(postReq):
 					]
 				}
 
+			print(len(allEvents))
 			for x in range(len(allEvents)-1):
 				print(x)
 				event = allEvents[x]
