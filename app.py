@@ -205,51 +205,52 @@ def getWebhookResult(postReq):
 					break
 
 			data = {
-					"source": "Eventful API", 
-					# "outputContexts": [
-					# 	{
-					# 		"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather-recommend",
-					# 	    "lifespanCount": 2,
-					# 	    "parameters": {
-					# 	    	"prevCategory": contextCategory,
-					# 	    	"longitude": self.longitude,
-					# 	    	"latitude": self.latitude
-					# 	    }
-					# 	}
-					# ],	
-					"fulfillmentMessages":[
-						{
-							"text":{
-								"text":[
-									allEvents[0].getEventName()
-								]
-							}
-						} 
-					]
-				}
+				"source": "Eventful API", 
+				# "outputContexts": [
+				# 	{
+				# 		"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather-recommend",
+				# 	    "lifespanCount": 2,
+				# 	    "parameters": {
+				# 	    	"prevCategory": contextCategory,
+				# 	    	"longitude": self.longitude,
+				# 	    	"latitude": self.latitude
+				# 	    }
+				# 	}
+				# ],	
+				"fulfillmentMessages":[
+					{
+						"text":{
+							"text":[
+								searchEvent
+							]
+						}
+					} 
+				]
+			}
 
-			# print(len(allEvents))
-			# for x in range(len(allEvents)-1):
-			# 	print(x)
-			# 	event = allEvents[x]
+			print(len(allEvents))
+			for x in range(len(allEvents)-1):
+				print(x)
+				event = allEvents[x]
 
-			# 	# if (x != 8):
-			# 	data["fulfillmentMessages"].append(
-			# 		{
-			# 			"card": { 
-			# 				 "title": event.getEventName(),
-			# 				 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
-			# 				 "imageUri": event.getImgUrl(),
-			# 				 "buttons": [
-			# 				 	{
-			# 				 		"text": "View on Eventful",
-			# 				 		#link to open in google maps
-			# 				 		"postback": event.getEventUrl()
-			# 				 	}
-			# 				 ]
-			# 			}
-			# 		}
-			# 	)
+				# if (x != 8):
+				data["fulfillmentMessages"].append(
+					{
+						"card": { 
+							 "title": event.getEventName(),
+							 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
+							 "imageUri": event.getImgUrl(),
+							 "buttons": [
+							 	{
+							 		"text": "View on Eventful",
+							 		#link to open in google maps
+							 		"postback": event.getEventUrl()
+							 	}
+							 ]
+						}
+					}
+				)
+				
 		else:
 			data = {
 				"fulfillmentText": "No results found :("
