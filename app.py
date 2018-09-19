@@ -185,7 +185,7 @@ def getWebhookResult(postReq):
 
 		# pluck information from results
 		# need to handle if more than 9 results????
-		if (eventResult.get("total_items") != 0):
+		if (eventResult.get("total_items") != "0"):
 			events = eventResult.get("events").get("event")
 
 			for item in events:
