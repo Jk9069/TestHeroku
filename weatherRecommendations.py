@@ -86,66 +86,65 @@ class weatherPlaceRecommendations():
 			results = placeResult.get("results")
 			counter = 0;
 
-			if (counter < 9):
+			for items in results:
 				if (counter != 8):
-					for items in results:
-						if ("opening_hours" in items):
-							openNow = items["opening_hours"].get("open_now")
-							# print(openNow)
-						else:
-							openNow = 'false'
-						
-						placeName = items["name"]
-						placeID = items["place_id"]
+					if ("opening_hours" in items):
+						openNow = items["opening_hours"].get("open_now")
+						# print(openNow)
+					else:
+						openNow = 'false'
+					
+					placeName = items["name"]
+					placeID = items["place_id"]
 
-						if ("rating" in items):
-							rating = items["rating"]
-						else:
-							rating = '0'
+					if ("rating" in items):
+						rating = items["rating"]
+					else:
+						rating = '0'
 
-						#obtain photo reference to get image to display in cards
-						if ("photos" in items):
-							photoDeets = items["photos"]
+					#obtain photo reference to get image to display in cards
+					if ("photos" in items):
+						photoDeets = items["photos"]
 
-							for x in photoDeets:
-								if ("photo_reference" in x):
-									photoRef = x.get("photo_reference", 'none')
-								else:
-									photoRef = 'none'
-
-							#using photo reference to get image
-							if (photoRef != 'none'):
-								photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
-								photoURL = urllib.request.urlopen(photoRequest).geturl()
-								#print(photoURL)
-
+						for x in photoDeets:
+							if ("photo_reference" in x):
+								photoRef = x.get("photo_reference", 'none')
 							else:
-								photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+								photoRef = 'none'
+
+						#using photo reference to get image
+						if (photoRef != 'none'):
+							photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
+							photoURL = urllib.request.urlopen(photoRequest).geturl()
+							#print(photoURL)
+
 						else:
-							photoRef = 'none'
 							photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+					else:
+						photoRef = 'none'
+						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 
-						# get type that categorise the places
-						stringTypes = ""
-						if ("types" in items):
-							types = items["types"]
+					# get type that categorise the places
+					stringTypes = ""
+					if ("types" in items):
+						types = items["types"]
 
-							for x in types:
-								stringTypes += x + ", "
+						for x in types:
+							stringTypes += x + ", "
 
-							#remove last 2 characters of the string
-							stringTypes = stringTypes[:-2]
-							
-							if '_' in stringTypes:
-								stringTypes = stringTypes.replace('_', " ")
+						#remove last 2 characters of the string
+						stringTypes = stringTypes[:-2]
+						
+						if '_' in stringTypes:
+							stringTypes = stringTypes.replace('_', " ")
 
-						#create the Place object containing all required values
-						newPlace = Place(placeID, placeName, rating, openNow, photoRef, photoURL, stringTypes)
+					#create the Place object containing all required values
+					newPlace = Place(placeID, placeName, rating, openNow, photoRef, photoURL, stringTypes)
 
-						#add to array to be displayed
-						shortlistPlaces.append(newPlace)
+					#add to array to be displayed
+					shortlistPlaces.append(newPlace)
 
-				else:
+				elif (counter == 8):
 					stringTypes = []
 		
 					#create the Place object containing all required values
@@ -156,8 +155,8 @@ class weatherPlaceRecommendations():
 				
 				counter += 1
 				
-			else:
-				break
+				else:
+					break
 				
 			if self.latitude == None or self.longitude == None:
 				data = {
