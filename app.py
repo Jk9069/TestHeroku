@@ -220,7 +220,7 @@ def getWebhookResult(postReq):
 						{
 							"text":{
 								"text":[
-									responseText
+									searchEvent
 								]
 							}
 						} 
