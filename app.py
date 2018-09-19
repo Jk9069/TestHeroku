@@ -229,6 +229,7 @@ def getWebhookResult(postReq):
 				}
 
 			for x in range(len(allEvents)-1):
+				print(x)
 				event = allEvents[x]
 
 				# if (x != 8):
