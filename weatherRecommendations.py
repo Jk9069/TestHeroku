@@ -206,7 +206,7 @@ class weatherPlaceRecommendations():
 					]
 				}
 
-			for x in range(len(shortlistPlaces)-1):
+			for x in range(len(shortlistPlaces)):
 				place = shortlistPlaces[x]
 
 				if (x < 8):
