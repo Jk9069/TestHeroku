@@ -235,7 +235,7 @@ class weatherPlaceRecommendations():
 								 "imageUri": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
 								 "buttons": [
 								 	{
-								 		"text": "Show in Google Maps",
+								 		"text": "Show Results",
 								 		#link to open in google maps
 								 		"postback": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
 								 	}
