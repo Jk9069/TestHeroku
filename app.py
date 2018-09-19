@@ -221,35 +221,35 @@ def getWebhookResult(postReq):
 						{
 							"text":{
 								"text":[
-									searchEvent
+									allEvents[0].getEventName()
 								]
 							}
 						} 
 					]
 				}
 
-			print(len(allEvents))
-			for x in range(len(allEvents)-1):
-				print(x)
-				event = allEvents[x]
+			# print(len(allEvents))
+			# for x in range(len(allEvents)-1):
+			# 	print(x)
+			# 	event = allEvents[x]
 
-				# if (x != 8):
-				data["fulfillmentMessages"].append(
-					{
-						"card": { 
-							 "title": event.getEventName(),
-							 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
-							 "imageUri": event.getImgUrl(),
-							 "buttons": [
-							 	{
-							 		"text": "View on Eventful",
-							 		#link to open in google maps
-							 		"postback": event.getEventUrl()
-							 	}
-							 ]
-						}
-					}
-				)
+			# 	# if (x != 8):
+			# 	data["fulfillmentMessages"].append(
+			# 		{
+			# 			"card": { 
+			# 				 "title": event.getEventName(),
+			# 				 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
+			# 				 "imageUri": event.getImgUrl(),
+			# 				 "buttons": [
+			# 				 	{
+			# 				 		"text": "View on Eventful",
+			# 				 		#link to open in google maps
+			# 				 		"postback": event.getEventUrl()
+			# 				 	}
+			# 				 ]
+			# 			}
+			# 		}
+			# 	)
 		else:
 			data = {
 				"fulfillmentText": "No results found :("
