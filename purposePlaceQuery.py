@@ -150,7 +150,7 @@ class purposePlaceQuery():
 				]
 			}
 
-			for x in range(len(shortlistPlaces)):
+			for x in range(len(shortlistPlaces)-1):
 				place = shortlistPlaces[x]
 
 				if (x != 8):
