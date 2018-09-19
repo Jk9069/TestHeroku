@@ -149,7 +149,7 @@ class weatherPlaceRecommendations():
 					stringTypes = []
 		
 					#create the Place object containing all required values
-					newPlace = Place("-", "More results found on Google Maps", "-", "-", "-", "-", stringTypes)
+					newPlace = Place("-", "There are more results found on Google Maps!", "-", "-", "-", "-", stringTypes)
 
 					#add to array to be displayed
 					shortlistPlaces.append(newPlace)					
@@ -231,11 +231,11 @@ class weatherPlaceRecommendations():
 						{
 							"card": { 
 								 "title": place.getPlaceName(),
-								 "subtitle": "Powered by Google",
+								 "subtitle": "\n\nPowered by Google",
 								 "imageUri": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
 								 "buttons": [
 								 	{
-								 		"text": "Map",
+								 		"text": "Show in Google Maps",
 								 		#link to open in google maps
 								 		"postback": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
 								 	}

@@ -56,62 +56,73 @@ class purposePlaceQuery():
 			counter = 0;
 
 			for items in results:
-				if ("opening_hours" in items):
-					openNow = items["opening_hours"].get("open_now")
-					# print(openNow)
-				else:
-					openNow = 'false'
-				
-				placeName = items["name"]
-				placeID = items["place_id"]
-
-				if ("rating" in items):
-					rating = items["rating"]
-				else:
-					rating = '0'
-
-				#obtain photo reference to get image to display in cards
-				if ("photos" in items):
-					photoDeets = items["photos"]
-
-					for x in photoDeets:
-						if ("photo_reference" in x):
-							photoRef = x.get("photo_reference", 'none')
-						else:
-							photoRef = 'none'
-
-					#using photo reference to get image
-					if (photoRef != 'none'):
-						photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
-						photoURL = urllib.request.urlopen(photoRequest).geturl()
-						#print(photoURL)
+				if (counter != 8):
+					if ("opening_hours" in items):
+						openNow = items["opening_hours"].get("open_now")
+						# print(openNow)
 					else:
-						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
-				else:
-					photoRef = 'none'
-					photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
-
-				#get types that categorise the place
-				stringTypes = ""
-				if ("types" in items):
-					types = items["types"]
-
-					for x in types:
-						stringTypes += x + ", "
-
-					#remove last 2 characters of the string
-					stringTypes = stringTypes[:-2]
+						openNow = 'false'
 					
-					if '_' in stringTypes:
-						stringTypes = stringTypes.replace('_', " ")
+					placeName = items["name"]
+					placeID = items["place_id"]
 
-				#create the Place object containing all required values
-				newPlace = Place(placeID, placeName, rating, openNow, photoRef, photoURL, stringTypes)
+					if ("rating" in items):
+						rating = items["rating"]
+					else:
+						rating = '0'
 
-				#add to array to be displayed
-				if (counter < 10):
+					#obtain photo reference to get image to display in cards
+					if ("photos" in items):
+						photoDeets = items["photos"]
+
+						for x in photoDeets:
+							if ("photo_reference" in x):
+								photoRef = x.get("photo_reference", 'none')
+							else:
+								photoRef = 'none'
+
+						#using photo reference to get image
+						if (photoRef != 'none'):
+							photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
+							photoURL = urllib.request.urlopen(photoRequest).geturl()
+							#print(photoURL)
+						else:
+							photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+					else:
+						photoRef = 'none'
+						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+
+					#get types that categorise the place
+					stringTypes = ""
+					if ("types" in items):
+						types = items["types"]
+
+						for x in types:
+							stringTypes += x + ", "
+
+						#remove last 2 characters of the string
+						stringTypes = stringTypes[:-2]
+						
+						if '_' in stringTypes:
+							stringTypes = stringTypes.replace('_', " ")
+
+					#create the Place object containing all required values
+					newPlace = Place(placeID, placeName, rating, openNow, photoRef, photoURL, stringTypes)
+					
+					#add to array to be displayed
 					shortlistPlaces.append(newPlace)
 					counter += 1
+
+				elif (counter == 8):
+					stringTypes = []
+		
+					#create the Place object containing all required values
+					newPlace = Place("-", "There are more results found on Google Maps!", "-", "-", "-", "-", stringTypes)
+
+					#add to array to be displayed
+					shortlistPlaces.append(newPlace)					
+					counter += 1
+				
 				else:
 					break
 				
@@ -142,22 +153,40 @@ class purposePlaceQuery():
 			for x in range(len(shortlistPlaces)-1):
 				place = shortlistPlaces[x]
 
-				data["fulfillmentMessages"].append(
-					{
-						"card": { 
-							 "title": place.getPlaceName(),
-							 "subtitle": place.getRating() + "\n" + place.getOpenNow() + "\n" + place.getPlaceTypes(), #+ "\n" + googleLogo.show(),
-							 "imageUri": place.getPhotoURL(),
-							 "buttons": [
-							 	{
-							 		"text": "Map",
-							 		#link to open in google maps
-							 		"postback": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
-							 	}
-							 ]
+				if (x != 8):
+					data["fulfillmentMessages"].append(
+						{
+							"card": { 
+								 "title": place.getPlaceName(),
+								 "subtitle": place.getRating() + "\n" + place.getOpenNow() + "\n" + place.getPlaceTypes(), #+ "\n" + googleLogo.show(),
+								 "imageUri": place.getPhotoURL(),
+								 "buttons": [
+								 	{
+								 		"text": "Map",
+								 		#link to open in google maps
+								 		"postback": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
+								 	}
+								 ]
+							}
 						}
-					}
-				)
+					)
+				else:
+					data["fulfillmentMessages"].append(
+						{
+							"card": { 
+								 "title": place.getPlaceName(),
+								 "subtitle": "\n\nPowered by Google",
+								 "imageUri": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
+								 "buttons": [
+								 	{
+								 		"text": "Show in Google Maps",
+								 		#link to open in google maps
+								 		"postback": "https://www.google.com/maps/search/?api=1&query=" + self.travelPurpose
+								 	}
+								 ]
+							}
+						}
+					)
 
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
