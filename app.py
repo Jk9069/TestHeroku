@@ -178,6 +178,7 @@ def getWebhookResult(postReq):
 
 		#start search here
 		#requestLink = requestLink + "&category=" + "???"
+		print (requestLink)
 		eventResult = json.loads(urllib.request.urlopen(requestLink).read())
 		allEvents = []
 		counter = 0
@@ -230,24 +231,27 @@ def getWebhookResult(postReq):
 			for x in range(len(allEvents)-1):
 				event = allEvents[x]
 
-				if (x != 8):
-					data["fulfillmentMessages"].append(
-						{
-							"card": { 
-								 "title": event.getEventName(),
-								 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
-								 "imageUri": event.getImgUrl(),
-								 "buttons": [
-								 	{
-								 		"text": "View on Eventful",
-								 		#link to open in google maps
-								 		"postback": event.getEventUrl()
-								 	}
-								 ]
-							}
+				# if (x != 8):
+				data["fulfillmentMessages"].append(
+					{
+						"card": { 
+							 "title": event.getEventName(),
+							 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
+							 "imageUri": event.getImgUrl(),
+							 "buttons": [
+							 	{
+							 		"text": "View on Eventful",
+							 		#link to open in google maps
+							 		"postback": event.getEventUrl()
+							 	}
+							 ]
 						}
-					)
-
+					}
+				)
+		else:
+			data = {
+				"fulfillmentText": "No results found :("
+			}
 
 		# return {
 		# 	"fulfillmentMessages": [
