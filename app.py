@@ -190,11 +190,16 @@ def getWebhookResult(postReq):
 
 			for item in events:
 				eventfulUrl = item.get("url")
+				print (eventfulUrl)
+
 				timeDate = item.get("start_time")
+				print (timeDate)
 				#description = item.get("description")
 				eventName = item.get("title")
-				imageUrl = (item.get("image").get("small").get("url")).replace("small", "large")
-				venue = item.get("venue_url")
+
+				imageUrl = item.get("image").get("medium").get("url")
+				venue = item.get("venue_name")
+				print(venue)
 
 				newEvent = Event(eventName, venue, timeDate, eventfulUrl, imageUrl)
 
