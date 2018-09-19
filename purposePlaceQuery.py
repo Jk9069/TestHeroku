@@ -56,7 +56,7 @@ class purposePlaceQuery():
 			counter = 0;
 
 			for items in results:
-				if (counter != 9):
+				if (counter != 8):
 					if ("opening_hours" in items):
 						openNow = items["opening_hours"].get("open_now")
 						# print(openNow)
@@ -113,7 +113,7 @@ class purposePlaceQuery():
 					shortlistPlaces.append(newPlace)
 					counter += 1
 
-				elif (counter == 9):
+				elif (counter == 8):
 					stringTypes = []
 		
 					#create the Place object containing all required values
@@ -153,7 +153,7 @@ class purposePlaceQuery():
 			for x in range(len(shortlistPlaces)):
 				place = shortlistPlaces[x]
 
-				if (x != 9):
+				if (x != 8):
 					data["fulfillmentMessages"].append(
 						{
 							"card": { 
