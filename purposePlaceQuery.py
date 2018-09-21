@@ -197,7 +197,7 @@ class purposePlaceQuery():
 				"outputContexts": [
 					{
 						"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/jk-travelPurpose-followup",
-					    "lifespanCount": 2,
+					    "lifespanCount": 5,
 					    "parameters": {
 					    	"longitude": self.longitude,
 					    	"latitude": self.latitude
