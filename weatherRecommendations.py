@@ -187,7 +187,7 @@ class weatherPlaceRecommendations():
 					"outputContexts": [
 						{
 							"name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/GetWeather-recommend",
-						    "lifespanCount": 2,
+						    "lifespanCount": 5,
 						    "parameters": {
 						    	"prevCategory": contextCategory,
 						    	"longitude": self.longitude,

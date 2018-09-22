@@ -7,8 +7,7 @@ import re
 import weatherHandler
 import weatherRecommendations
 import purposePlaceQuery
-
-from Event import Event
+import eventFinder
 
 from flask import Flask
 from flask import request
@@ -137,119 +136,113 @@ def getWebhookResult(postReq):
 		return placeRecommend.requestPurposePlace()
 
 	elif postedReq.get('action') == "getEvent":
-		categories = [
-			"learning_education", "music", "science", 
-			"business", "support", "outdoors_recreation", 
-			"performing_arts", "religion_spirituality",
-			"miscellaneous"
-		]
-
-		requestLink = "http://api.eventful.com/json/events/search?app_key=ccLj6sppM4RsQ4wX&location=George%20town,Pulau%20Pinang"
-
+		
 		# search for event or concert, depending on user input
 		# if ("eventConcert" in postedReqParams):
-		searchEvent = postedReqParams.get("eventConcert")
+		eventLookup = eventFinder.eventFinder(postedReqParams)
 
-		# get the time period or date to search	
-		if (postedReqParams.get("date-period") != ""):
-			startDate = postedReqParams.get("date-period").get("startDate")
-			# print('STARTDATE: ' + startDate)
+		return eventLookup.performSearch()
 
-			startDate = (startDate[:10]).replace('-', '') + '00'
-			# print('REPLACED STARTDATE: ' + startDate)
+		# # get the time period or date to search	
+		# if (postedReqParams.get("date-period") != ""):
+		# 	startDate = postedReqParams.get("date-period").get("startDate")
+		# 	# print('STARTDATE: ' + startDate)
 
-			endDate = postedReqParams.get("date-period").get("endDate")
-			# print('ENDDATE: ' + endDate)
+		# 	startDate = (startDate[:10]).replace('-', '') + '00'
+		# 	# print('REPLACED STARTDATE: ' + startDate)
 
-			endDate = (endDate[:10]).replace('-', '') + '00'
-			# print('REPLACED ENDDATE: ' + endDate)
+		# 	endDate = postedReqParams.get("date-period").get("endDate")
+		# 	# print('ENDDATE: ' + endDate)
 
-			requestLink = requestLink + "&date=" + str(startDate) + "-" + str(endDate)
+		# 	endDate = (endDate[:10]).replace('-', '') + '00'
+		# 	# print('REPLACED ENDDATE: ' + endDate)
+
+		# 	requestLink = requestLink + "&date=" + str(startDate) + "-" + str(endDate)
 		
-		elif postedReqParams.get("date") != "":
-			date = postedReqParams.get("date")
-			# print ('DATE: ' + date)
+		# elif postedReqParams.get("date") != "":
+		# 	date = postedReqParams.get("date")
+		# 	# print ('DATE: ' + date)
 
-			date = (date[:10]).replace('-', '') + "00"
-			# print('REPLACED DATE: ' + date)
+		# 	date = (date[:10]).replace('-', '') + "00"
+		# 	# print('REPLACED DATE: ' + date)
 
-			requestLink = requestLink + "&date=" + str(date) + "-" + str(date)
+		# 	requestLink = requestLink + "&date=" + str(date) + "-" + str(date)
 
 
-		#start search here
-		#requestLink = requestLink + "&category=" + "???"
-		print (requestLink)
-		eventResult = json.loads(urllib.request.urlopen(requestLink).read())
-		allEvents = []
-		counter = 0
+		# #start search here
+		# #requestLink = requestLink + "&category=" + "???"
+		# print (requestLink)
+		# eventResult = json.loads(urllib.request.urlopen(requestLink).read())
+		# allEvents = []
+		# counter = 0
 
-		# pluck information from results
-		# need to handle if more than 9 results????
-		if (eventResult.get("total_items") != "0"):
-			events = eventResult.get("events").get("event")
+		# # pluck information from results
+		# # need to handle if more than 9 results????
+		# if (eventResult.get("total_items") != "0"):
+		# 	events = eventResult.get("events").get("event")
 
-			for item in events:
-				eventfulUrl = item.get("url")
-				print (eventfulUrl)
+		# 	for item in events:
+		# 		eventfulUrl = item.get("url")
+		# 		print (eventfulUrl)
 
-				timeDate = item.get("start_time")
-				print (timeDate)
-				#description = item.get("description")
-				eventName = item.get("title")
+		# 		timeDate = item.get("start_time")
+		# 		print (timeDate)
+		# 		#description = item.get("description")
+		# 		eventName = item.get("title")
 
-				imageUrl = (item.get("image").get("small").get("url")).replace('small', 'large')
-				venue = item.get("venue_name")
-				print(venue)
+		# 		imageUrl = (item.get("image").get("small").get("url")).replace('small', 'large')
+		# 		venue = item.get("venue_name")
+		# 		print(venue)
 
-				newEvent = Event(eventName, venue, timeDate, eventfulUrl, imageUrl)
+		# 		newEvent = Event(eventName, venue, timeDate, eventfulUrl, imageUrl)
 
-				allEvents.append(newEvent)
-				counter += 1
+		# 		allEvents.append(newEvent)
+		# 		counter += 1
 
-				if (counter > 9):
-					break
+		# 		if (counter > 9):
+		# 			break
 
-			data = {
-				"source": "Eventful API", 	
-				"fulfillmentMessages":[
-					{
-						"text":{
-							"text":[
-								"Here's what I found."
-							]
-						}
-					} 
-				]
-			}
+		# 	data = {
+		# 		"source": "Eventful API", 	
+		# 		"fulfillmentMessages":[
+		# 			{
+		# 				"text":{
+		# 					"text":[
+		# 						"Here's what I found."
+		# 					]
+		# 				}
+		# 			} 
+		# 		]
+		# 	}
 
-			for x in range(len(allEvents)):
-				print(x)
-				event = allEvents[x]
+		# 	for x in range(len(allEvents)):
+		# 		print(x)
+		# 		event = allEvents[x]
 
-				# if (x != 8):
-				data["fulfillmentMessages"].append(
-					{
-						"card": { 
-							 "title": event.getEventName(),
-							 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
-							 "imageUri": event.getImgUrl(),
-							 "buttons": [
-							 	{
-							 		"text": "View on Eventful",
-							 		#link to open in google maps
-							 		"postback": event.getEventUrl()
-							 	}
-							 ]
-						}
-					}
-				)
+		# 		# if (x != 8):
+		# 		data["fulfillmentMessages"].append(
+		# 			{
+		# 				"card": { 
+		# 					 "title": event.getEventName(),
+		# 					 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
+		# 					 "imageUri": event.getImgUrl(),
+		# 					 "buttons": [
+		# 					 	{
+		# 					 		"text": "View on Eventful",
+		# 					 		#link to open in google maps
+		# 					 		"postback": event.getEventUrl()
+		# 					 	}
+		# 					 ]
+		# 				}
+		# 			}
+		# 		)
 
-		else:
-			data = {
-				"fulfillmentText": "No results found :("
-			}
+		# else:
+		# 	data = {
+		# 		"fulfillmentText": "No results found :("
+		# 	}
 
-		return data
+		# return data
 
 	# elif postedReq.get('action') == "PenangInfo":
 					
