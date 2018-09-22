@@ -75,7 +75,13 @@ class eventFinder():
 				#description = item.get("description")
 				eventName = item.get("title")
 
-				imageUrl = (item.get("image").get("small").get("url")).replace('small', 'large')
+				if item.get("image").get("small") != None:
+					imageUrl = item.get("image").get("small").get("url")
+					imageUrl = imageUrl.replace('small', 'large')
+				else:
+					imageUrl = item.get("image").get("medium").get("url")
+					imageUrl = imageUrl.replace('small', 'large')
+				
 				venue = item.get("venue_name")
 				print(venue)
 
