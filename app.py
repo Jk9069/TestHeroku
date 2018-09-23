@@ -84,23 +84,24 @@ def getWebhookResult(postReq):
 						print ("searchCategoryRecommendation longitude: " + str(longitude))
 
 					#if user choose same as above, get prev intent category
-					if ("prevCategory" in item.get("parameters")):
-						prevCategory = item.get("parameters").get("prevCategory")
-						print('outputContexts PREV CATEOGRY ' + prevCategory)
-						break
+					# if ("prevCategory" in item.get("parameters")):
+					# 	prevCategory = item.get("parameters").get("prevCategory")
+					# 	print('outputContexts PREV CATEOGRY ' + prevCategory)
+					# 	break
 		
 			#get chosen category (can be either same or new category)
-			chosenCategory = postedReq.get("queryText")
-			print(chosenCategory)
+			# chosenCategory = postedReq.get("queryText")
 
-			if prevCategory != None:
-				chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
-		
-				if 'same as above' in chosenCategory or 'same' in chosenCategory.split() or 'above' in chosenCategory.split(): 
-					chosenCategory = prevCategory
-				
-				chosenCategory = chosenCategory.replace('%20', ' ')
-				chosenCategory = chosenCategory.replace('_', ' ')
+			# if prevCategory != None:
+			chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
+			print(chosenCategory)
+	
+			# if 'same as above' in chosenCategory or 'same' in chosenCategory.split() or 'above' in chosenCategory.split(): 
+			# 	chosenCategory = prevCategory
+			
+			chosenCategory = chosenCategory.replace('%20', ' ')
+			chosenCategory = chosenCategory.replace('_', ' ')
+
 			#print(chosenCategory)
 			#based on weather condition, decide what kind of place to suggest
 			if latitude == "" and longitude == "":
