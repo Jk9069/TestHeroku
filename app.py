@@ -74,6 +74,8 @@ def getWebhookResult(postReq):
 		#if not, get location from output contexts
 		#and then perform search 
 		elif postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
+			latitude = ""
+			longitude = ""
 			#get latitude, longitude and previous category from outputContexts
 			for item in outputContexts:
 				if ("parameters" in item):
