@@ -245,12 +245,13 @@ class weatherPlaceRecommendations():
 					)
 
 			data["fulfillmentMessages"].append(
-				{
-					"text":{
-						"text":[
-							"Not feeling like it? Say 'more' if you prefer other categories."
+				{	
+					"quickReplies": {
+						"title": "Not feeling like it? Let's choose other categories.",
+						"quickReplies": [
+							"Other category"
 						]
-					}
+					}					
 				}
 			)
 

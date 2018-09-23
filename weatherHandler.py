@@ -226,38 +226,6 @@ class weatherResponse():
 							]
 						}
 					},
-					{
-						"text": {
-							"text": [
-								"Do you want me to suggest places to visit?"
-							]
-						}
-					},
-					# #HERE ONWARDS FOR FACEBOOK MESSENGER RESPONSES
-					# {
-					# 	"platform": "FACEBOOK",
-					# 	"text": {
-					# 		"text": [
-					# 			self.weatherEmoji(mainWeather)
-					# 		]
-					# 	}	
-					# },
-					# {
-					# 	"platform": "FACEBOOK",
-					# 	"text": {
-					# 		"text": [
-					# 			speech
-					# 		]
-					# 	}	
-					# },
-					# {
-					# 	"platform": "FACEBOOK",
-					# 	"text": {
-					# 		"text": [
-					# 			self.mainWeatherMessage(mainWeather)
-					# 		]
-					# 	}	
-					# },
 					{	
 						"quickReplies": {
 							"title": "Do you want me to suggest suitable places to visit?",
