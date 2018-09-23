@@ -87,7 +87,7 @@ class weatherPlaceRecommendations():
 			counter = 0;
 
 			for items in results:
-				if (counter < 8):
+				if (counter < 7):
 					if ("opening_hours" in items):
 						openNow = items["opening_hours"].get("open_now")
 						# print(openNow)
@@ -145,7 +145,7 @@ class weatherPlaceRecommendations():
 					shortlistPlaces.append(newPlace)
 					counter += 1
 
-				elif (counter == 8):
+				elif (counter == 7):
 					stringTypes = []
 		
 					#create the Place object containing all required values
@@ -177,7 +177,15 @@ class weatherPlaceRecommendations():
 									"Showing " + selectedCategory.replace('_', ' ') + " in George Town"
 								]
 							}
-						} 
+						},
+						{
+							"platform": "FACEBOOK",
+							"text":{
+								"text":[
+									"Showing " + selectedCategory.replace('_', ' ') + " in George Town"
+								]
+							}
+						}  
 					]
 				}
 
@@ -202,6 +210,14 @@ class weatherPlaceRecommendations():
 									responseText
 								]
 							}
+						},
+						{
+							"platform": "FACEBOOK",
+							"text":{
+								"text":[
+									responseText
+								]
+							}
 						} 
 					]
 				}
@@ -209,9 +225,10 @@ class weatherPlaceRecommendations():
 			for x in range(len(shortlistPlaces)):
 				place = shortlistPlaces[x]
 
-				if (x < 8):
+				if (x < 7):
 					data["fulfillmentMessages"].append(
 						{
+							"platform": "FACEBOOK",
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": place.getRating() + "\n" + place.getOpenNow() + "\n" + place.getPlaceTypes(), #+ "\n" + googleLogo.show(),
@@ -226,9 +243,10 @@ class weatherPlaceRecommendations():
 							}
 						}
 					)
-				elif (x == 8):
+				elif (x == 7):
 					data["fulfillmentMessages"].append(
 						{
+							"platform": "FACEBOOK",
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": "Powered by Google",
@@ -243,6 +261,19 @@ class weatherPlaceRecommendations():
 							}
 						}
 					)
+
+				#add quick reply
+				data["fulfillmentMessages"].append(
+					{	
+						"platform": "FACEBOOK",
+						"quickReplies": {
+							# "title": "Do you want me to suggest suitable places to visit?",
+							"quickReplies": [
+								"Other category"
+							]
+						}					
+					}
+				)
 
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
