@@ -249,7 +249,7 @@ class weatherResponse():
 						"platform": "facebook",
 						"type": 4,
 						"payload": {
-							"facebook": {
+							"message": {
 								"text": "Do you want me to suggest suitable places to visit?",
 								"quick_replies": [
 									{
