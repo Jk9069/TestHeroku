@@ -117,7 +117,7 @@ def getWebhookResult(postReq):
 			longitude = None
 
 			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
-			x = weatherRecommend.requestMore(chosenCategory)
+			x = weatherRecommend.requestPlaces()
 
 
 		return x
