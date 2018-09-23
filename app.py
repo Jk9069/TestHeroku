@@ -53,6 +53,8 @@ def getWebhookResult(postReq):
 
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation" or postedReq.get("action") == "GetWeather.GetWeather-yesLocation.GeneralSearch":
+		fbPayload = postReq.get("originalDetectIntentRequest").get("payload").get("data").get("postback")
+
 		#get weather condition
 		for item in outputContexts:
 			if ("parameters" in item):
@@ -61,7 +63,6 @@ def getWebhookResult(postReq):
 		#if action is GetWeather.GetWeather-yes, get location from facebook payload
 		# and then perform search
 		if postedReq.get("action") == "GetWeather.GetWeather-yes":
-			fbPayload = postReq.get("originalDetectIntentRequest").get("payload").get("data").get("postback")
 			latitude = fbPayload.get("data").get("lat")
 			longitude = fbPayload.get("data").get("long")
 
