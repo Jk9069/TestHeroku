@@ -227,6 +227,13 @@ class weatherResponse():
 						}
 					},
 					{	
+						"text": {
+							"text": [
+								"💡 Tip: I can help you look for weather forecasts up to the next 5 days. \nEg. 'Weather tomorrow', 'Weather on Tuesday night'"
+							]
+						}				
+					},
+					{	
 						"quickReplies": {
 							"title": "Do you want me to suggest suitable places to visit?",
 							"quickReplies": [

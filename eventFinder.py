@@ -91,7 +91,7 @@ class eventFinder():
 				allEvents.append(newEvent)
 				counter += 1
 
-				if (counter > 9):
+				if (counter > 7):
 					break
 
 			data = {
@@ -128,6 +128,27 @@ class eventFinder():
 						}
 					}
 				)
+
+				if counter == 7:
+					break
+
+			data["fulfillmentMessages"].append(
+				{	
+					"text": {
+						"text": [
+							"💡 Tip: You can search for future events as well. \nEg. 'Events next week', 'Events next month'"
+						]
+					}					
+				},
+				{	
+					"quickReplies": {
+						"title": "What else can I help you with?",
+						"quickReplies": [
+							"Weather", "Events this week", "About Penang"
+						]
+					}					
+				}
+			)
 
 		else:
 			data = {
