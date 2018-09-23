@@ -244,25 +244,25 @@ class weatherPlaceRecommendations():
 						}
 					)
 
-				data["fulfillmentMessages"].append(
-					{
-						# "text":{
-						# 	"text":[
-						# 		"Not feeling like it? Say 'more' if you prefer other categories."
-						# 	]
-						# }
-						"facebook": {
-							"text": "Not feeling like it? Try other categories.",
-							"quick_replies": [
-								{
-									"content_type": "text",
-									"title": "Other category",
-									"payload": "Other category"
-								}
-							]
-						}
+			data["fulfillmentMessages"].append(
+				{
+					# "text":{
+					# 	"text":[
+					# 		"Not feeling like it? Say 'more' if you prefer other categories."
+					# 	]
+					# }
+					"facebook": {
+						"text": "Not feeling like it? Try other categories.",
+						"quick_replies": [
+							{
+								"content_type": "text",
+								"title": "Other category",
+								"payload": "Other category"
+							}
+						]
 					}
-				)
+				}
+			)
 
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
