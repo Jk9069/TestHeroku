@@ -229,7 +229,7 @@ class weatherResponse():
 					{	
 						"text": {
 							"text": [
-								"💡 Tip: I can help you look for weather forecasts up to the next 5 days. \nEg. 'Weather tomorrow', 'Weather on Tuesday night'"
+								"💡 Tip: I can help you look for weather forecasts up to the next 5 days. \n\nEg. 'Weather tomorrow', 'Weather on Tuesday night'"
 							]
 						}				
 					},

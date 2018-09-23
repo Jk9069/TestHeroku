@@ -194,7 +194,7 @@ class purposePlaceQuery():
 					"quickReplies": {
 						"title": "What else can I help you with?",
 						"quickReplies": [
-							"Weather", "Events this week", "About Penang"
+							"Weather", "Events this week", "About Penang", "Bye!"
 						]
 					}					
 				}

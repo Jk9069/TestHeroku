@@ -136,7 +136,7 @@ class eventFinder():
 				{	
 					"text": {
 						"text": [
-							"💡 Tip: You can search for future events as well. \nEg. 'Events next week', 'Events next month'"
+							"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
 						]
 					}					
 				},
@@ -144,7 +144,7 @@ class eventFinder():
 					"quickReplies": {
 						"title": "What else can I help you with?",
 						"quickReplies": [
-							"Weather", "Events this week", "About Penang"
+							"Weather", "Travel Purpose", "About Penang", "Bye!"
 						]
 					}					
 				}
