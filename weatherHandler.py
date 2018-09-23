@@ -249,20 +249,22 @@ class weatherResponse():
 						"platform": "facebook",
 						"type": 4,
 						"payload": {
-							"message": {
-								"text": "Do you want me to suggest suitable places to visit?",
-								"quick_replies": [
-									{
-										"content_type": "text",
-										"title": "Yes",
-										"payload": "yes"
-									},
-									{
-										"content_type": "text",
-										"title": "No",
-										"payload": "no"
-									}
-								]
+							"facebook": {
+								"message": {
+									"text": "Do you want me to suggest suitable places to visit?",
+									"quick_replies": [
+										{
+											"content_type": "text",
+											"title": "Yes",
+											"payload": "yes"
+										},
+										{
+											"content_type": "text",
+											"title": "No",
+											"payload": "no"
+										}
+									]
+								}
 							}
 						}
 					}
