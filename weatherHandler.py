@@ -237,14 +237,23 @@ class weatherResponse():
 							]
 						}
 					},
+					# {
+					# 	#have to change to quick replies
+					# 	"text":{
+					# 		"text": [
+					# 			"Do you want me to suggest suitable places to visit?"
+					# 		]
+					# 	}
+					# },
 					{
-						#have to change to quick replies
-						"text":{
-							"text": [
-								"Do you want me to suggest suitable places to visit?"
-							]
-						}
-					}
+					    "platform": "facebook",
+					    "title": "Do you want me to suggest suitable places to visit?",
+						"replies": [
+							"Yes",
+							"No"
+					    ],
+					    "type": 2
+					  }
 				],
 				"source": 'OpenWeatherAPI',
 				"outputContexts": [

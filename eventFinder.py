@@ -19,12 +19,13 @@ class eventFinder():
 		self.date = parameters.get("date")
 
 	def performSearch(self):
-		categories = [
-			"learning_education", "music", "science", 
-			"business", "support", "outdoors_recreation", 
-			"performing_arts", "religion_spirituality",
-			"miscellaneous"
-		]
+		# need to search by category? mostly not more than 9 results de wor
+		# categories = [
+		# 	"learning_education", "music", "science", 
+		# 	"business", "support", "outdoors_recreation", 
+		# 	"performing_arts", "religion_spirituality",
+		# 	"miscellaneous"
+		# ]
 
 		requestLink = "http://api.eventful.com/json/events/search?app_key=ccLj6sppM4RsQ4wX&location=George%20town,Pulau%20Pinang"
 
