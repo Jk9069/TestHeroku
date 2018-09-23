@@ -246,18 +246,9 @@ class weatherPlaceRecommendations():
 
 			data["fulfillmentMessages"].append(
 				{
-					# "text":{
-					# 	"text":[
-					# 		"Not feeling like it? Say 'more' if you prefer other categories."
-					# 	]
-					# }
-					"facebook": {
-						"quick_replies": [
-							{
-								"content_type": "text",
-								"title": "Other category",
-								"payload": "Other category"
-							}
+					"text":{
+						"text":[
+							"Not feeling like it? Say 'more' if you prefer other categories."
 						]
 					}
 				}
