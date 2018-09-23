@@ -206,7 +206,6 @@ class weatherResponse():
 				"fulfillmentText": "This is optional",
 				"fulfillmentMessages": [
 					{
-						"platform": "PLATFORM_UNSPECIFIED",
 						"text": {
 							"text": [
 								self.weatherEmoji(mainWeather)
