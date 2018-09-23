@@ -52,7 +52,7 @@ def getWebhookResult(postReq):
 		return weatherInfo.getWeatherResponse()
 
 	#user responded 'yes' to obtain place suggestions
-	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
+	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation" or postedReq.get("action") == "GetWeather.GetWeather-yesLocation.GeneralSearch":
 		fbPayload = postReq.get("originalDetectIntentRequest").get("payload").get("data").get("postback")
 
 		#get weather condition
@@ -112,6 +112,14 @@ def getWebhookResult(postReq):
 			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
 			x = weatherRecommend.requestMore(chosenCategory)
 
+		elif postedReq.get("action") == "GetWeather.GetWeather-yesLocation.GeneralSearch":
+			latitude = None
+			longitude = None
+
+			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
+			x = weatherRecommend.requestMore(chosenCategory)
+
+
 		return x
 
 	#what happens after show places after recommendation????
@@ -136,114 +144,28 @@ def getWebhookResult(postReq):
 		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose.replace(' ', '%20'), latitude, longitude)
 		return placeRecommend.requestPurposePlace()
 
+	elif postedReq.get("action") == "jk-travelPurpose.jk-travelPurpose-generalSearch" or postedReq.get("action") == "jk-travelPurpose-placeCategory-GeneralSearch":
+		if postedReq.get('action') == "jk-travelPurpose.jk-travelPurpose-generalSearch":
+			for item in outputContexts:
+				if ("parameters" in item):
+					if ("purpose.original" in item.get("parameters")):
+						purpose = item.get("parameters").get("purpose.original")
+
+		elif postedReq.get('action') == "jk-travelPurpose-placeCategory-GeneralSearch":
+			for item in outputContexts:
+				if ("parameters" in item):
+					if ("placeCategory.original" in item.get("parameters")):
+						purpose = item.get("parameters").get("placeCategory.original")
+
+		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose.replace(' ', '%20'), latitude, longitude)
+		return placeRecommend.requestPurposePlace()
+
 	elif postedReq.get('action') == "getEvent":
 		
-		# search for event or concert, depending on user input
-		# if ("eventConcert" in postedReqParams):
+		# search for event from user input
 		eventLookup = eventFinder.eventFinder(postedReqParams)
 
 		return eventLookup.performSearch()
-
-		# # get the time period or date to search	
-		# if (postedReqParams.get("date-period") != ""):
-		# 	startDate = postedReqParams.get("date-period").get("startDate")
-		# 	# print('STARTDATE: ' + startDate)
-
-		# 	startDate = (startDate[:10]).replace('-', '') + '00'
-		# 	# print('REPLACED STARTDATE: ' + startDate)
-
-		# 	endDate = postedReqParams.get("date-period").get("endDate")
-		# 	# print('ENDDATE: ' + endDate)
-
-		# 	endDate = (endDate[:10]).replace('-', '') + '00'
-		# 	# print('REPLACED ENDDATE: ' + endDate)
-
-		# 	requestLink = requestLink + "&date=" + str(startDate) + "-" + str(endDate)
-		
-		# elif postedReqParams.get("date") != "":
-		# 	date = postedReqParams.get("date")
-		# 	# print ('DATE: ' + date)
-
-		# 	date = (date[:10]).replace('-', '') + "00"
-		# 	# print('REPLACED DATE: ' + date)
-
-		# 	requestLink = requestLink + "&date=" + str(date) + "-" + str(date)
-
-
-		# #start search here
-		# #requestLink = requestLink + "&category=" + "???"
-		# print (requestLink)
-		# eventResult = json.loads(urllib.request.urlopen(requestLink).read())
-		# allEvents = []
-		# counter = 0
-
-		# # pluck information from results
-		# # need to handle if more than 9 results????
-		# if (eventResult.get("total_items") != "0"):
-		# 	events = eventResult.get("events").get("event")
-
-		# 	for item in events:
-		# 		eventfulUrl = item.get("url")
-		# 		print (eventfulUrl)
-
-		# 		timeDate = item.get("start_time")
-		# 		print (timeDate)
-		# 		#description = item.get("description")
-		# 		eventName = item.get("title")
-
-		# 		imageUrl = (item.get("image").get("small").get("url")).replace('small', 'large')
-		# 		venue = item.get("venue_name")
-		# 		print(venue)
-
-		# 		newEvent = Event(eventName, venue, timeDate, eventfulUrl, imageUrl)
-
-		# 		allEvents.append(newEvent)
-		# 		counter += 1
-
-		# 		if (counter > 9):
-		# 			break
-
-		# 	data = {
-		# 		"source": "Eventful API", 	
-		# 		"fulfillmentMessages":[
-		# 			{
-		# 				"text":{
-		# 					"text":[
-		# 						"Here's what I found."
-		# 					]
-		# 				}
-		# 			} 
-		# 		]
-		# 	}
-
-		# 	for x in range(len(allEvents)):
-		# 		print(x)
-		# 		event = allEvents[x]
-
-		# 		# if (x != 8):
-		# 		data["fulfillmentMessages"].append(
-		# 			{
-		# 				"card": { 
-		# 					 "title": event.getEventName(),
-		# 					 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
-		# 					 "imageUri": event.getImgUrl(),
-		# 					 "buttons": [
-		# 					 	{
-		# 					 		"text": "View on Eventful",
-		# 					 		#link to open in google maps
-		# 					 		"postback": event.getEventUrl()
-		# 					 	}
-		# 					 ]
-		# 				}
-		# 			}
-		# 		)
-
-		# else:
-		# 	data = {
-		# 		"fulfillmentText": "No results found :("
-		# 	}
-
-		# return data
 
 	# elif postedReq.get('action') == "PenangInfo":
 					

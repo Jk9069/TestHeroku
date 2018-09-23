@@ -17,14 +17,15 @@ class purposePlaceQuery():
 		self.longitude = longitude
 
 	def requestPurposePlace(self):
-		#search based on what purpose user enters
-		# requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
-		# requestLink = (requestLink + "&keyword=" + self.travelPurpose)
 
-		#this one to search when coordinates are provided 
-		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=8000&location="
-		requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude) + "&keyword=" + self.travelPurpose	
-		
+		# ssearch when coordinates are provided 
+		if self.latitude != None and self.longitude != None:
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=8000&location="
+			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude) + "&keyword=" + self.travelPurpose	
+		else:
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=8000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = (requestLink + "&keyword=" + self.travelPurpose)
+
 		print(requestLink)
 
 		#post url

@@ -174,7 +174,7 @@ class weatherPlaceRecommendations():
 						{
 							"text":{
 								"text":[
-									"Showing results in Penang"
+									"Showing results in George Town"
 								]
 							}
 						} 
