@@ -145,7 +145,7 @@ class weatherPlaceRecommendations():
 					shortlistPlaces.append(newPlace)
 					counter += 1
 
-				elif (counter == 8):
+				elif (counter == 7):
 					stringTypes = []
 		
 					#create the Place object containing all required values
