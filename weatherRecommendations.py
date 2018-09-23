@@ -252,10 +252,9 @@ class weatherPlaceRecommendations():
 					# 	]
 					# }
 					"facebook": {
-						"text": "Not feeling like it? Try other categories.",
 						"quick_replies": [
 							{
-								"content_type": "text",
+								"content_type": "Not feeling like it? Try other categories.",
 								"title": "Other category",
 								"payload": "Other category"
 							}
