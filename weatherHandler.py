@@ -246,14 +246,26 @@ class weatherResponse():
 					# 	}
 					# },
 					{
-					    "platform": "facebook",
-					    "title": "Do you want me to suggest suitable places to visit?",
-						"replies": [
-							"Yes",
-							"No"
-					    ],
-					    "type": 2
-					  }
+						"platform": "facebook",
+						"type": 4,
+						"payload": {
+							"facebook": {
+								"text": "Do you want me to suggest suitable places to visit?",
+								"quick_replies": [
+									{
+										"content_type": "text",
+										"title": "Yes",
+										"payload": "yes"
+									},
+									{
+										"content_type": "text",
+										"title": "No",
+										"payload": "no"
+									}
+								]
+							}
+						}
+					}
 				],
 				"source": 'OpenWeatherAPI',
 				"outputContexts": [
