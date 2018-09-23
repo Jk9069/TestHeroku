@@ -145,7 +145,7 @@ class weatherPlaceRecommendations():
 					shortlistPlaces.append(newPlace)
 					counter += 1
 
-				elif (counter == 7):
+				elif (counter == 8):
 					stringTypes = []
 		
 					#create the Place object containing all required values
@@ -210,14 +210,6 @@ class weatherPlaceRecommendations():
 									responseText
 								]
 							}
-						},
-						{
-							"platform": "FACEBOOK",
-							"text":{
-								"text":[
-									responseText
-								]
-							}
 						} 
 					]
 				}
@@ -228,7 +220,6 @@ class weatherPlaceRecommendations():
 				if (x < 7):
 					data["fulfillmentMessages"].append(
 						{
-							# "platform": "FACEBOOK",
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": place.getRating() + "\n" + place.getOpenNow() + "\n" + place.getPlaceTypes(), #+ "\n" + googleLogo.show(),
@@ -246,7 +237,6 @@ class weatherPlaceRecommendations():
 				elif (x == 7):
 					data["fulfillmentMessages"].append(
 						{
-							# "platform": "FACEBOOK",
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": "Powered by Google",
@@ -262,18 +252,13 @@ class weatherPlaceRecommendations():
 						}
 					)
 
-				#add quick reply for last item
 				data["fulfillmentMessages"].append(
-					{	
-						"platform": "FACEBOOK",
-						"quickReplies": {
-							# "title": "Do you want me to suggest suitable places to visit?",
-							"quickReplies": [
-								"Other category"
+						"text":{
+							"text":[
+								"Not feeling like it? Say 'more' if you prefer other categories."
 							]
-						}					
-					}
-				)
+						}
+					)
 
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
