@@ -87,8 +87,7 @@ def getWebhookResult(postReq):
 					if ("prevCategory" in item.get("parameters")):
 						prevCategory = item.get("parameters").get("prevCategory")
 						print('outputContexts PREV CATEOGRY ' + prevCategory)
-					else:
-						prevCategory = None
+						break
 		
 			#get chosen category (can be either same or new category)
 			chosenCategory = postedReq.get("queryText")
