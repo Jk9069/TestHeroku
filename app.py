@@ -157,6 +157,8 @@ def getWebhookResult(postReq):
 					if ("placeCategory.original" in item.get("parameters")):
 						purpose = item.get("parameters").get("placeCategory.original")
 
+		latitude = None
+		longitude = None
 		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose.replace(' ', '%20'), latitude, longitude)
 		return placeRecommend.requestPurposePlace()
 

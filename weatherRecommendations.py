@@ -38,10 +38,10 @@ class weatherPlaceRecommendations():
 		# this one is to search penang when no coordinates provided
 		# hardcode location of penang as 5.4356 (lat), 100.3091 (long)
 		if self.latitude == None or self.longitude == None:
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=8000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&rankby=distance&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=8000&location="
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location="
 			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
 		
 		#both request links will need this
@@ -174,7 +174,7 @@ class weatherPlaceRecommendations():
 						{
 							"text":{
 								"text":[
-									"Showing results in George Town"
+									"Showing " + selectedCategory.replace('_', ' ') + " in George Town"
 								]
 							}
 						} 
@@ -293,16 +293,13 @@ class weatherPlaceRecommendations():
 		if chosenCategory == 'More':
 			chosenCategory == 'points_of_interest'
 
-		#initiate search using keyword from nearby search
-		# requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
-
 		# this one is to search penang when no coordinates provided
-		# hardcode location of penang as 5.4356 (lat), 100.3091 (long)
+		# hardcode location of george town as 5.4356 (lat), 100.3091 (long)
 		if self.latitude == None or self.longitude == None:
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=8000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&rankby=distance&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=8000&location="
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location="
 			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
 		
 		requestLink = (requestLink + "&keyword=" + chosenCategory.replace(' ', '%20'))
