@@ -95,13 +95,12 @@ def getWebhookResult(postReq):
 
 			if prevCategory != None:
 				chosenCategory = remove_emoji(postedReq.get("queryText")).lower()
+		
+				if 'same as above' in chosenCategory or 'same' in chosenCategory.split() or 'above' in chosenCategory.split(): 
+					chosenCategory = prevCategory
+				
 				chosenCategory = chosenCategory.replace('%20', ' ')
 				chosenCategory = chosenCategory.replace('_', ' ')
-				#print('NOT NONE' + chosenCategory)
-				
-				if 'same as above' in chosenCategory or 'same' in chosenCategory or 'above' in chosenCategory: 
-					chosenCategory = prevCategory
-
 			#print(chosenCategory)
 			#based on weather condition, decide what kind of place to suggest
 			if latitude == "" and longitude == "":
@@ -182,7 +181,7 @@ def remove_emoji(data):
 			break
 
 	if found == True:
-		data = data[3:]
+		data = data[2:]
 
 	return data
 
