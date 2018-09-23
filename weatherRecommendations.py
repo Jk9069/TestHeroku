@@ -177,15 +177,7 @@ class weatherPlaceRecommendations():
 									"Showing " + selectedCategory.replace('_', ' ') + " in George Town"
 								]
 							}
-						},
-						{
-							"platform": "FACEBOOK",
-							"text":{
-								"text":[
-									"Showing " + selectedCategory.replace('_', ' ') + " in George Town"
-								]
-							}
-						}  
+						}
 					]
 				}
 
