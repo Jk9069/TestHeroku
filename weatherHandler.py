@@ -211,17 +211,6 @@ class weatherResponse():
 								self.weatherEmoji(mainWeather)
 							]
 						}
-						#"card": {
-						#	"title": "Weather forecast",
-						#	"subtitle": speech,
-						#	"imageUri": "http://openweathermap.org/img/w/" + icon + ".png"
-							#"buttons": [
-							#	{
-							#		"text": "button text",
-							#		"postback": ""
-							#	}
-							#]
-						#}
 					},
 					{
 						"text": {
@@ -237,20 +226,27 @@ class weatherResponse():
 							]
 						}
 					},
-					# {
-					# 	#have to change to quick replies
-					# 	"text":{
-					# 		"text": [
-					# 			"Do you want me to suggest suitable places to visit?"
-					# 		]
-					# 	}
-					# },
+					{
+						"text": {
+							"text": [
+								"Do you want me to suggest places to visit?"
+							]
+						}
+					},
+					#HERE ONWARDS FOR FACEBOOK MESSENGER RESPONSES
 					{	
 						"platform": "FACEBOOK",
+						"text": {
+							"text": [
+								self.weatherEmoji(mainWeather),
+								speech,
+								self.mainWeatherMessage(mainWeather)
+							]
+						},
 						"quickReplies": {
 							"title": "Do you want me to suggest suitable places to visit?",
 							"quickReplies": [
-								"Yes"
+								"Yes", "No"
 							]
 						}					
 					}
