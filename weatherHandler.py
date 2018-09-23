@@ -233,33 +233,32 @@ class weatherResponse():
 							]
 						}
 					},
-					#HERE ONWARDS FOR FACEBOOK MESSENGER RESPONSES
-					{
-						"platform": "FACEBOOK",
-						"text": {
-							"text": [
-								self.weatherEmoji(mainWeather)
-							]
-						}	
-					},
-					{
-						"platform": "FACEBOOK",
-						"text": {
-							"text": [
-								speech
-							]
-						}	
-					},
-					{
-						"platform": "FACEBOOK",
-						"text": {
-							"text": [
-								self.mainWeatherMessage(mainWeather)
-							]
-						}	
-					},
+					# #HERE ONWARDS FOR FACEBOOK MESSENGER RESPONSES
+					# {
+					# 	"platform": "FACEBOOK",
+					# 	"text": {
+					# 		"text": [
+					# 			self.weatherEmoji(mainWeather)
+					# 		]
+					# 	}	
+					# },
+					# {
+					# 	"platform": "FACEBOOK",
+					# 	"text": {
+					# 		"text": [
+					# 			speech
+					# 		]
+					# 	}	
+					# },
+					# {
+					# 	"platform": "FACEBOOK",
+					# 	"text": {
+					# 		"text": [
+					# 			self.mainWeatherMessage(mainWeather)
+					# 		]
+					# 	}	
+					# },
 					{	
-						"platform": "FACEBOOK",
 						"quickReplies": {
 							"title": "Do you want me to suggest suitable places to visit?",
 							"quickReplies": [
