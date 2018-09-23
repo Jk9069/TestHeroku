@@ -100,7 +100,7 @@ def getWebhookResult(postReq):
 				chosenCategory = chosenCategory.replace('_', ' ')
 				#print('NOT NONE' + chosenCategory)
 				
-				if 'same as above' in chosenCategory or 'same' in chosenCategory: 
+				if 'same as above' in chosenCategory or 'same' in chosenCategory or 'above' in chosenCategory: 
 					chosenCategory = prevCategory
 
 			#print(chosenCategory)
@@ -183,7 +183,7 @@ def remove_emoji(data):
 			break
 
 	if found == True:
-		data = data[2:]
+		data = data[3:]
 
 	return data
 
