@@ -246,10 +246,13 @@ class weatherResponse():
 					# 	}
 					# },
 					{	
-						"title": "Do you want me to suggest suitable places to visit?",
-						"quickReplies": [
-							"Yes", "No"
-						]
+						"platform": "FACEBOOK",
+						"quickReplies": {
+							"title": "Do you want me to suggest suitable places to visit?",
+							"quickReplies": [
+								"Yes"
+							]
+						}					
 					}
 				],
 				"source": 'OpenWeatherAPI',
