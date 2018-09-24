@@ -353,7 +353,7 @@ class weatherPlaceRecommendations():
 									"uri": "http://example.com/page/111"
 								}
 							]
-						},
+						}
 					)
 
 			data["fulfillmentMessages"].append(lineData)
