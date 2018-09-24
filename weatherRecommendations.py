@@ -274,15 +274,41 @@ class weatherPlaceRecommendations():
 				if (x < 7):
 					lineCarousel.append(
 						{
-							"thumbnailImageUrl": place.getPhotoURL(),
+							# "thumbnailImageUrl": place.getPhotoURL(),
+							# "imageBackgroundColor": "#FFFFFF",
+							# "title": place.getPlaceName(),
+							# "text": place.getRating() + ", " + place.getOpenNow(), #+ "\n" + place.getPlaceTypes(),
+							# "actions": [
+							# 	{
+							# 		"type":"uri",
+							# 		"label":"Map",
+							# 		"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
+							# 	}
+							# ]
+							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
 							"imageBackgroundColor": "#FFFFFF",
 							"title": place.getPlaceName(),
-							"text": place.getRating() + ", " + place.getOpenNow(), #+ "\n" + place.getPlaceTypes(),
+							"text": "description",
+							"defaultAction": {
+								"type": "uri",
+								"label": "View detail",
+								"uri": "http://example.com/page/123"
+							},
 							"actions": [
+								# {
+								# 	"type": "postback",
+								# 	"label": "Buy",
+								# 	"data": "action=buy&itemid=111"
+								# },
+								# {
+								# 	"type": "postback",
+								# 	"label": "Add to cart",
+								# 	"data": "action=add&itemid=111"
+								# },
 								{
-									"type":"uri",
-									"label":"Map",
-									"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
+									"type": "uri",
+									"label": "View detail",
+									"uri": "http://example.com/page/111"
 								}
 							]
 						}
