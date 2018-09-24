@@ -285,10 +285,10 @@ class weatherPlaceRecommendations():
 							# 		"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
 							# 	}
 							# ]
-							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+							"thumbnailImageUrl": place.getPhotoURL(),
 							"imageBackgroundColor": "#FFFFFF",
 							"title": place.getPlaceName(),
-							"text": place.getRating(),
+							"text": "description",
 							"defaultAction": {
 								"type": "uri",
 								"label": "View detail",
