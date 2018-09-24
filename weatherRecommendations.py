@@ -261,7 +261,8 @@ class weatherPlaceRecommendations():
 						}
 					)
 
-			lineData = data["fulfillmentMessages"][1]["payload"]["line"]["template"]["columns"]
+			# lineData = data["fulfillmentMessages"][1]["payload"]["line"]["template"]["columns"]
+			lineData = data["fulfillmentMessages"][1].get("payload").get("line").get("template").get("columns")
 			
 			for x in range(len(shortlistPlaces)):
 				place = shortlistPlaces[x]
