@@ -293,7 +293,7 @@ class weatherPlaceRecommendations():
 							"thumbnailImageUrl": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
 							"imageBackgroundColor": "#FFFFFF",
 							"title": place.getPlaceName(),
-							"text": "Powered by Google"
+							"text": "Powered by Google",
 							"actions": [
 								{
 									"type":"uri",
