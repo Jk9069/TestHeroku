@@ -244,67 +244,64 @@ class weatherPlaceRecommendations():
 						}
 					)
 
-			for item in data["fulfillmentMessages"]:
-				if "payload" in item:
-					print("FOUND ITT!!")
-					lineData = data["fulfillmentMessages"].get("payload").get("line").get("template").get("columns")
+			lineData = data["fulfillmentMessages"][counter]["payload"]["line"]["template"]["columns"]
+			
+			for x in range(len(shortlistPlaces)):
+				place = shortlistPlaces[x]
+				print("PLACE NAAMEE:" + place.getPlaceName())
 
-					for x in range(len(shortlistPlaces)):
-						place = shortlistPlaces[x]
-						print("PLACE NAAMEE:" + place.getPlaceName())
-
-						if (x < 7):
-							lineData.append(
+				if (x < 7):
+					lineData.append(
+						{
+							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+							"imageBackgroundColor": "#FFFFFF",
+							"title": "this is menu",
+							"text": "description",
+							"actions": [
 								{
-									"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
-									"imageBackgroundColor": "#FFFFFF",
-									"title": "this is menu",
-									"text": "description",
-									"actions": [
-										{
-											"type": "postback",
-											"label": "Buy",
-											"data": "action=buy&itemid=111"
-										},
-										{
-											"type": "postback",
-											"label": "Add to cart",
-											"data": "action=add&itemid=111"
-										},
-										{
-											"type": "uri",
-											"label": "View detail",
-											"uri": "http://example.com/page/111"
-										}
-									]
-								}
-							)
-						elif (x == 7):
-							lineData.append(
-								{
-									"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
-									"imageBackgroundColor": "#FFFFFF",
-									"title": "this is the LAST menu",
-									"text": "description",
-									"actions": [
-										{
-											"type": "postback",
-											"label": "Buy",
-											"data": "action=buy&itemid=111"
-										},
-										{
-											"type": "postback",
-											"label": "Add to cart",
-											"data": "action=add&itemid=111"
-										},
-										{
-											"type": "uri",
-											"label": "View detail",
-											"uri": "http://example.com/page/111"
-										}
-									]
+									"type": "postback",
+									"label": "Buy",
+									"data": "action=buy&itemid=111"
 								},
-							)
+								{
+									"type": "postback",
+									"label": "Add to cart",
+									"data": "action=add&itemid=111"
+								},
+								{
+									"type": "uri",
+									"label": "View detail",
+									"uri": "http://example.com/page/111"
+								}
+							]
+						}
+					)
+				elif (x == 7):
+					lineData.append(
+						{
+							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+							"imageBackgroundColor": "#FFFFFF",
+							"title": "this is the LAST menu",
+							"text": "description",
+							"actions": [
+								{
+									"type": "postback",
+									"label": "Buy",
+									"data": "action=buy&itemid=111"
+								},
+								{
+									"type": "postback",
+									"label": "Add to cart",
+									"data": "action=add&itemid=111"
+								},
+								{
+									"type": "uri",
+									"label": "View detail",
+									"uri": "http://example.com/page/111"
+								}
+							]
+						},
+					)
 
 			# data["fulfillmentMessages"].append(
 			# 	{	
