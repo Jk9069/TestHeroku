@@ -73,6 +73,9 @@ def getWebhookResult(postReq):
 		#if action is GetWeather.GetWeather-yes, get location from facebook payload
 		# and then perform search
 		if postedReq.get("action") == "GetWeather.GetWeather-yes":
+			return {
+				"fulfillmentText": "ENTERED..."
+			}
 			fbPayload = postReq.get("originalDetectIntentRequest").get("payload").get("data").get("postback")
 			latitude = fbPayload.get("data").get("lat")
 			longitude = fbPayload.get("data").get("long")
