@@ -212,7 +212,7 @@ class weatherPlaceRecommendations():
 				if (x < 7):
 					data["fulfillmentMessages"].append(
 						{
-							"platform": "FACEBOOK",
+							# "platform": "FACEBOOK",
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": place.getRating() + "\n" + place.getOpenNow() + "\n" + place.getPlaceTypes(), #+ "\n" + googleLogo.show(),
@@ -230,7 +230,7 @@ class weatherPlaceRecommendations():
 				elif (x == 7):
 					data["fulfillmentMessages"].append(
 						{
-							"platform": "FACEBOOK",
+							# "platform": "FACEBOOK",
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": "Powered by Google",
