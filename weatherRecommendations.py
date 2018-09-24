@@ -202,23 +202,6 @@ class weatherPlaceRecommendations():
 									responseText
 								]
 							}
-						},
-						{
-							"payload": {
-								"line":{
-									"type": "template",
-									"altText": "this is a carousel template",
-									"template": {
-										"type": "carousel",
-										"columns": [
-											
-										],
-										
-										"imageAspectRatio": "rectangle",
-										"imageSize": "cover"
-									}
-								}
-							}				
 						}
 					]
 				}
@@ -262,14 +245,32 @@ class weatherPlaceRecommendations():
 					)
 
 			# lineData = data["fulfillmentMessages"][1]["payload"]["line"]["template"]["columns"]
-			lineData = data["fulfillmentMessages"][1].get("payload").get("line").get("template").get("columns")
-			
+			lineData = {
+				"payload": {
+					"line":{
+						"type": "template",
+						"altText": "this is a carousel template",
+						"template": {
+							"type": "carousel",
+							"columns": [
+								
+							],
+							
+							"imageAspectRatio": "rectangle",
+							"imageSize": "cover"
+						}
+					}
+				}				
+			}
+
+			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+
 			for x in range(len(shortlistPlaces)):
 				place = shortlistPlaces[x]
 				print("PLACE NAAMEE:" + place.getPlaceName())
 
 				if (x < 7):
-					lineData.append(
+					lineCarousel.append(
 						{
 							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
 							"imageBackgroundColor": "#FFFFFF",
@@ -295,7 +296,7 @@ class weatherPlaceRecommendations():
 						}
 					)
 				elif (x == 7):
-					lineData.append(
+					lineCarousel.append(
 						{
 							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
 							"imageBackgroundColor": "#FFFFFF",
@@ -385,6 +386,8 @@ class weatherPlaceRecommendations():
 			# 		}				
 			# 	}
 			# )
+
+			data["fulfillmentMessages"].append(lineData)
 
 			#after showing results, ask if user want to change category
 			data["fulfillmentMessages"].append(
