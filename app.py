@@ -51,6 +51,18 @@ def getWebhookResult(postReq):
 		weatherInfo = weatherHandler.weatherResponse(postedReqParams, postedReq)
 		return weatherInfo.getWeatherResponse()
 
+	elif postedReq.get("action") == "GetWeather.GetWeather-yesLocation":
+		return {
+			"followupEventInput": {
+				"name": "LINE_LOCATION",
+				"parameters": {
+					"parameter-name-1": "parameter-value-1",
+					"parameter-name-2": "parameter-value-2"
+				},
+				"languageCode": "en-US"
+			}
+		}
+
 	#user responded 'yes' to obtain place suggestions
 	elif postedReq.get("action") == "GetWeather.GetWeather-yes" or postedReq.get("action") == "GetWeather.searchCategoryRecommendation" or postedReq.get("action") == "GetWeather.GetWeather-yesLocation.GeneralSearch":
 		#get weather condition
