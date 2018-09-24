@@ -212,6 +212,7 @@ class weatherPlaceRecommendations():
 				if (x < 7):
 					data["fulfillmentMessages"].append(
 						{
+							"platform": "FACEBOOK",
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": place.getRating() + "\n" + place.getOpenNow() + "\n" + place.getPlaceTypes(), #+ "\n" + googleLogo.show(),
@@ -229,6 +230,7 @@ class weatherPlaceRecommendations():
 				elif (x == 7):
 					data["fulfillmentMessages"].append(
 						{
+							"platform": "FACEBOOK",
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": "Powered by Google",
@@ -244,7 +246,7 @@ class weatherPlaceRecommendations():
 						}
 					)
 
-			# lineData = data["fulfillmentMessages"][1]["payload"]["line"]["template"]["columns"]
+			# this section is for LINE platform
 			lineData = {
 				"payload": {
 					"line":{
@@ -272,25 +274,15 @@ class weatherPlaceRecommendations():
 				if (x < 7):
 					lineCarousel.append(
 						{
-							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+							"thumbnailImageUrl": place.getPhotoURL(),
 							"imageBackgroundColor": "#FFFFFF",
-							"title": "this is menu",
-							"text": "description",
+							"title": place.getPlaceName(),
+							"text": place.getRating() + "\n" + place.getOpenNow() + "\n" + place.getPlaceTypes(),
 							"actions": [
 								{
-									"type": "postback",
-									"label": "Buy",
-									"data": "action=buy&itemid=111"
-								},
-								{
-									"type": "postback",
-									"label": "Add to cart",
-									"data": "action=add&itemid=111"
-								},
-								{
-									"type": "uri",
-									"label": "View detail",
-									"uri": "http://example.com/page/111"
+									"type":"uri",
+									"label":"Map",
+									"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
 								}
 							]
 						}
@@ -298,94 +290,19 @@ class weatherPlaceRecommendations():
 				elif (x == 7):
 					lineCarousel.append(
 						{
-							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+							"thumbnailImageUrl": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
 							"imageBackgroundColor": "#FFFFFF",
-							"title": "this is the LAST menu",
-							"text": "description",
+							"title": place.getPlaceName(),
+							"text": "Powered by Google"
 							"actions": [
 								{
-									"type": "postback",
-									"label": "Buy",
-									"data": "action=buy&itemid=111"
-								},
-								{
-									"type": "postback",
-									"label": "Add to cart",
-									"data": "action=add&itemid=111"
-								},
-								{
-									"type": "uri",
-									"label": "View detail",
-									"uri": "http://example.com/page/111"
+									"type":"uri",
+									"label":"Show Results",
+									"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
 								}
 							]
 						},
 					)
-
-			# data["fulfillmentMessages"].append(
-			# 	{	
-			# 		"payload": {
-			# 			"line":{
-			# 				"type": "template",
-			# 				"altText": "this is a carousel template",
-			# 				"template": {
-			# 					"type": "carousel",
-			# 					"columns": [
-			# 						{
-			# 							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
-			# 							"imageBackgroundColor": "#FFFFFF",
-			# 							"title": "this is menu",
-			# 							"text": "description",
-			# 							"actions": [
-			# 								{
-			# 									"type": "postback",
-			# 									"label": "Buy",
-			# 									"data": "action=buy&itemid=111"
-			# 								},
-			# 								{
-			# 									"type": "postback",
-			# 									"label": "Add to cart",
-			# 									"data": "action=add&itemid=111"
-			# 								},
-			# 								{
-			# 									"type": "uri",
-			# 									"label": "View detail",
-			# 									"uri": "http://example.com/page/111"
-			# 								}
-			# 							]
-			# 						},
-			# 						{
-			# 							"thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
-			# 							"imageBackgroundColor": "#000000",
-			# 							"title": "this is menu",
-			# 							"text": "description",
-			# 							"actions": [
-			# 								{
-			# 									"type": "postback",
-			# 									"label": "Buy",
-			# 									"data": "action=buy&itemid=222"
-			# 								},
-			# 								{
-			# 									"type": "postback",
-			# 									"label": "Add to cart",
-			# 									"data": "action=add&itemid=222"
-			# 								},
-			# 								{
-			# 									"type": "uri",
-			# 									"label": "View detail",
-			# 									"uri": "http://example.com/page/222"
-			# 								}
-			# 							]
-			# 						}
-			# 					],
-								
-			# 					"imageAspectRatio": "rectangle",
-			# 					"imageSize": "cover"
-			# 				}
-			# 			}
-			# 		}				
-			# 	}
-			# )
 
 			data["fulfillmentMessages"].append(lineData)
 
@@ -400,8 +317,6 @@ class weatherPlaceRecommendations():
 					}					
 				}
 			)
-
-
 
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
