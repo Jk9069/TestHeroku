@@ -251,7 +251,7 @@ class weatherPlaceRecommendations():
 
 					for x in range(len(shortlistPlaces)):
 						place = shortlistPlaces[x]
-						print("PLACE NAAMEE": + place.getPlaceName())
+						print("PLACE NAAMEE:" + place.getPlaceName())
 
 						if (x < 7):
 							lineData.append(
