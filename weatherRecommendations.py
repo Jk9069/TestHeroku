@@ -197,6 +197,15 @@ class weatherPlaceRecommendations():
 					],	
 					"fulfillmentMessages":[
 						{
+							"platform": "FACEBOOK",
+							"text":{
+								"text":[
+									responseText
+								]
+							}
+						},
+						{
+							"platform": "LINE",
 							"text":{
 								"text":[
 									responseText
@@ -309,6 +318,19 @@ class weatherPlaceRecommendations():
 			#after showing results, ask if user want to change category
 			data["fulfillmentMessages"].append(
 				{	
+					"platform": "FACEBOOK",
+					"quickReplies": {
+						"title": "Not feeling like it? Let's choose other categories.",
+						"quickReplies": [
+							"Other category"
+						]
+					}					
+				}
+			)
+
+			data["fulfillmentMessages"].append(
+				{	
+					"platform": "LINE",
 					"quickReplies": {
 						"title": "Not feeling like it? Let's choose other categories.",
 						"quickReplies": [
