@@ -288,7 +288,7 @@ class weatherPlaceRecommendations():
 							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
 							"imageBackgroundColor": "#FFFFFF",
 							"title": place.getPlaceName(),
-							"text": "description",
+							"text": place.getRating(),
 							"defaultAction": {
 								"type": "uri",
 								"label": "View detail",
@@ -316,15 +316,41 @@ class weatherPlaceRecommendations():
 				elif (x == 7):
 					lineCarousel.append(
 						{
-							"thumbnailImageUrl": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
+							# "thumbnailImageUrl": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
+							# "imageBackgroundColor": "#FFFFFF",
+							# "title": place.getPlaceName(),
+							# "text": "Powered by Google",
+							# "actions": [
+							# 	{
+							# 		"type":"uri",
+							# 		"label":"Show Results",
+							# 		"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
+							# 	}
+							# ]
+							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
 							"imageBackgroundColor": "#FFFFFF",
 							"title": place.getPlaceName(),
-							"text": "Powered by Google",
+							"text": place.getRating(),
+							"defaultAction": {
+								"type": "uri",
+								"label": "View detail",
+								"uri": "http://example.com/page/123"
+							},
 							"actions": [
+								# {
+								# 	"type": "postback",
+								# 	"label": "Buy",
+								# 	"data": "action=buy&itemid=111"
+								# },
+								# {
+								# 	"type": "postback",
+								# 	"label": "Add to cart",
+								# 	"data": "action=add&itemid=111"
+								# },
 								{
-									"type":"uri",
-									"label":"Show Results",
-									"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
+									"type": "uri",
+									"label": "View detail",
+									"uri": "http://example.com/page/111"
 								}
 							]
 						},
