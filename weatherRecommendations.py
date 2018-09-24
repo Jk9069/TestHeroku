@@ -277,7 +277,7 @@ class weatherPlaceRecommendations():
 							"thumbnailImageUrl": place.getPhotoURL(),
 							"imageBackgroundColor": "#FFFFFF",
 							"title": place.getPlaceName(),
-							"text": place.getRating() + "\n" + place.getOpenNow(), #+ "\n" + place.getPlaceTypes(),
+							"text": place.getRating() + ", " + place.getOpenNow(), #+ "\n" + place.getPlaceTypes(),
 							"actions": [
 								{
 									"type":"uri",
