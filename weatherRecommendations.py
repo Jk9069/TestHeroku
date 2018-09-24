@@ -316,7 +316,7 @@ class weatherPlaceRecommendations():
 				elif (x == 7):
 					lineCarousel.append(
 						{
-							"thumbnailImageUrl": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
+							"thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
 							"imageBackgroundColor": "#FFFFFF",
 							"title": place.getPlaceName(),
 							"text": "Powered by Google",
