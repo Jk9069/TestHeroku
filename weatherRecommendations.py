@@ -277,15 +277,12 @@ class weatherPlaceRecommendations():
 							"thumbnailImageUrl": place.getPhotoURL(),
 							"imageBackgroundColor": "#FFFFFF",
 							"title": place.getPlaceName(),
-							"text": place.getRating() + "\n" + place.getOpenNow() + "\n" + place.getPlaceTypes(),
+							"text": place.getRating() + "\n" + place.getOpenNow(), #+ "\n" + place.getPlaceTypes(),
 							"actions": [
 								{
-								# 	"type":"uri",
-								# 	"label":"Map",
-								# 	"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
-									"type": "message",
-									"label": "OHHO",
-									"text": "OOHHOO"
+									"type":"uri",
+									"label":"Map",
+									"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
 								}
 							]
 						}
@@ -299,12 +296,9 @@ class weatherPlaceRecommendations():
 							"text": "Powered by Google",
 							"actions": [
 								{
-									# "type":"uri",
-									# "label":"Show Results",
-									# "uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
-									"type": "message",
-									"label": "OHHO",
-									"text": "OOHHOO"
+									"type":"uri",
+									"label":"Show Results",
+									"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
 								}
 							]
 						},
