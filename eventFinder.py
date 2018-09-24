@@ -139,7 +139,10 @@ class eventFinder():
 							"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
 						]
 					}					
-				},
+				}
+			)
+
+			data["fulfillmentMessages"].append(
 				{	
 					"quickReplies": {
 						"title": "What else can I help you with?",
@@ -148,7 +151,7 @@ class eventFinder():
 						]
 					}					
 				}
-			)
+			)	
 
 		else:
 			data = {
