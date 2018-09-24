@@ -202,7 +202,24 @@ class weatherPlaceRecommendations():
 									responseText
 								]
 							}
-						} 
+						},
+						{
+							"payload": {
+								"line":{
+									"type": "template",
+									"altText": "this is a carousel template",
+									"template": {
+										"type": "carousel",
+										"columns": [
+											
+										],
+										
+										"imageAspectRatio": "rectangle",
+										"imageSize": "cover"
+									}
+								}
+							}				
+						}
 					]
 				}
 
@@ -244,7 +261,7 @@ class weatherPlaceRecommendations():
 						}
 					)
 
-			lineData = data["fulfillmentMessages"][counter]["payload"]["line"]["template"]["columns"]
+			lineData = data["fulfillmentMessages"][1]["payload"]["line"]["template"]["columns"]
 			
 			for x in range(len(shortlistPlaces)):
 				place = shortlistPlaces[x]
