@@ -318,28 +318,32 @@ class weatherPlaceRecommendations():
 
 			data["fulfillmentMessages"].append(
 				{
-					"type": "template",
-					"altText": "More results available on Google Maps!",
-					"template": {
-						"type": "buttons",
-						"thumbnailImageUrl": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
-						"imageAspectRatio": "rectangle",
-						"imageSize": "cover",
-						"imageBackgroundColor": "#FFFFFF",
-						"title": "More results available on Google Maps!",
-						"text": "Click the button to view more.",
-						# "defaultAction": {
-						# 	"type": "uri",
-						# 	"label": "View detail",
-						# 	"uri": "http://example.com/page/123"
-						# },
-						"actions": [
-							{
-								"type": "uri",
-								"label": "Show results",
-								"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
+					"payload":{
+						"line": {
+							"type": "template",
+							"altText": "More results available on Google Maps!",
+							"template": {
+								"type": "buttons",
+								"thumbnailImageUrl": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
+								"imageAspectRatio": "rectangle",
+								"imageSize": "cover",
+								"imageBackgroundColor": "#FFFFFF",
+								"title": "More results available on Google Maps!",
+								"text": "Click the button to view more.",
+								# "defaultAction": {
+								# 	"type": "uri",
+								# 	"label": "View detail",
+								# 	"uri": "http://example.com/page/123"
+								# },
+								"actions": [
+									{
+										"type": "uri",
+										"label": "Show results",
+										"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
+									}
+								]
 							}
-						]
+						}
 					}
 				}
 			)
