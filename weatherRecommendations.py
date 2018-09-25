@@ -271,7 +271,7 @@ class weatherPlaceRecommendations():
 				place = shortlistPlaces[x]
 				print("PLACE NAAMEE:" + place.getPlaceName())
 
-				if (x < 6):
+				if (x < 7):
 					lineCarousel.append(
 						{
 							# "thumbnailImageUrl": place.getPhotoURL(),
@@ -312,41 +312,37 @@ class weatherPlaceRecommendations():
 								}
 							]
 						}
-					)
-				elif (x == 6):
-					lineCarousel.append(
-						{
-							"thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
-							"imageBackgroundColor": "#FFFFFF",
-							"title": place.getPlaceName(),
-							"text": "Powered by Google",
-							"defaultAction": {
-								"type": "uri",
-								"label": "View detail",
-								"uri": "http://example.com/page/123"
-							},
-							"actions": [
-								# {
-								# 	"type": "postback",
-								# 	"label": "Buy",
-								# 	"data": "action=buy&itemid=111"
-								# },
-								# {
-								# 	"type": "postback",
-								# 	"label": "Add to cart",
-								# 	"data": "action=add&itemid=111"
-								# },
-								{
-									"type": "uri",
-									"label": "View detail",
-									"uri": "http://example.com/page/111"
-								}
-							]
-						}
-					)
-					
+					)					
 
 			data["fulfillmentMessages"].append(lineData)
+
+			data["fulfillmentMessages"].append(
+				{
+					"type": "template",
+					"altText": "More results available on Google Maps!",
+					"template": {
+						"type": "buttons",
+						"thumbnailImageUrl": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
+						"imageAspectRatio": "rectangle",
+						"imageSize": "cover",
+						"imageBackgroundColor": "#FFFFFF",
+						"title": "More results available on Google Maps!",
+						"text": "Click the button to view more.",
+						# "defaultAction": {
+						# 	"type": "uri",
+						# 	"label": "View detail",
+						# 	"uri": "http://example.com/page/123"
+						# },
+						"actions": [
+							{
+								"type": "uri",
+								"label": "Show results",
+								"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
+							}
+						]
+					}
+				}
+			)
 
 			#after showing results, ask if user want to change category
 			data["fulfillmentMessages"].append(
