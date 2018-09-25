@@ -271,7 +271,7 @@ class weatherPlaceRecommendations():
 				place = shortlistPlaces[x]
 				print("PLACE NAAMEE:" + place.getPlaceName())
 
-				if (x < 7):
+				if (x < 6):
 					lineCarousel.append(
 						{
 							# "thumbnailImageUrl": place.getPhotoURL(),
@@ -313,7 +313,7 @@ class weatherPlaceRecommendations():
 							]
 						}
 					)
-				elif (x == 7):
+				elif (x == 6):
 					lineCarousel.append(
 						{
 							"thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
