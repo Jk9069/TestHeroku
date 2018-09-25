@@ -76,12 +76,15 @@ class eventFinder():
 				#description = item.get("description")
 				eventName = item.get("title")
 
-				if item.get("image").get("small") != None:
-					imageUrl = item.get("image").get("small").get("url")
-					imageUrl = imageUrl.replace('small', 'large')
+				if item.get("image") != None:
+					if item.get("image").get("small") != None:
+						imageUrl = item.get("image").get("small").get("url")
+						imageUrl = imageUrl.replace('small', 'large')
+					else:
+						imageUrl = item.get("image").get("medium").get("url")
+						imageUrl = imageUrl.replace('small', 'large')
 				else:
-					imageUrl = item.get("image").get("medium").get("url")
-					imageUrl = imageUrl.replace('small', 'large')
+					imageUrl = "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium"
 				
 				venue = item.get("venue_name")
 				print(venue)
