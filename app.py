@@ -261,17 +261,17 @@ def getWebhookResult(postReq):
 			#if counter is less than 4 take 3 items from set 1
 			if (len(shortlistedFoods) < 4):
 				randomInt = random.randint(0, (len(foodSet1) - 1))
-				foodItem = Food(foodSet1[randint], set1Desc[randint])
+				foodItem = Food(foodSet1[randomInt], set1Desc[randomInt])
 
 			#if counter is less than 7, take another 3 items from set 2
 			elif (len(shortlistedFoods) < 7):
 				randomInt = random.randint(0, (len(foodSet2) - 1))
-				foodItem = Food(foodSet2[randint], set2Desc[randint])
+				foodItem = Food(foodSet2[randomInt], set2Desc[randomInt])
 
 			#for the remaining loops, take items from set 3	
 			else:
 				randomInt = random.randint(0, (len(foodSet3) - 1))
-				foodItem = Food(foodSet3[randint], set3Desc[randint])
+				foodItem = Food(foodSet3[randomInt], set3Desc[randomInt])
 
 			print(foodItem.getFoodName())
 			shortlistedFoods.append(foodItem)
