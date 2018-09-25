@@ -9,6 +9,7 @@ import weatherRecommendations
 import purposePlaceQuery
 import eventFinder
 
+from food import food
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -70,11 +71,13 @@ def getWebhookResult(postReq):
 			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
 			x = weatherRecommend.requestPlaces()
 
-		#if not, get location from output contexts
+		#if no facebook location, get location from output contexts
 		#and then perform search 
 		elif postedReq.get("action") == "GetWeather.searchCategoryRecommendation":
+			# initialise
 			latitude = ""
 			longitude = ""
+
 			#get latitude, longitude and previous category from outputContexts
 			for item in outputContexts:
 				if ("parameters" in item):
@@ -103,15 +106,18 @@ def getWebhookResult(postReq):
 			chosenCategory = chosenCategory.replace('%20', ' ')
 			chosenCategory = chosenCategory.replace('_', ' ')
 
-			#print(chosenCategory)
-			#based on weather condition, decide what kind of place to suggest
+			# print(chosenCategory)
+			# in the case chatbot could not get location from outputContexts and facebook location
+			# set to None first, later will check if none then search only in george town penang
 			if latitude == "" and longitude == "":
 				latitude = None
 				longitude = None
 				
+			#based on weather condition, decide what kind of place to suggest
 			weatherRecommend = weatherRecommendations.weatherPlaceRecommendations(weather, latitude, longitude)
 			x = weatherRecommend.requestMore(chosenCategory)
 
+		# for search in george town only	
 		elif postedReq.get("action") == "GetWeather.GetWeather-yesLocation.GeneralSearch":
 			latitude = None
 			longitude = None
@@ -122,54 +128,189 @@ def getWebhookResult(postReq):
 
 		return x
 
-	#what happens after show places after recommendation????
+	# handles user search based on their purpose (have user coordinates)
 	elif postedReq.get('action') == "jk-travelPurpose.jk-travelPurpose-coordinateSearch" or postedReq.get('action') == "jk-travelPurpose-placeCategory-getResult":
+		# get facebook location
 		fbPayload = postReq.get("originalDetectIntentRequest").get("payload").get("data").get("postback")
-
 		latitude = fbPayload.get("data").get("lat")
 		longitude = fbPayload.get("data").get("long")
-		
+
+		# if user search based on customized term
 		if postedReq.get('action') == "jk-travelPurpose.jk-travelPurpose-coordinateSearch":
 			for item in outputContexts:
 				if ("parameters" in item):
 					if ("purpose.original" in item.get("parameters")):
 						purpose = item.get("parameters").get("purpose.original")
 
+		# if user search based on a place category
 		elif postedReq.get('action') == "jk-travelPurpose-placeCategory-getResult":
 			for item in outputContexts:
 				if ("parameters" in item):
 					if ("placeCategory.original" in item.get("parameters")):
 						purpose = item.get("parameters").get("placeCategory.original")
 
+		# perform search
 		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose.replace(' ', '%20'), latitude, longitude)
 		return placeRecommend.requestPurposePlace()
 
+	# handles search only in george town (when dont have user coordinates)
 	elif postedReq.get("action") == "jk-travelPurpose.jk-travelPurpose-generalSearch" or postedReq.get("action") == "jk-travelPurpose-placeCategory-GeneralSearch":
+		# if user search based on customized term
 		if postedReq.get('action') == "jk-travelPurpose.jk-travelPurpose-generalSearch":
 			for item in outputContexts:
 				if ("parameters" in item):
 					if ("purpose.original" in item.get("parameters")):
 						purpose = item.get("parameters").get("purpose.original")
 
+		# if user search based on a place category
 		elif postedReq.get('action') == "jk-travelPurpose-placeCategory-GeneralSearch":
 			for item in outputContexts:
 				if ("parameters" in item):
 					if ("placeCategory.original" in item.get("parameters")):
 						purpose = item.get("parameters").get("placeCategory.original")
 
+		# since no coordinates, perform search without latitude and longitude data
 		latitude = None
 		longitude = None
 		placeRecommend = purposePlaceQuery.purposePlaceQuery(purpose.replace(' ', '%20'), latitude, longitude)
+		
 		return placeRecommend.requestPurposePlace()
 
+	#if user asks for events
 	elif postedReq.get('action') == "getEvent":
-		
 		# search for event from user input
 		eventLookup = eventFinder.eventFinder(postedReqParams)
-
 		return eventLookup.performSearch()
 
-	# elif postedReq.get('action') == "PenangInfo":
+	#handle info about penang
+	#show best foods
+	elif postedReq.get('action') == "jk-PenangInfo.jk-PenangInfo-bestfoods":
+		# provide 3 sets of best foods, will take randomized results from each
+		# more to snacks category
+		foodSet1 = [
+			"Apom Balik", 
+			"Roti Canai", "Roti Tisu",
+			"Popiah", "Satay",
+			"Fried Oyster", "Pasembur",
+			"Lor Bak", "Char Koay Kak"
+		]
+
+		set1Desc = [
+			"Pancake. Dessert. Peanuts.",
+			"Flatbread. Breakfast. Snack.",
+			"Flatbread. Sweet. Thin like tissue.",
+			"Teochew-style spring roll.",
+			"Seasoned, skewered, grilled meat.",
+			"Omelette filled with small oysters.",
+			"Malaysian Indian salad.", 
+			"Mixed plate of deep fried snacks.",
+			"Fried rice cakes."
+		]
+
+		# more to main meal category
+		foodSet2 = [
+			"Char Koay Teow", "Curry Mee",
+			"Penang Hokkien Mee", "Mee Goreng",
+			"Lok Lok", "Penang Assam Laksa", 
+			"Nasi Kandar", "Char Hor Fun",
+			"Koay Teow Soup", "Wanton Mee",
+			"Lor Mee", "Nasi Lemak"
+		]
+
+		set2Desc = [
+			"Fried. Flat rice noodles. Best.",
+			"Noodles and/or rice vermicelli in spicy curry soup.",
+			"Spicy prawn broth with noodles and/or rice vermicelli.",
+			"Fried Indian noodles. Spicy.",
+			"Various foods such as meat and vegetables served on a skewer.",
+			"Sour. Thick rice noodles in fish and tamarind-based soup.",
+			"Steamed rice served with a variety of curries and side dishes.",
+			"Fried broad rice noodles in treacly gravy.",
+			"Flat rice noodles in warm soup.",
+			"Noodle dish served in either soup or dry soy sauce.",
+			"Noodle and vermicelli served in thick soy sauce gravy.",
+			"Malay fragrant rice dish. Spicy. Best."
+		]
+
+		# more to desserts category
+		foodSet3 = [
+			"Penang Teochew Cendol", "Ice Kacang",
+			"Rojak", "Nyonya Kuih", 
+			"Muar Chee", "Coconut Shake",
+			"Putu Mayam", "Coconut Jelly",
+			"Aiyu Jelly/Oh Kio", "Ais Tingkap/Window Sherbet"
+		]
+
+		set3Desc = [
+			"Iced, sweet dessert. Green rice flour jelly. Coconut milk.",
+			"Shaved ice. Dessert. Topped with various toppings.",
+			"Fruit and vegetable salad mixed with prawn paste.",
+			"Wide spectrum of colorful desserts. Unique taste and shape.",
+			"Steamed glutinous flour dough coated with fine sugar and crushed peanuts.",
+			"Blended coconut drink topped with coconut ice cream and chewy pearls.",
+			"Indian style steamed rice vermicelli cake served with sugar and grated coconut.",
+			"Sweet. Cooling dessert. Coconut flavored jelly.",
+			"Taiwan traditional dessert. Jelly with lemonade, sugar and lychee.",
+			"Coconut water in red syrup. Topped with basil seeds and coconut flesh."
+		]
+
+		shortlistedFoods = []
+
+		# add items into the array list using randomizer
+		for x in range(0, 8):
+			#if counter is less than 4 take 3 items from set 1
+			if (len(shortlistedFoods) < 4):
+				randomInt = random.randint(0, (len(foodSet1) - 1))
+				foodItem = food.Food(foodSet1[randint], set1Desc[randint])
+
+			#if counter is less than 7, take another 3 items from set 2
+			elif (len(shortlistedFoods) < 7):
+				randomInt = random.randint(0, (len(foodSet2) - 1))
+				foodItem = food.Food(foodSet2[randint], set2Desc[randint])
+
+			#for the remaining loops, take items from set 3	
+			else:
+				randomInt = random.randint(0, (len(foodSet3) - 1))
+				foodItem = food.Food(foodSet3[randint], set3Desc[randint])
+
+			print(foodItem.getFoodName())
+			shortlistedFoods.append(foodItem)
+
+
+		# format data to be returned
+		data = {
+			"fulfillmentMessages":[
+				{
+					"text":{
+						"text":[
+							"These are some of the best foods in Penang."
+						]
+					}
+				}
+			]
+		}
+
+		for x in range(len(shortlistedFoods)):
+			foods = shortlistedFoods[x]
+
+			data["fulfillmentMessages"].append(
+				{
+					"card": { 
+						 "title": foods.getFoodName(),
+						 "subtitle": foods.getFoodDesc(),
+						 "imageUri": "https://sethlui.com/wp-content/uploads/2015/06/penang-street-hawker-food.jpg",
+						 "buttons": [
+						 	{
+						 		"text": "Find where",
+						 		#link to open in google maps
+						 		"postback": "https://www.google.com/maps/search/?api=1&query=" + foods.getFoodName()
+						 	}
+						 ]
+					}
+				}
+			)
+
+		return data
 					
 def remove_emoji(data):
 	count = 0
