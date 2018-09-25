@@ -9,7 +9,7 @@ import weatherRecommendations
 import purposePlaceQuery
 import eventFinder
 
-from food import Food
+from Food import Food
 from flask import Flask
 from flask import request
 from flask import make_response
