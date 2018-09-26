@@ -270,6 +270,7 @@ class weatherPlaceRecommendations():
 			for x in range(len(shortlistPlaces)):
 				place = shortlistPlaces[x]
 				print("PLACE NAAMEE:" + place.getPlaceName())
+				print(len(shortlistPlaces))
 
 				if (x < 7):
 					lineCarousel.append(
@@ -293,7 +294,7 @@ class weatherPlaceRecommendations():
 								{
 									"type": "uri",
 									"label": "Map",
-									"uri": "http://example.com/page/111"
+									"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
 								}
 							]
 						}
@@ -317,9 +318,9 @@ class weatherPlaceRecommendations():
 								"text": "Click button for more",
 								"actions": [
 									{
-										"type": "postback",
-										"label": "Buy",
-										"data": "action=buy&itemid=123"
+										"type": "uri",
+										"label": "View results",
+										"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
 									},
 								]
 							}
