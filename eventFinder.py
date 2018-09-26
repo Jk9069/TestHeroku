@@ -156,7 +156,7 @@ class eventFinder():
 
 			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
 
-			for x in range(len(shortlistPlaces)):
+			for x in range(len(allEvents)):
 				event = allEvents[x]
 				print("PLACE NAAMEE:" + place.getPlaceName())
 				print(len(allEvents))
