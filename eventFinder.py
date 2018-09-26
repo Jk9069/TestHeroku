@@ -174,19 +174,19 @@ class eventFinder():
 							# 		"uri": "https://www.google.com"
 							# 	}
 							# ]
-							{
-								"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
-								"imageBackgroundColor": "#FFFFFF",
-								"title": "this is menu",
-								"text": "description",
-								"actions": [
-									{
-										"type":"uri",
-										"label":"View details",
-										"uri":"http://example.com/page/222"
-									}
-								]
-							}
+							
+							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+							"imageBackgroundColor": "#FFFFFF",
+							"title": "this is menu",
+							"text": "description",
+							"actions": [
+								{
+									"type":"uri",
+									"label":"View details",
+									"uri":"http://example.com/page/222"
+								}
+							]
+							
 						}
 					)
 				else:
