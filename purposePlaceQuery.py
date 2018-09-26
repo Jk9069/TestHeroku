@@ -20,11 +20,11 @@ class purposePlaceQuery():
 		#categories that will provide results for attractions in penang
 		generalArray = [
 			"holiday", "sightseeing", "sight seeing", "retirement",
-			"vacation", "trip", 
+			"vacation", "trip" 
 		]
 
 		# do preset categories
-		if self.travelPurpose in generalArray:
+		if (self.travelPurpose).lower() in generalArray:
 			self.travelPurpose = "attractions"
 
 		# ssearch when coordinates are provided 
