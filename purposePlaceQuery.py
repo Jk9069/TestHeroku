@@ -30,10 +30,10 @@ class purposePlaceQuery():
 		# ssearch when coordinates are provided 
 		if self.latitude != None and self.longitude != None:
 			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location="
-			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude) + "&keyword=" + self.travelPurpose	
+			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude) + "&keyword=" + (self.travelPurpose).replace(' ', '+')
 		else:
 			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&rankby=distance&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
-			requestLink = (requestLink + "&keyword=" + self.travelPurpose)
+			requestLink = requestLink + "&keyword=" + (self.travelPurpose).replace(' ' + '+')
 
 		print(requestLink)
 
@@ -191,7 +191,7 @@ class purposePlaceQuery():
 								 	{
 								 		"text": "Show Results",
 								 		#link to open in google maps
-								 		"postback": "https://www.google.com/maps/search/?api=1&query=" + self.travelPurpose
+								 		"postback": "https://www.google.com/maps/search/?api=1&query=" + (self.travelPurpose).replace(' ', '+')
 								 	}
 								 ]
 							}
@@ -262,7 +262,7 @@ class purposePlaceQuery():
 										{
 											"type": "uri",
 											"label": "View results",
-											"uri": "https://www.google.com/maps/search/?api=1&query=" + self.travelPurpose
+											"uri": "https://www.google.com/maps/search/?api=1&query=" + (self.travelPurpose).replace(' ', '+')
 										},
 									]
 								}
