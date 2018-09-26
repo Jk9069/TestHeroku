@@ -141,17 +141,17 @@ class eventFinder():
 							"type": "carousel",
 							"columns": [
 								{
-									"thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
-									"imageBackgroundColor": "#FFFFFF",
-									"title": "This is the title",
-									"text": "This is the description", #+ "\n" + event.getEventDateTime(),
-									"actions": [
-										{
-											"type": "uri",
-											"label": "Map",
-											"uri": "https://www.google.com/?client=safari&channel=iphone_bm"
-										}
-									]
+									# "thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
+									# "imageBackgroundColor": "#FFFFFF",
+									# "title": "This is the title",
+									# "text": "This is the description", #+ "\n" + event.getEventDateTime(),
+									# "actions": [
+									# 	{
+									# 		"type": "uri",
+									# 		"label": "Map",
+									# 		"uri": "https://www.google.com/?client=safari&channel=iphone_bm"
+									# 	}
+									# ]
 								}
 							],
 							
@@ -162,29 +162,26 @@ class eventFinder():
 				}				
 			}
 
-			# lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
 
-			# for y in range(len(allEvents)):
-			# 	event = allEvents[y]
+			for y in range(len(allEvents)):
+				event = allEvents[y]
 
-			# 	if (y < 7):
-			# 		lineCarousel.append(
-			# 			{
-			# 				"thumbnailImageUrl": event.getImgUrl(),
-			# 				"imageBackgroundColor": "#FFFFFF",
-			# 				"title": (event.getEventName())[:40],
-			# 				"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
-			# 				"actions": [
-			# 					{
-			# 						"type": "uri",
-			# 						"label": "Map",
-			# 						"uri": event.getEventUrl()
-			# 					}
-			# 				]
-			# 			}
-			# 		)
-			# 	else:
-			# 		break					
+				lineCarousel.append(
+					{
+						"thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
+						"imageBackgroundColor": "#FFFFFF",
+						"title": (event.getEventName())[:40],
+						"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
+						"actions": [
+							{
+								"type": "uri",
+								"label": "Map",
+								"uri": "https://www.google.com/?client=safari&channel=iphone_bm"
+							}
+						]
+					}
+				)				
 
 			data["fulfillmentMessages"].append(lineData)
 
