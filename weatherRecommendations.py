@@ -273,21 +273,21 @@ class weatherPlaceRecommendations():
 				print(len(shortlistPlaces))
 
 				#if (x < 7):
-					lineCarousel.append(
-						{
-							"thumbnailImageUrl": place.getPhotoURL(),
-							"imageBackgroundColor": "#FFFFFF",
-							"title": place.getPlaceName(),
-							"text": place.getRating() + "\n" + place.getOpenNow(),
-							"actions": [
-								{
-									"type": "uri",
-									"label": "Map",
-									"uri": "https://www.google.com/maps/search/?api=1&query=" + (place.getPlaceName()).replace(' ', '+') + "&query_place_id=" + place.getPlaceID()
-								}
-							]
-						}
-					)					
+				lineCarousel.append(
+					{
+						"thumbnailImageUrl": place.getPhotoURL(),
+						"imageBackgroundColor": "#FFFFFF",
+						"title": place.getPlaceName(),
+						"text": place.getRating() + "\n" + place.getOpenNow(),
+						"actions": [
+							{
+								"type": "uri",
+								"label": "Map",
+								"uri": "https://www.google.com/maps/search/?api=1&query=" + (place.getPlaceName()).replace(' ', '+') + "&query_place_id=" + place.getPlaceID()
+							}
+						]
+					}
+				)					
 
 			data["fulfillmentMessages"].append(lineData)
 
