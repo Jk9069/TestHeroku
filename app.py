@@ -502,47 +502,47 @@ def getWebhookResult(postReq):
 				}
 			)
 
-		# # this section is for LINE platform
-		# lineData = {
-		# 	"payload": {
-		# 		"line":{
-		# 			"type": "template",
-		# 			"altText": "Highlights to visit in Penang.",
-		# 			"template": {
-		# 				"type": "carousel",
-		# 				"columns": [
+		# this section is for LINE platform
+		lineData = {
+			"payload": {
+				"line":{
+					"type": "template",
+					"altText": "Highlights to visit in Penang.",
+					"template": {
+						"type": "carousel",
+						"columns": [
 							
-		# 				],
+						],
 						
-		# 				"imageAspectRatio": "rectangle",
-		# 				"imageSize": "cover"
-		# 			}
-		# 		}
-		# 	}				
-		# }
+						"imageAspectRatio": "rectangle",
+						"imageSize": "cover"
+					}
+				}
+			}				
+		}
 
-		# lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+		lineCarousel = lineData["payload"]["line"]["template"]["columns"]
 
-		# for x in range(len(shortlistHighlights)):
-		# 	highlightItem = shortlistHighlights[x]
+		for x in range(len(shortlistHighlights)):
+			highlightItem = shortlistHighlights[x]
 
-		# 	lineCarousel.append(
-		# 		{
-		# 			"thumbnailImageUrl": photoURL,
-		# 			"imageBackgroundColor": "#FFFFFF",
-		# 			"title": highlightItem[:40],
-		# 			"text": stringTypes[:60],
-		# 			"actions": [
-		# 				{
-		# 					"type": "uri",
-		# 					"label": "Map",
-		# 					"uri": showMap.replace(' ', '+')
-		# 				}
-		# 			]
-		# 		}
-		# 	)				
+			lineCarousel.append(
+				{
+					"thumbnailImageUrl": photoURL,
+					"imageBackgroundColor": "#FFFFFF",
+					"title": highlightItem[:40],
+					"text": stringTypes[:60],
+					"actions": [
+						{
+							"type": "uri",
+							"label": "Map",
+							"uri": showMap.replace(' ', '+')
+						}
+					]
+				}
+			)				
 
-		# data["fulfillmentMessages"].append(lineData)
+		data["fulfillmentMessages"].append(lineData)
 
 		data["fulfillmentMessages"].append(
 			{
