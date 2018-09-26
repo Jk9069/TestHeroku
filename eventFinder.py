@@ -140,7 +140,19 @@ class eventFinder():
 						"template": {
 							"type": "carousel",
 							"columns": [
-								
+								{
+									"thumbnailImageUrl": event.getImgUrl(),
+									"imageBackgroundColor": "#FFFFFF",
+									"title": (event.getEventName())[:40],
+									"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
+									"actions": [
+										{
+											"type": "uri",
+											"label": "Map",
+											"uri": event.getEventUrl()
+										}
+									]
+								}
 							],
 							
 							"imageAspectRatio": "rectangle",
@@ -150,41 +162,41 @@ class eventFinder():
 				}				
 			}
 
-			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+			# lineCarousel = lineData["payload"]["line"]["template"]["columns"]
 
-			for y in range(len(allEvents)):
-				event = allEvents[y]
+			# for y in range(len(allEvents)):
+			# 	event = allEvents[y]
 
-				if (y < 7):
-					lineCarousel.append(
-						{
-							"thumbnailImageUrl": event.getImgUrl(),
-							"imageBackgroundColor": "#FFFFFF",
-							"title": (event.getEventName())[:40],
-							"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
-							"actions": [
-								{
-									"type": "uri",
-									"label": "Map",
-									"uri": event.getEventUrl()
-								}
-							]
-						}
-					)
-				else:
-					break					
+			# 	if (y < 7):
+			# 		lineCarousel.append(
+			# 			{
+			# 				"thumbnailImageUrl": event.getImgUrl(),
+			# 				"imageBackgroundColor": "#FFFFFF",
+			# 				"title": (event.getEventName())[:40],
+			# 				"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
+			# 				"actions": [
+			# 					{
+			# 						"type": "uri",
+			# 						"label": "Map",
+			# 						"uri": event.getEventUrl()
+			# 					}
+			# 				]
+			# 			}
+			# 		)
+			# 	else:
+			# 		break					
 
 			data["fulfillmentMessages"].append(lineData)
 
-			# data["fulfillmentMessages"].append(
-			# 	{	
-			# 		"text": {
-			# 			"text": [
-			# 				"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
-			# 			]
-			# 		}					
-			# 	}
-			# )
+			data["fulfillmentMessages"].append(
+				{	
+					"text": {
+						"text": [
+							"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
+						]
+					}					
+				}
+			)
 
 			data["fulfillmentMessages"].append(
 				{	

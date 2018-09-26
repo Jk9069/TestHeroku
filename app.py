@@ -432,6 +432,7 @@ def getWebhookResult(postReq):
 			highlightResult = json.loads(urllib.request.urlopen(requestLink).read())
 			results = highlightResult.get("results")
 			stringTypes = ""
+			photoURL = ""
 
 			#if there are results
 			if (highlightResult.get("status") == "OK"):
@@ -477,6 +478,9 @@ def getWebhookResult(postReq):
 							photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 					else:
 						photoRef = 'none'
+						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+
+					if photoURL = "":
 						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 
 			showMap = "https://www.google.com/maps/search/?api=1&query=" + highlight
