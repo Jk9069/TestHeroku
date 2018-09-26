@@ -181,26 +181,27 @@ class eventFinder():
 
 			data["fulfillmentMessages"].append(lineData)
 
-			data["fulfillmentMessages"].append(
-				{	
-					"text": {
-						"text": [
-							"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
-						]
-					}					
-				}
-			)
 
-			data["fulfillmentMessages"].append(
-				{	
-					"quickReplies": {
-						"title": "What else can I help you with?",
-						"quickReplies": [
-							"Weather", "Travel Purpose", "About Penang"
-						]
-					}					
-				}
-			)	
+			# data["fulfillmentMessages"].append(
+			# 	{	
+			# 		"text": {
+			# 			"text": [
+			# 				"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
+			# 			]
+			# 		}					
+			# 	}
+			# )
+
+			# data["fulfillmentMessages"].append(
+			# 	{	
+			# 		"quickReplies": {
+			# 			"title": "What else can I help you with?",
+			# 			"quickReplies": [
+			# 				"Weather", "Travel Purpose", "About Penang"
+			# 			]
+			# 		}					
+			# 	}
+			# )	
 
 		else:
 			data = {
