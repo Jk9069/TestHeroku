@@ -186,19 +186,6 @@ class eventFinder():
 										"uri":"http://example.com/page/222"
 									}
 								]
-							},
-							{
-								"thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
-								"imageBackgroundColor": "#000000",
-								"title": "this is menu",
-								"text": "description",
-								"actions": [
-									{
-										"type":"uri",
-										"label":"View details",
-										"uri":"http://example.com/page/222"
-									}
-								]
 							}
 						}
 					)
