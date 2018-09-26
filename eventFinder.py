@@ -141,15 +141,15 @@ class eventFinder():
 							"type": "carousel",
 							"columns": [
 								{
-									"thumbnailImageUrl": event.getImgUrl(),
+									"thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
 									"imageBackgroundColor": "#FFFFFF",
-									"title": (event.getEventName())[:40],
-									"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
+									"title": "This is the title",
+									"text": "This is the description", #+ "\n" + event.getEventDateTime(),
 									"actions": [
 										{
 											"type": "uri",
 											"label": "Map",
-											"uri": event.getEventUrl()
+											"uri": "https://www.google.com/?client=safari&channel=iphone_bm"
 										}
 									]
 								}
