@@ -167,21 +167,22 @@ class eventFinder():
 			for y in range(len(allEvents)):
 				event = allEvents[y]
 
-				lineCarousel.append(
-					{
-						"thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
-						"imageBackgroundColor": "#FFFFFF",
-						"title": (event.getEventName())[:40],
-						"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
-						"actions": [
-							{
-								"type": "uri",
-								"label": "Map",
-								"uri": "https://www.google.com/?client=safari&channel=iphone_bm"
-							}
-						]
-					}
-				)				
+				if y < 5:
+					lineCarousel.append(
+						{
+							"thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
+							"imageBackgroundColor": "#FFFFFF",
+							"title": (event.getEventName())[:40],
+							"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
+							"actions": [
+								{
+									"type": "uri",
+									"label": "Map",
+									"uri": "https://www.google.com/?client=safari&channel=iphone_bm"
+								}
+							]
+						}
+					)				
 
 			data["fulfillmentMessages"].append(lineData)
 
