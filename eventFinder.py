@@ -158,7 +158,6 @@ class eventFinder():
 
 			for x in range(len(allEvents)):
 				event = allEvents[x]
-				print("PLACE NAAMEE:" + place.getPlaceName())
 				print(len(allEvents))
 
 				if (x < 7):
