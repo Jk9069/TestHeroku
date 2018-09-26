@@ -131,60 +131,60 @@ class eventFinder():
 			# 	if counter == 7:
 			# 		break
 
-			# # this section is for LINE platform
-			# lineData = {
-			# 	"payload": {
-			# 		"line":{
-			# 			"type": "template",
-			# 			"altText": "Results found.",
-			# 			"template": {
-			# 				"type": "carousel",
-			# 				"columns": [
+			# this section is for LINE platform
+			lineData = {
+				"payload": {
+					"line":{
+						"type": "template",
+						"altText": "Results found.",
+						"template": {
+							"type": "carousel",
+							"columns": [
 								
-			# 				],
+							],
 							
-			# 				"imageAspectRatio": "rectangle",
-			# 				"imageSize": "cover"
-			# 			}
-			# 		}
-			# 	}				
-			# }
+							"imageAspectRatio": "rectangle",
+							"imageSize": "cover"
+						}
+					}
+				}				
+			}
 
-			# lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
 
-			# for x in range(len(allEvents)):
-			# 	event = allEvents[x]
+			for x in range(len(allEvents)):
+				event = allEvents[x]
 
-			# 	if (x < 7):
-			# 		lineCarousel.append(
-			# 			{
-			# 				"thumbnailImageUrl": event.getImgUrl(),
-			# 				"imageBackgroundColor": "#FFFFFF",
-			# 				"title": (event.getEventName())[:40],
-			# 				"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
-			# 				"actions": [
-			# 					{
-			# 						"type": "uri",
-			# 						"label": "Map",
-			# 						"uri": event.getEventUrl()
-			# 					}
-			# 				]
-			# 			}
-			# 		)
-			# 	else:
-			# 		break					
+				if (x < 7):
+					lineCarousel.append(
+						{
+							"thumbnailImageUrl": event.getImgUrl(),
+							"imageBackgroundColor": "#FFFFFF",
+							"title": (event.getEventName())[:40],
+							"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
+							"actions": [
+								{
+									"type": "uri",
+									"label": "Map",
+									"uri": event.getEventUrl()
+								}
+							]
+						}
+					)
+				else:
+					break					
 
-			# data["fulfillmentMessages"].append(lineData)
+			data["fulfillmentMessages"].append(lineData)
 
-			# data["fulfillmentMessages"].append(
-			# 	{	
-			# 		"text": {
-			# 			"text": [
-			# 				"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
-			# 			]
-			# 		}					
-			# 	}
-			# )
+			data["fulfillmentMessages"].append(
+				{	
+					"text": {
+						"text": [
+							"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
+						]
+					}					
+				}
+			)
 
 			data["fulfillmentMessages"].append(
 				{	
