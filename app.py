@@ -504,7 +504,7 @@ def getWebhookResult(postReq):
 				}
 			)
 
-			data["fulfillmentMessages"].append(
+		data["fulfillmentMessages"].append(
 			{
 				"quickReplies": {
 					"title": "Explore other options!",
