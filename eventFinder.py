@@ -107,29 +107,29 @@ class eventFinder():
 				]
 			}
 
-			# for x in range(len(allEvents)):
-			# 	event = allEvents[x]
+			for x in range(len(allEvents)):
+				event = allEvents[x]
 
-			# 	# if (x != 8):
-			# 	data["fulfillmentMessages"].append(
-			# 		{
-			# 			"card": { 
-			# 				 "title": event.getEventName(),
-			# 				 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
-			# 				 "imageUri": event.getImgUrl(),
-			# 				 "buttons": [
-			# 				 	{
-			# 				 		"text": "View on Eventful",
-			# 				 		#link to open in google maps
-			# 				 		"postback": event.getEventUrl()
-			# 				 	}
-			# 				 ]
-			# 			}
-			# 		}
-			# 	)
+				# if (x != 8):
+				data["fulfillmentMessages"].append(
+					{
+						"card": { 
+							 "title": event.getEventName(),
+							 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
+							 "imageUri": event.getImgUrl(),
+							 "buttons": [
+							 	{
+							 		"text": "View on Eventful",
+							 		#link to open in google maps
+							 		"postback": event.getEventUrl()
+							 	}
+							 ]
+						}
+					}
+				)
 
-			# 	if counter == 7:
-			# 		break
+				if counter == 7:
+					break
 
 			# this section is for LINE platform
 			lineData = {
@@ -170,6 +170,7 @@ class eventFinder():
 				if y < 7:
 					lineCarousel.append(
 						{
+							# image must be https but API do not have https links
 							"thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
 							"imageBackgroundColor": "#FFFFFF",
 							"title": (event.getEventName())[:40],
