@@ -255,34 +255,32 @@ def getWebhookResult(postReq):
 		]
 
 		shortlistedFoods = []
-		prevRandomInt = 0
-		randomInt = 0
 
 		# add items into the array list using randomizer
 		for x in range(0, 8):
 			#if counter is less than 3 take 2 items from set 1
 			if (len(shortlistedFoods) < 2):
-				while prevRandomInt == randomInt:
-					randomInt = random.randint(0, (len(foodSet1) - 1))
+				randomInt = random.randint(0, (len(foodSet1) - 1))
 				
 				foodItem = Food(foodSet1[randomInt], set1Desc[randomInt])
-				prevRandomInt = randomInt
+				del foodSet1[randomInt]
+				del set1Desc[randomInt]
 
 			#if counter is less than 7, take another 3 items from set 2
 			elif (len(shortlistedFoods) < 5):
-				while prevRandomInt == randomInt:
-					randomInt = random.randint(0, (len(foodSet2) - 1))
+				randomInt = random.randint(0, (len(foodSet2) - 1))
 
 				foodItem = Food(foodSet2[randomInt], set2Desc[randomInt])
-				prevRandomInt = randomInt
+				del foodSet2[randomInt]
+				del set2Desc[randomInt]
 
 			#for the remaining loops, take items from set 3	
 			else:
-				while prevRandomInt == randomInt:
-					randomInt = random.randint(0, (len(foodSet3) - 1))
+				randomInt = random.randint(0, (len(foodSet3) - 1))
 
 				foodItem = Food(foodSet3[randomInt], set3Desc[randomInt])
-				prevRandomInt = randomInt
+				del foodSet3[randomInt]
+				del set3Desc[randomInt]
 
 			print(foodItem.getFoodName())
 			shortlistedFoods.append(foodItem)
@@ -396,23 +394,19 @@ def getWebhookResult(postReq):
 		]
 
 		shortlistHighlights = []
-		prevRandomInt = 0
-		randomInt = 0
 
 		for x in range(0, 7):
 			if (len(shortlistHighlights) < 5):
-				while prevRandomInt == randomInt:
-					randomInt = random.randint(0, (len(highlightSet1) - 1))
+				randomInt = random.randint(0, (len(highlightSet1) - 1))
 
 				placeItem = highlightSet1[randomInt]
-				prevRandomInt = randomInt
+				del highlightSet1[randomInt]
 
 			else:
-				while prevRandomInt == randomInt:
-					randomInt = random.randint(0, (len(highlightSet2) - 1))
+				randomInt = random.randint(0, (len(highlightSet2) - 1))
 
 				placeItem = highlightSet2[randomInt]
-				prevRandomInt = randomInt
+				del highlightSet2[randomInt]
 
 			shortlistHighlights.append(placeItem)
 
@@ -503,6 +497,48 @@ def getWebhookResult(postReq):
 					}
 				}
 			)
+
+		# this section is for LINE platform
+		lineData = {
+			"payload": {
+				"line":{
+					"type": "template",
+					"altText": "Highlights to visit in Penang.",
+					"template": {
+						"type": "carousel",
+						"columns": [
+							
+						],
+						
+						"imageAspectRatio": "rectangle",
+						"imageSize": "cover"
+					}
+				}
+			}				
+		}
+
+		lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+
+		for x in range(len(shortlistHighlights)):
+			highlightItem = shortlistHighlights[x]
+
+			lineCarousel.append(
+				{
+					"thumbnailImageUrl": photoURL,
+					"imageBackgroundColor": "#FFFFFF",
+					"title": highlightItem[:40],
+					"text": stringTypes[:60],
+					"actions": [
+						{
+							"type": "uri",
+							"label": "Map",
+							"uri": showMap.replace(' ', '+')
+						}
+					]
+				}
+			)				
+
+		data["fulfillmentMessages"].append(lineData)
 
 		data["fulfillmentMessages"].append(
 			{
