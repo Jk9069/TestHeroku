@@ -69,10 +69,8 @@ class eventFinder():
 
 			for item in events:
 				eventfulUrl = item.get("url")
-				print (eventfulUrl)
 
 				timeDate = item.get("start_time")
-				print (timeDate)
 				#description = item.get("description")
 				eventName = item.get("title")
 
@@ -87,7 +85,6 @@ class eventFinder():
 					imageUrl = "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium"
 				
 				venue = item.get("venue_name")
-				print(venue)
 
 				newEvent = Event(eventName, venue, timeDate, eventfulUrl, imageUrl)
 
@@ -198,11 +195,13 @@ class eventFinder():
 						]
 					}					
 				}
-			)	
+			)
+
+			return data	
 
 		else:
 			data = {
 				"fulfillmentText": "No results found :("
 			}
 
-		return data
+			return data
