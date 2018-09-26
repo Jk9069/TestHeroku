@@ -368,7 +368,7 @@ def getWebhookResult(postReq):
 				"quickReplies": {
 					"title": "Explore other options!",
 					"quickReplies": [
-						"🍲 Best foods", "🌈 Highlights", "💡Did you know/Tips", "Bye!"
+						"🍲 Best foods", "🌈 Highlights", "💡Did you know/Tips", "Menu"
 					]
 				}	
 			}
@@ -503,6 +503,17 @@ def getWebhookResult(postReq):
 					}
 				}
 			)
+
+			data["fulfillmentMessages"].append(
+			{
+				"quickReplies": {
+					"title": "Explore other options!",
+					"quickReplies": [
+						"🍲 Best foods", "🌈 Highlights", "💡Did you know/Tips", "Menu"
+					]
+				}	
+			}
+		)
 
 		return data
 					
