@@ -219,12 +219,12 @@ def getWebhookResult(postReq):
 
 		set2Desc = [
 			"Fried. Flat rice noodles. Best.",
-			"Noodles and/or rice vermicelli in spicy curry soup.",
+			"Noodles. Rice vermicelli. Spicy curry soup.",
 			"Spicy prawn broth with noodles and/or rice vermicelli.",
 			"Fried Indian noodles. Spicy.",
-			"Various foods such as meat and vegetables served on a skewer.",
+			"Various foods served on a skewer.",
 			"Sour. Thick rice noodles in fish and tamarind-based soup.",
-			"Steamed rice served with a variety of curries and side dishes.",
+			"Rice served with a variety of curries and side dishes.",
 			"Fried broad rice noodles in treacly gravy.",
 			"Flat rice noodles in warm soup.",
 			"Noodle dish served in either soup or dry soy sauce.",
@@ -246,12 +246,12 @@ def getWebhookResult(postReq):
 			"Shaved ice. Dessert. Topped with various toppings.",
 			"Fruit and vegetable salad mixed with prawn paste.",
 			"Wide spectrum of colorful desserts. Unique taste and shape.",
-			"Steamed glutinous flour dough coated with fine sugar and crushed peanuts.",
-			"Blended coconut drink topped with coconut ice cream and chewy pearls.",
-			"Indian style steamed rice vermicelli cake served with sugar and grated coconut.",
+			"Steamed glutinous flour dough. Sugar. Crushed peanuts.",
+			"Blended. Topped with coconut ice cream and chewy pearls.",
+			"Steamed rice vermicelli cake. Sugar. Grated coconut.",
 			"Sweet. Cooling dessert. Coconut flavored jelly.",
-			"Taiwan traditional dessert. Jelly with lemonade, sugar and lychee.",
-			"Coconut water in red syrup. Topped with basil seeds and coconut flesh."
+			"Taiwan traditional dessert. Jelly with lemonade and sugar.",
+			"Coconut water in red syrup. Basil seeds. Coconut flesh."
 		]
 
 		shortlistedFoods = []
@@ -309,6 +309,49 @@ def getWebhookResult(postReq):
 					}
 				}
 			)
+
+
+		# this section is for LINE platform
+		lineData = {
+			"payload": {
+				"line":{
+					"type": "template",
+					"altText": "Best foods in Penang.",
+					"template": {
+						"type": "carousel",
+						"columns": [
+							
+						],
+						
+						"imageAspectRatio": "rectangle",
+						"imageSize": "cover"
+					}
+				}
+			}				
+		}
+
+		lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+
+		for x in range(len(shortlistedFoods)):
+			foods = shortlistedFoods[x]
+
+			lineCarousel.append(
+				{
+					# "thumbnailImageUrl": place.getPhotoURL(),
+					"imageBackgroundColor": "#FFFFFF",
+					"title": foods.getFoodName(),
+					"text": foods.getFoodDesc(),
+					"actions": [
+						{
+							"type": "uri",
+							"label": "Find where",
+							"uri": "https://www.google.com/maps/search/?api=1&query=" + foods.getFoodName()
+						}
+					]
+				}
+			)				
+
+		data["fulfillmentMessages"].append(lineData)
 
 		return data
 					
