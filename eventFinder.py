@@ -170,7 +170,7 @@ class eventFinder():
 				if y < 5:
 					lineCarousel.append(
 						{
-							"thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
+							"thumbnailImageUrl": event.getImgUrl(),
 							"imageBackgroundColor": "#FFFFFF",
 							"title": (event.getEventName())[:40],
 							"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
