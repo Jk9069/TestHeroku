@@ -32,7 +32,7 @@ class purposePlaceQuery():
 			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location="
 			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude) + "&keyword=" + (self.travelPurpose).replace(' ', '+')
 		else:
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&rankby=distance&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=10000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 			requestLink = requestLink + "&keyword=" + (self.travelPurpose).replace(' ' , '+')
 
 		print(requestLink)
