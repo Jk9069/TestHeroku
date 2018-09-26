@@ -166,12 +166,12 @@ class eventFinder():
 							"thumbnailImageUrl": event.getImgUrl(),
 							"imageBackgroundColor": "#FFFFFF",
 							"title": event.getEventName(),
-							"text": event.getEventVenue() + "\n" + event.getEventDateTime(),
+							"text": event.getEventVenue() #+ "\n" + event.getEventDateTime(),
 							"actions": [
 								{
 									"type": "uri",
 									"label": "View on Eventful",
-									"uri": event.getEventUrl()
+									"uri": "https://www.google.com"
 								}
 							]
 						}
@@ -196,7 +196,7 @@ class eventFinder():
 					"quickReplies": {
 						"title": "What else can I help you with?",
 						"quickReplies": [
-							"Weather", "Travel Purpose", "About Penang", "Bye!"
+							"Weather", "Travel Purpose", "About Penang"
 						]
 					}					
 				}
