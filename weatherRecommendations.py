@@ -272,20 +272,9 @@ class weatherPlaceRecommendations():
 				print("PLACE NAAMEE:" + place.getPlaceName())
 				print(len(shortlistPlaces))
 
-				if (x < 7):
+				#if (x < 7):
 					lineCarousel.append(
 						{
-							# "thumbnailImageUrl": place.getPhotoURL(),
-							# "imageBackgroundColor": "#FFFFFF",
-							# "title": place.getPlaceName(),
-							# "text": place.getRating() + ", " + place.getOpenNow(), #+ "\n" + place.getPlaceTypes(),
-							# "actions": [
-							# 	{
-							# 		"type":"uri",
-							# 		"label":"Map",
-							# 		"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
-							# 	}
-							# ]
 							"thumbnailImageUrl": place.getPhotoURL(),
 							"imageBackgroundColor": "#FFFFFF",
 							"title": place.getPlaceName(),
@@ -294,7 +283,7 @@ class weatherPlaceRecommendations():
 								{
 									"type": "uri",
 									"label": "Map",
-									"uri": "https://www.google.com/maps/search/?api=1" + "&query_place_id=" + place.getPlaceID()
+									"uri": "https://www.google.com/maps/search/?api=1&query_place_id=" + place.getPlaceID()
 								}
 							]
 						}
@@ -307,14 +296,11 @@ class weatherPlaceRecommendations():
 					"payload":{
 						"line": {
 							"type": "template",
-							"altText": "More results found.\nPowered by Google",
+							"altText": "More results found.",
 							"template": {
 								"type": "buttons",
-								"thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
-								"imageAspectRatio": "rectangle",
-								"imageSize": "cover",
 								"imageBackgroundColor": "#FFFFFF",
-								"title": "More results in Google Maps",
+								"title": "More results in Google Maps. \nPowered by Google",
 								"text": "Click button for more",
 								"actions": [
 									{
