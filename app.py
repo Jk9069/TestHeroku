@@ -345,7 +345,7 @@ def getWebhookResult(postReq):
 						{
 							"type": "uri",
 							"label": "Find where",
-							"uri": "https://www.google.com/maps/search/?api=1&query=" + foods.getFoodName()
+							"uri": "https://www.google.com/maps/search/?api=1&query=" + (foods.getFoodName()).replace(' ', '+')
 						}
 					]
 				}
