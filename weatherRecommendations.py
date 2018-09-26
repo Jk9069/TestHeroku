@@ -321,26 +321,21 @@ class weatherPlaceRecommendations():
 					"payload":{
 						"line": {
 							"type": "template",
-							"altText": "More results available on Google Maps!",
+							"altText": "This is a buttons template",
 							"template": {
 								"type": "buttons",
-								"thumbnailImageUrl": "https://www.televox.com/webvox/wp-content/uploads/2015/09/9-8-15_1.png",
+								"thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
 								"imageAspectRatio": "rectangle",
 								"imageSize": "cover",
 								"imageBackgroundColor": "#FFFFFF",
-								"title": "More results available on Google Maps!",
-								"text": "Click the button to view more.",
-								# "defaultAction": {
-								# 	"type": "uri",
-								# 	"label": "View detail",
-								# 	"uri": "http://example.com/page/123"
-								# },
+								"title": "Menu",
+								"text": "Please select",
 								"actions": [
 									{
-										"type": "uri",
-										"label": "Show results",
-										"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
-									}
+										"type": "postback",
+										"label": "Buy",
+										"data": "action=buy&itemid=123"
+									},
 								]
 							}
 						}
