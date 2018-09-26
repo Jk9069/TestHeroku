@@ -212,15 +212,13 @@ class purposePlaceQuery():
 
 			for x in range(len(shortlistPlaces)):
 				place = shortlistPlaces[x]
-				print("PLACE NAAMEE:" + place.getPlaceName())
-				print(len(shortlistPlaces))
 
 				if (x < 7):
 					lineCarousel.append(
 						{
 							"thumbnailImageUrl": place.getPhotoURL(),
 							"imageBackgroundColor": "#FFFFFF",
-							"title": place.getPlaceName(),
+							"title": (place.getPlaceName())[:40],
 							"text": place.getRating() + "\n" + place.getOpenNow(),
 							"actions": [
 								{
@@ -263,7 +261,7 @@ class purposePlaceQuery():
 						}
 					}
 				)
-				
+
 			data["fulfillmentMessages"].append(
 				{	
 					"quickReplies": {
