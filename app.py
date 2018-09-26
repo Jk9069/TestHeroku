@@ -339,8 +339,8 @@ def getWebhookResult(postReq):
 				{
 					# "thumbnailImageUrl": place.getPhotoURL(),
 					"imageBackgroundColor": "#FFFFFF",
-					"title": foods.getFoodName(),
-					"text": foods.getFoodDesc(),
+					"title": (foods.getFoodName())[:40],
+					"text": foods.getFoodDesc()[:60],
 					"actions": [
 						{
 							"type": "uri",
@@ -352,6 +352,17 @@ def getWebhookResult(postReq):
 			)				
 
 		data["fulfillmentMessages"].append(lineData)
+
+		data["fulfillmentMessages"].append(
+			{
+				"quickReplies": {
+					"title": "Explore other options!",
+					"quickReplies": [
+						"🍲 Best foods", "🌈 Highlights", "💡Did you know/Tips", "Bye!"
+					]
+				}	
+			}
+		)
 
 		return data
 					
