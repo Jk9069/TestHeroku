@@ -395,7 +395,7 @@ def getWebhookResult(postReq):
 
 		shortlistHighlights = []
 
-		for x in range(0, 7):
+		for x in range(0, 6):
 			if (len(shortlistHighlights) < 5):
 				randomInt = random.randint(0, (len(highlightSet1) - 1))
 
