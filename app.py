@@ -462,6 +462,9 @@ def getWebhookResult(postReq):
 						if '_' in stringTypes:
 							stringTypes = stringTypes.replace('_', " ")
 
+					else:
+						stringTypes = "Highlight in Penang"
+
 					#obtain photo reference to get image to display in cards
 					if ("photos" in items):
 						photoDeets = items["photos"]
