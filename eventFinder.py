@@ -116,7 +116,8 @@ class eventFinder():
 						"card": { 
 							 "title": event.getEventName(),
 							 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
-							 "imageUri": event.getImgUrl(),
+							 # "imageUri": event.getImgUrl(),
+							 "imageUri": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
 							 "buttons": [
 							 	{
 							 		"text": "View on Eventful",
