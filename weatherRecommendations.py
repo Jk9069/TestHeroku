@@ -251,7 +251,7 @@ class weatherPlaceRecommendations():
 				"payload": {
 					"line":{
 						"type": "template",
-						"altText": "this is a carousel template",
+						"altText": "Results found.",
 						"template": {
 							"type": "carousel",
 							"columns": [
@@ -294,7 +294,7 @@ class weatherPlaceRecommendations():
 								{
 									"type": "uri",
 									"label": "Map",
-									"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() #+ "&query_place_id=" + place.getPlaceID()
+									"uri": "https://www.google.com/maps/search/?api=1" + "&query_place_id=" + place.getPlaceID()
 								}
 							]
 						}
@@ -307,7 +307,7 @@ class weatherPlaceRecommendations():
 					"payload":{
 						"line": {
 							"type": "template",
-							"altText": "This is a buttons template",
+							"altText": "More results found.\nPowered by Google",
 							"template": {
 								"type": "buttons",
 								"thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
