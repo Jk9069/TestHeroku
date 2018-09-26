@@ -23,15 +23,18 @@ class weatherPlaceRecommendations():
 	#from placeTypes search for places in Google Places API
 	def requestPlaces(self):
 		placeTypes = [
-			'park', 'amusement_park', 'aquarium', 'art_gallery',
-			'bowling_alley', 'library', 'movie_theater', 'museum',
-			'shopping_mall', 'spa', 'points_of_interest'
+			'park', 'amusement_park', 'art_gallery',
+			'bowling_alley', 'movie_theater', 'museum',
+			'shopping_mall', 'spa', 'street_art', 'arcade',
+			"restaurant", "cafe", "heritage", "lounge"
 		]
 
 		#remove outdoor places from recommendations
 		if ('Rain' in self.weather or 'Thunderstorm' in self.weather):
 			placeTypes.remove('park')
 			placeTypes.remove('amusement_park')
+			placeTypes.remove('street_art')
+			placeTypes.remove('heritage')
 
 		print(self.weather)
 
