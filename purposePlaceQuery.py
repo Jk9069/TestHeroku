@@ -243,9 +243,9 @@ class purposePlaceQuery():
 							"line": {
 								"type": "template",
 								"altText": "More results found.",
-								"thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
-								"imageAspectRatio": "rectangle",
-								"imageSize": "cover",
+								# "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+								# "imageAspectRatio": "rectangle",
+								# "imageSize": "cover",
 								"template": {
 									"type": "buttons",
 									"imageBackgroundColor": "#FFFFFF",
@@ -255,7 +255,7 @@ class purposePlaceQuery():
 										{
 											"type": "uri",
 											"label": "View results",
-											"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
+											"uri": "https://www.google.com/maps/search/?api=1&query=" + self.travelPurpose
 										},
 									]
 								}
