@@ -257,14 +257,14 @@ def getWebhookResult(postReq):
 		shortlistedFoods = []
 
 		# add items into the array list using randomizer
-		for x in range(0, 8):
-			#if counter is less than 4 take 3 items from set 1
-			if (len(shortlistedFoods) < 4):
+		for x in range(0, 7):
+			#if counter is less than 3 take 2 items from set 1
+			if (len(shortlistedFoods) < 3):
 				randomInt = random.randint(0, (len(foodSet1) - 1))
 				foodItem = Food(foodSet1[randomInt], set1Desc[randomInt])
 
 			#if counter is less than 7, take another 3 items from set 2
-			elif (len(shortlistedFoods) < 7):
+			elif (len(shortlistedFoods) < 6):
 				randomInt = random.randint(0, (len(foodSet2) - 1))
 				foodItem = Food(foodSet2[randomInt], set2Desc[randomInt])
 
