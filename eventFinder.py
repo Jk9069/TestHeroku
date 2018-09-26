@@ -124,7 +124,7 @@ class eventFinder():
 							 "buttons": [
 							 	{
 							 		"text": "View on Eventful",
-							 		#link to open in eventful website
+							 		#link to open in google maps
 							 		"postback": event.getEventUrl()
 							 	}
 							 ]
@@ -135,86 +135,26 @@ class eventFinder():
 				if counter == 7:
 					break
 
-			# this section is for LINE platform
-			lineData = {
-				"payload": {
-					"line":{
-						"type": "template",
-						"altText": "Results found.",
-						"template": {
-							"type": "carousel",
-							"columns": [
-								
-							],
-							
-							"imageAspectRatio": "rectangle",
-							"imageSize": "cover"
-						}
-					}
-				}				
-			}
+			data["fulfillmentMessages"].append(
+				{	
+					"text": {
+						"text": [
+							"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
+						]
+					}					
+				}
+			)
 
-			# lineCarousel = lineData["payload"]["line"]["template"]["columns"]
-
-			# for x in range(len(allEvents)):
-			# 	event = allEvents[x]
-			# 	print(len(allEvents))
-
-			# 	if (x < 7):
-			# 		lineCarousel.append(
-			# 			{
-			# 				# "thumbnailImageUrl": event.getImgUrl(),
-			# 				# "imageBackgroundColor": "#FFFFFF",
-			# 				# "title": event.getEventName(),
-			# 				# "text": event.getEventVenue(), #+ "\n" + event.getEventDateTime(),
-			# 				# "actions": [
-			# 				# 	{
-			# 				# 		"type": "uri",
-			# 				# 		"label": "View on Eventful",
-			# 				# 		"uri": "https://www.google.com"
-			# 				# 	}
-			# 				# ]
-							
-			# 					"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
-			# 					"imageBackgroundColor": "#FFFFFF",
-			# 					"title": "this is menu",
-			# 					"text": "description",
-			# 					"actions": [
-			# 						{
-			# 							"type":"uri",
-			# 							"label":"View details",
-			# 							"uri":"http://example.com/page/222"
-			# 						}
-			# 					]
-							
-			# 			}
-			# 		)
-			# 	else:
-			# 		break					
-
-			# data["fulfillmentMessages"].append(lineData)
-
-
-			# data["fulfillmentMessages"].append(
-			# 	{	
-			# 		"text": {
-			# 			"text": [
-			# 				"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
-			# 			]
-			# 		}					
-			# 	}
-			# )
-
-			# data["fulfillmentMessages"].append(
-			# 	{	
-			# 		"quickReplies": {
-			# 			"title": "What else can I help you with?",
-			# 			"quickReplies": [
-			# 				"Weather", "Travel Purpose", "About Penang"
-			# 			]
-			# 		}					
-			# 	}
-			# )	
+			data["fulfillmentMessages"].append(
+				{	
+					"quickReplies": {
+						"title": "What else can I help you with?",
+						"quickReplies": [
+							"Weather", "Travel Purpose", "About Penang", "Bye!"
+						]
+					}					
+				}
+			)	
 
 		else:
 			data = {

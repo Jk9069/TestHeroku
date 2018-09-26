@@ -189,6 +189,81 @@ class purposePlaceQuery():
 						}
 					)
 
+			# this section is for LINE platform
+			lineData = {
+				"payload": {
+					"line":{
+						"type": "template",
+						"altText": "Results found.",
+						"template": {
+							"type": "carousel",
+							"columns": [
+								
+							],
+							
+							"imageAspectRatio": "rectangle",
+							"imageSize": "cover"
+						}
+					}
+				}				
+			}
+
+			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+
+			for x in range(len(shortlistPlaces)):
+				place = shortlistPlaces[x]
+				print("PLACE NAAMEE:" + place.getPlaceName())
+				print(len(shortlistPlaces))
+
+				if (x < 7):
+					lineCarousel.append(
+						{
+							"thumbnailImageUrl": place.getPhotoURL(),
+							"imageBackgroundColor": "#FFFFFF",
+							"title": place.getPlaceName(),
+							"text": place.getRating() + "\n" + place.getOpenNow(),
+							"actions": [
+								{
+									"type": "uri",
+									"label": "Map",
+									"uri": "https://www.google.com/maps/search/?api=1&query=" + (place.getPlaceName()).replace(' ', '+') + "&query_place_id=" + place.getPlaceID()
+								}
+							]
+						}
+					)
+				else:
+					break					
+
+			data["fulfillmentMessages"].append(lineData)
+
+			if len(shortlistPlaces) > 7:
+				data["fulfillmentMessages"].append(
+					{
+						"payload":{
+							"line": {
+								"type": "template",
+								"altText": "More results found.",
+								"thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+								"imageAspectRatio": "rectangle",
+								"imageSize": "cover",
+								"template": {
+									"type": "buttons",
+									"imageBackgroundColor": "#FFFFFF",
+									"title": "More results in Google Maps.",
+									"text": "Powered by Google",
+									"actions": [
+										{
+											"type": "uri",
+											"label": "View results",
+											"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
+										},
+									]
+								}
+							}
+						}
+					}
+				)
+				
 			data["fulfillmentMessages"].append(
 				{	
 					"quickReplies": {
