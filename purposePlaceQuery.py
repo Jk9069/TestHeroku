@@ -17,6 +17,15 @@ class purposePlaceQuery():
 		self.longitude = longitude
 
 	def requestPurposePlace(self):
+		#categories that will provide results for attractions in penang
+		generalArray = [
+			"holiday", "sightseeing", "sight seeing", "retirement",
+			"vacation", "trip", 
+		]
+
+		# do preset categories
+		if self.travelPurpose in generalArray:
+			self.travelPurpose = "attractions"
 
 		# ssearch when coordinates are provided 
 		if self.latitude != None and self.longitude != None:
