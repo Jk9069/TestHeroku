@@ -166,7 +166,7 @@ class eventFinder():
 							"thumbnailImageUrl": event.getImgUrl(),
 							"imageBackgroundColor": "#FFFFFF",
 							"title": event.getEventName(),
-							"text": event.getEventVenue() #+ "\n" + event.getEventDateTime(),
+							"text": event.getEventVenue(), #+ "\n" + event.getEventDateTime(),
 							"actions": [
 								{
 									"type": "uri",
