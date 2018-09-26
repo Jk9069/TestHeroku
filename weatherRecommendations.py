@@ -273,8 +273,6 @@ class weatherPlaceRecommendations():
 				print(len(shortlistPlaces))
 
 				if (x < 7):
-					placeUri = 
-
 					lineCarousel.append(
 						{
 							"thumbnailImageUrl": place.getPhotoURL(),
