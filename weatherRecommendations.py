@@ -288,26 +288,11 @@ class weatherPlaceRecommendations():
 							"thumbnailImageUrl": place.getPhotoURL(),
 							"imageBackgroundColor": "#FFFFFF",
 							"title": place.getPlaceName(),
-							"text": "description",
-							"defaultAction": {
-								"type": "uri",
-								"label": "View detail",
-								"uri": "http://example.com/page/123"
-							},
+							"text": place.getRating() + "\n" + place.getOpenNow(),
 							"actions": [
-								# {
-								# 	"type": "postback",
-								# 	"label": "Buy",
-								# 	"data": "action=buy&itemid=111"
-								# },
-								# {
-								# 	"type": "postback",
-								# 	"label": "Add to cart",
-								# 	"data": "action=add&itemid=111"
-								# },
 								{
 									"type": "uri",
-									"label": "View detail",
+									"label": "Map",
 									"uri": "http://example.com/page/111"
 								}
 							]
@@ -328,8 +313,8 @@ class weatherPlaceRecommendations():
 								"imageAspectRatio": "rectangle",
 								"imageSize": "cover",
 								"imageBackgroundColor": "#FFFFFF",
-								"title": "Menu",
-								"text": "Please select",
+								"title": "More results in Google Maps",
+								"text": "Click button for more",
 								"actions": [
 									{
 										"type": "postback",
