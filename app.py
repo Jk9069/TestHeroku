@@ -375,6 +375,132 @@ def getWebhookResult(postReq):
 		)
 
 		return data
+
+	elif postedReq.get('action') == "jk-PenangInfo.jk-PenangInfo-highlights":
+		highlightSet1 = [
+			"Gravity Z", "ESCAPE Waterpark",
+			"Avatar Secret Garden", "Penang Little India",
+			"Penang Peranakan Mansion", "St. George's Church",
+			"Kek Lok Si Temple", "Penang Hill",
+			"Penang Street Art", "Snake Temple",
+			"Penang National Park", "Tropical Spice Garden"
+		]
+
+		highlightSet2 = [
+			"Fort Cornwallis", "Khoo Kongsi", 
+			"Hin Bus Depot", "Entopia",
+			"Clan Jetties of Penang", "The TOP, KOMTAR",
+			"Batu Ferringhi Beach", "Tech Dome",
+			"Penang Botanical Gardens", "Dharmikarama Burmese Temple",
+			"Floating Mosque", "Arulmigu Balathandayuthapani Temple",
+		]
+
+		shortlistHighlights = []
+		prevRandomInt = 0
+		randomInt = 0
+
+		for x in range(0, 8):
+			if (len(shortlistHighlights) < 5):
+				while prevRandomInt == randomInt:
+					randomInt = random.randint(0, (len(highlightSet1) - 1))
+
+				placeItem = highlightSet1[randomInt]
+				prevRandomInt = randomInt
+
+			else:
+				while prevRandomInt == randomInt:
+					randomInt = random.randint(0, (len(highlightSet2) - 1))
+
+				placeItem = highlightSet2[randomInt]
+				prevRandomInt = randomInt
+
+			print(placeItem[x])
+			shortlistHighlights.append(placeItem)
+
+		# format data to be returned
+		data = {
+			"fulfillmentMessages":[
+				{
+					"text":{
+						"text":[
+							"These are the best places to visit in Penang!"
+						]
+					}
+				}
+			]
+		}
+
+		for x in range(len(shortlistHighlights)):
+			highlight = shortlistHighlights[x]
+
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location=5.4356,100.3091"
+			requestLink += "&keyword=" + highlight
+
+			highlightResult = json.loads(urllib.request.urlopen(requestLink).read())
+			results = highlightResult.get("results")
+			stringTypes = ""
+
+			#if there are results
+			if (highlightResult.get("status") == "OK"):
+				for items in results:
+					#get types that categorise the place
+					if ("types" in items):
+						types = items["types"]
+
+						for x in types:
+							stringTypes += x + ", "
+							
+							if x == 2:
+								break
+
+						#remove last 2 characters of the string
+						stringTypes = stringTypes[:-2]
+						
+						if '_' in stringTypes:
+							stringTypes = stringTypes.replace('_', " ")
+
+					#obtain photo reference to get image to display in cards
+					if ("photos" in items):
+						photoDeets = items["photos"]
+
+						for x in photoDeets:
+							if ("photo_reference" in x):
+								photoRef = x.get("photo_reference", 'none')
+							else:
+								photoRef = 'none'
+
+						#using photo reference to get image
+						if (photoRef != 'none'):
+							photoRequest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&key=AIzaSyBMfB2YS4eye4FNNWvyv71DV5HN3ld8GDs&photoreference=" + photoRef
+							photoURL = urllib.request.urlopen(photoRequest).geturl()
+							#print(photoURL)
+
+						else:
+							photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+					else:
+						photoRef = 'none'
+						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
+
+			showMap = "https://www.google.com/maps/search/?api=1&query=" + highlight
+
+			data["fulfillmentMessages"].append(
+				{
+					"card": { 
+						 "title": highlight,
+						 "subtitle": stringTypes,
+						 "imageUri": photoURL,
+						 "buttons": [
+						 	{
+						 		"text": "Map",
+						 		#link to open in google maps
+						 		"postback": showMap.replace(' ', '+')
+						 	}
+						 ]
+					}
+				}
+			)
+
+		return data
 					
 def remove_emoji(data):
 	count = 0
