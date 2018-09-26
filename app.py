@@ -448,10 +448,12 @@ def getWebhookResult(postReq):
 					if ("types" in items):
 						types = items["types"]
 
+						counter = 0
 						for x in types:
 							stringTypes += x + ", "
-							
-							if x == 2:
+							counter += 1
+
+							if counter == 2:
 								break
 
 						#remove last 2 characters of the string
