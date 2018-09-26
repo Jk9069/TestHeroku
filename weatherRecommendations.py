@@ -294,7 +294,7 @@ class weatherPlaceRecommendations():
 								{
 									"type": "uri",
 									"label": "Map",
-									"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() + "&query_place_id=" + place.getPlaceID()
+									"uri": "https://www.google.com/maps/search/?api=1&query=" + place.getPlaceName() #+ "&query_place_id=" + place.getPlaceID()
 								}
 							]
 						}
