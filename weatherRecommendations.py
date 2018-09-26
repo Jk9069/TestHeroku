@@ -272,48 +272,54 @@ class weatherPlaceRecommendations():
 				print("PLACE NAAMEE:" + place.getPlaceName())
 				print(len(shortlistPlaces))
 
-				#if (x < 7):
-				lineCarousel.append(
-					{
-						"thumbnailImageUrl": place.getPhotoURL(),
-						"imageBackgroundColor": "#FFFFFF",
-						"title": place.getPlaceName(),
-						"text": place.getRating() + "\n" + place.getOpenNow(),
-						"actions": [
-							{
-								"type": "uri",
-								"label": "Map",
-								"uri": "https://www.google.com/maps/search/?api=1&query=" + (place.getPlaceName()).replace(' ', '+') + "&query_place_id=" + place.getPlaceID()
-							}
-						]
-					}
-				)					
+				if (x < 7):
+					placeUri = 
+
+					lineCarousel.append(
+						{
+							"thumbnailImageUrl": place.getPhotoURL(),
+							"imageBackgroundColor": "#FFFFFF",
+							"title": place.getPlaceName(),
+							"text": place.getRating() + "\n" + place.getOpenNow(),
+							"actions": [
+								{
+									"type": "uri",
+									"label": "Map",
+									"uri": "https://www.google.com/maps/search/?api=1&query=" + (place.getPlaceName()).replace(' ', '+') + "&query_place_id=" + place.getPlaceID()
+								}
+							]
+						}
+					)					
 
 			data["fulfillmentMessages"].append(lineData)
 
-			data["fulfillmentMessages"].append(
-				{
-					"payload":{
-						"line": {
-							"type": "template",
-							"altText": "More results found.",
-							"template": {
-								"type": "buttons",
-								"imageBackgroundColor": "#FFFFFF",
-								"title": "More results in Google Maps. \nPowered by Google",
-								"text": "Click button for more",
-								"actions": [
-									{
-										"type": "uri",
-										"label": "View results",
-										"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
-									},
-								]
+			if len(shortlistPlaces) > 7:
+				data["fulfillmentMessages"].append(
+					{
+						"payload":{
+							"line": {
+								"type": "template",
+								"altText": "More results found.",
+								"thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+								"imageAspectRatio": "rectangle",
+								"imageSize": "cover",
+								"template": {
+									"type": "buttons",
+									"imageBackgroundColor": "#FFFFFF",
+									"title": "More results in Google Maps.",
+									"text": "Powered by Google",
+									"actions": [
+										{
+											"type": "uri",
+											"label": "View results",
+											"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
+										},
+									]
+								}
 							}
 						}
 					}
-				}
-			)
+				)
 
 			#after showing results, ask if user want to change category
 			data["fulfillmentMessages"].append(
