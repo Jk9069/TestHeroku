@@ -434,7 +434,7 @@ def getWebhookResult(postReq):
 			highlight = shortlistHighlights[x]
 
 			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location=5.4356,100.3091"
-			requestLink += "&keyword=" + highlight
+			requestLink += "&keyword=" + highlight.replace(' ', '+')
 			print(requestLink)
 
 			highlightResult = json.loads(urllib.request.urlopen(requestLink).read())
