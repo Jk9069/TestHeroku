@@ -181,9 +181,9 @@ class eventFinder():
 								"text": "description",
 								"actions": [
 									{
-										"type": "postback",
-										"label": "Buy",
-										"data": "action=buy&itemid=111"
+										"type":"uri",
+										"label":"View details",
+										"uri":"http://example.com/page/222"
 									}
 								]
 							},
@@ -194,9 +194,9 @@ class eventFinder():
 								"text": "description",
 								"actions": [
 									{
-										"type": "postback",
-										"label": "Buy",
-										"data": "action=buy&itemid=222"
+										"type":"uri",
+										"label":"View details",
+										"uri":"http://example.com/page/222"
 									}
 								]
 							}
