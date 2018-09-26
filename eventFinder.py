@@ -152,10 +152,10 @@ class eventFinder():
 
 			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
 
-			for x in range(len(allEvents)):
-				event = allEvents[x]
+			for y in range(len(allEvents)):
+				event = allEvents[y]
 
-				if (x < 7):
+				if (y < 7):
 					lineCarousel.append(
 						{
 							"thumbnailImageUrl": event.getImgUrl(),
@@ -176,15 +176,15 @@ class eventFinder():
 
 			data["fulfillmentMessages"].append(lineData)
 
-			data["fulfillmentMessages"].append(
-				{	
-					"text": {
-						"text": [
-							"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
-						]
-					}					
-				}
-			)
+			# data["fulfillmentMessages"].append(
+			# 	{	
+			# 		"text": {
+			# 			"text": [
+			# 				"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
+			# 			]
+			# 		}					
+			# 	}
+			# )
 
 			data["fulfillmentMessages"].append(
 				{	
