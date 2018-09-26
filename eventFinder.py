@@ -163,17 +163,58 @@ class eventFinder():
 				if (x < 7):
 					lineCarousel.append(
 						{
-							"thumbnailImageUrl": event.getImgUrl(),
-							"imageBackgroundColor": "#FFFFFF",
-							"title": event.getEventName(),
-							"text": event.getEventVenue(), #+ "\n" + event.getEventDateTime(),
-							"actions": [
-								{
-									"type": "uri",
-									"label": "View on Eventful",
-									"uri": "https://www.google.com"
+							# "thumbnailImageUrl": event.getImgUrl(),
+							# "imageBackgroundColor": "#FFFFFF",
+							# "title": event.getEventName(),
+							# "text": event.getEventVenue(), #+ "\n" + event.getEventDateTime(),
+							# "actions": [
+							# 	{
+							# 		"type": "uri",
+							# 		"label": "View on Eventful",
+							# 		"uri": "https://www.google.com"
+							# 	}
+							# ]
+
+							"type": "template",
+							"altText": "this is a carousel template",
+							"template": {
+								"type": "carousel",
+								"columns": [
+									{
+										"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+										"imageBackgroundColor": "#FFFFFF",
+										"title": "this is menu",
+										"text": "description",
+										"actions": [
+											{
+												"type": "postback",
+												"label": "Buy",
+												"data": "action=buy&itemid=111"
+											}
+										]
+									},
+									{
+										"thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
+										"imageBackgroundColor": "#000000",
+										"title": "this is menu",
+										"text": "description",
+										"defaultAction": {
+										"type": "uri",
+										"label": "View detail",
+										"uri": "http://example.com/page/222"
+									},
+									"actions": [
+										{
+											"type": "postback",
+											"label": "Buy",
+											"data": "action=buy&itemid=222"
+										}
+									]
 								}
-							]
+							],
+							"imageAspectRatio": "rectangle",
+							"imageSize": "cover"
+							}
 						}
 					)
 				else:
