@@ -140,19 +140,19 @@ class eventFinder():
 						"template": {
 							"type": "carousel",
 							"columns": [
-								{
-									# "thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
-									# "imageBackgroundColor": "#FFFFFF",
-									# "title": "This is the title",
-									# "text": "This is the description", #+ "\n" + event.getEventDateTime(),
-									# "actions": [
-									# 	{
-									# 		"type": "uri",
-									# 		"label": "Map",
-									# 		"uri": "https://www.google.com/?client=safari&channel=iphone_bm"
-									# 	}
-									# ]
-								}
+								# {
+								# 	"thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
+								# 	"imageBackgroundColor": "#FFFFFF",
+								# 	"title": "This is the title",
+								# 	"text": "This is the description", #+ "\n" + event.getEventDateTime(),
+								# 	"actions": [
+								# 		{
+								# 			"type": "uri",
+								# 			"label": "Map",
+								# 			"uri": "https://www.google.com/?client=safari&channel=iphone_bm"
+								# 		}
+								# 	]
+								# }
 							],
 							
 							"imageAspectRatio": "rectangle",
