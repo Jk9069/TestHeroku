@@ -154,45 +154,45 @@ class eventFinder():
 				}				
 			}
 
-			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+			# lineCarousel = lineData["payload"]["line"]["template"]["columns"]
 
-			for x in range(len(allEvents)):
-				event = allEvents[x]
-				print(len(allEvents))
+			# for x in range(len(allEvents)):
+			# 	event = allEvents[x]
+			# 	print(len(allEvents))
 
-				if (x < 7):
-					lineCarousel.append(
-						{
-							# "thumbnailImageUrl": event.getImgUrl(),
-							# "imageBackgroundColor": "#FFFFFF",
-							# "title": event.getEventName(),
-							# "text": event.getEventVenue(), #+ "\n" + event.getEventDateTime(),
-							# "actions": [
-							# 	{
-							# 		"type": "uri",
-							# 		"label": "View on Eventful",
-							# 		"uri": "https://www.google.com"
-							# 	}
-							# ]
+			# 	if (x < 7):
+			# 		lineCarousel.append(
+			# 			{
+			# 				# "thumbnailImageUrl": event.getImgUrl(),
+			# 				# "imageBackgroundColor": "#FFFFFF",
+			# 				# "title": event.getEventName(),
+			# 				# "text": event.getEventVenue(), #+ "\n" + event.getEventDateTime(),
+			# 				# "actions": [
+			# 				# 	{
+			# 				# 		"type": "uri",
+			# 				# 		"label": "View on Eventful",
+			# 				# 		"uri": "https://www.google.com"
+			# 				# 	}
+			# 				# ]
 							
-							"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
-							"imageBackgroundColor": "#FFFFFF",
-							"title": "this is menu",
-							"text": "description",
-							"actions": [
-								{
-									"type":"uri",
-									"label":"View details",
-									"uri":"http://example.com/page/222"
-								}
-							]
+			# 					"thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+			# 					"imageBackgroundColor": "#FFFFFF",
+			# 					"title": "this is menu",
+			# 					"text": "description",
+			# 					"actions": [
+			# 						{
+			# 							"type":"uri",
+			# 							"label":"View details",
+			# 							"uri":"http://example.com/page/222"
+			# 						}
+			# 					]
 							
-						}
-					)
-				else:
-					break					
+			# 			}
+			# 		)
+			# 	else:
+			# 		break					
 
-			data["fulfillmentMessages"].append(lineData)
+			# data["fulfillmentMessages"].append(lineData)
 
 
 			# data["fulfillmentMessages"].append(
