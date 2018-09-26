@@ -255,27 +255,37 @@ def getWebhookResult(postReq):
 		]
 
 		shortlistedFoods = []
+		prevRandomInt = 0
+		randomInt = 0
 
 		# add items into the array list using randomizer
-		for x in range(0, 7):
+		for x in range(0, 8):
 			#if counter is less than 3 take 2 items from set 1
-			if (len(shortlistedFoods) < 3):
-				randomInt = random.randint(0, (len(foodSet1) - 1))
+			if (len(shortlistedFoods) < 2):
+				while prevRandomInt == randomInt:
+					randomInt = random.randint(0, (len(foodSet1) - 1))
+				
 				foodItem = Food(foodSet1[randomInt], set1Desc[randomInt])
+				prevRandomInt = randomInt
 
 			#if counter is less than 7, take another 3 items from set 2
-			elif (len(shortlistedFoods) < 6):
-				randomInt = random.randint(0, (len(foodSet2) - 1))
+			elif (len(shortlistedFoods) < 5):
+				while prevRandomInt == randomInt:
+					randomInt = random.randint(0, (len(foodSet2) - 1))
+
 				foodItem = Food(foodSet2[randomInt], set2Desc[randomInt])
+				prevRandomInt = randomInt
 
 			#for the remaining loops, take items from set 3	
 			else:
-				randomInt = random.randint(0, (len(foodSet3) - 1))
+				while prevRandomInt == randomInt:
+					randomInt = random.randint(0, (len(foodSet3) - 1))
+
 				foodItem = Food(foodSet3[randomInt], set3Desc[randomInt])
+				prevRandomInt = randomInt
 
 			print(foodItem.getFoodName())
 			shortlistedFoods.append(foodItem)
-
 
 		# format data to be returned
 		data = {
