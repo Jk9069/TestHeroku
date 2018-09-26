@@ -111,7 +111,6 @@ class eventFinder():
 			}
 
 			for x in range(len(allEvents)):
-				print(x)
 				event = allEvents[x]
 
 				# if (x != 8):
@@ -134,6 +133,51 @@ class eventFinder():
 
 				if counter == 7:
 					break
+
+			# this section is for LINE platform
+			lineData = {
+				"payload": {
+					"line":{
+						"type": "template",
+						"altText": "Results found.",
+						"template": {
+							"type": "carousel",
+							"columns": [
+								
+							],
+							
+							"imageAspectRatio": "rectangle",
+							"imageSize": "cover"
+						}
+					}
+				}				
+			}
+
+			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+
+			for x in range(len(allEvents)):
+				event = allEvents[x]
+
+				if (x < 7):
+					lineCarousel.append(
+						{
+							"thumbnailImageUrl": event.getImgUrl(),
+							"imageBackgroundColor": "#FFFFFF",
+							"title": (event.getEventName())[:40],
+							"text": (event.getEventVenue())[:60], #+ "\n" + event.getEventDateTime(),
+							"actions": [
+								{
+									"type": "uri",
+									"label": "Map",
+									"uri": event.getEventUrl()
+								}
+							]
+						}
+					)
+				else:
+					break					
+
+			data["fulfillmentMessages"].append(lineData)
 
 			data["fulfillmentMessages"].append(
 				{	
