@@ -480,7 +480,7 @@ def getWebhookResult(postReq):
 						photoRef = 'none'
 						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 
-					if photoURL = "":
+					if photoURL == "":
 						photoURL = "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png"
 
 			showMap = "https://www.google.com/maps/search/?api=1&query=" + highlight
