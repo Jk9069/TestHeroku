@@ -124,7 +124,7 @@ class eventFinder():
 							 "buttons": [
 							 	{
 							 		"text": "View on Eventful",
-							 		#link to open in google maps
+							 		#link to open in eventful website
 							 		"postback": event.getEventUrl()
 							 	}
 							 ]
@@ -134,6 +134,53 @@ class eventFinder():
 
 				if counter == 7:
 					break
+
+			# this section is for LINE platform
+			lineData = {
+				"payload": {
+					"line":{
+						"type": "template",
+						"altText": "Results found.",
+						"template": {
+							"type": "carousel",
+							"columns": [
+								
+							],
+							
+							"imageAspectRatio": "rectangle",
+							"imageSize": "cover"
+						}
+					}
+				}				
+			}
+
+			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+
+			for x in range(len(shortlistPlaces)):
+				event = allEvents[x]
+				print("PLACE NAAMEE:" + place.getPlaceName())
+				print(len(allEvents))
+
+				if (x < 7):
+					lineCarousel.append(
+						{
+							"thumbnailImageUrl": event.getImgUrl(),
+							"imageBackgroundColor": "#FFFFFF",
+							"title": event.getEventName(),
+							"text": event.getEventVenue() + "\n" + event.getEventDateTime(),
+							"actions": [
+								{
+									"type": "uri",
+									"label": "View on Eventful",
+									"uri": event.getEventUrl()
+								}
+							]
+						}
+					)
+				else:
+					break					
+
+			data["fulfillmentMessages"].append(lineData)
 
 			data["fulfillmentMessages"].append(
 				{	

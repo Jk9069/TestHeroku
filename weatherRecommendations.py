@@ -287,7 +287,9 @@ class weatherPlaceRecommendations():
 								}
 							]
 						}
-					)					
+					)
+				else:
+					break					
 
 			data["fulfillmentMessages"].append(lineData)
 
