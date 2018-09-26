@@ -25,7 +25,7 @@ class purposePlaceQuery():
 
 		# do preset categories
 		if (self.travelPurpose).lower() in generalArray:
-			self.travelPurpose = "attractions"
+			self.travelPurpose = "attraction near George Town"
 
 		# ssearch when coordinates are provided 
 		if self.latitude != None and self.longitude != None:
