@@ -207,6 +207,18 @@ def getWebhookResult(postReq):
 			"Fried rice cakes."
 		]
 
+		set1Img = [
+			"https://thumbor.thedailymeal.com/SwjjdmBW7aT67LpGKfcSGGvzXyw=/840x565/https://www.thedailymeal.com/sites/default/files/2016/01/13/SSWF-ApamBalik.JPG",
+			"https://www.rotinrice.com/wp-content/uploads/2011/04/RotiCanai-1.jpg",
+			"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/RotiTissue001.jpg/250px-RotiTissue001.jpg",
+			"http://apcdn.ar-cdn.com/recipes/port500/8dbe4282-5bfc-432a-bd01-b43d7a9333ec.jpg",
+			"https://www.irishtimes.com/polopoly_fs/1.2854640.1478261927!/image/image.jpg_gen/derivatives/landscape_620/image.jpg",
+			"http://lh5.ggpht.com/7nCmsOVON1KhAd64TsSme8L-YS2UsTEO_t4YeTw_CFnHgCDdRco82sunQsO9UJHECJf35tVwVvGpZp3p6AEQF1A0LA=s800",
+			"https://enqvistlim.files.wordpress.com/2016/10/kareempasembu-10.jpg",
+			"https://www.chowstatic.com/uploads/4/9/6/827694_dscn4343.jpg",
+			"http://www.penangtrails.com.my/wp-content/uploads/2016/07/Char-Koay-Kak.jpg"
+		]
+
 		# more to main meal category
 		foodSet2 = [
 			"Char Koay Teow", "Curry Mee",
@@ -215,6 +227,21 @@ def getWebhookResult(postReq):
 			"Nasi Kandar", "Char Hor Fun",
 			"Koay Teow Soup", "Wanton Mee",
 			"Lor Mee", "Nasi Lemak"
+		]
+
+		set2Img = [
+			"https://iluminasi.com/img/thumb/banner-resepi-char-koay-teow-power-5394.jpg",
+			"https://farm5.staticflickr.com/4347/35556167003_d39b2b8ef9_o.jpg",
+			"https://cdn-geo.dayre.me/tfss-9d709c46-c7a2-4907-baa9-2966cd61800f-jzSCpkB6SC9gGrwCd46Y.jpg",
+			"https://img.delicious.com.au/5RBEZeCF/h506-w759-cfill/del/2017/07/malaysian-chicken-mee-goreng-49049-2.jpg",
+			"https://4.bp.blogspot.com/-iBYEPz00EtM/V57ng5IkqsI/AAAAAAAAnOA/u7sJRie0NZsKBoRrK04AnSvJ7gv_VQRZwCLcB/s640/1-IMG_3606.jpg",
+			"http://3.bp.blogspot.com/-GjfaSKMCMKs/Tnf51by8-MI/AAAAAAAACZY/6JcsB62LeXQ/s1600/Penang+asam+laksa.JPG",
+			"https://www.thestar.com.my/~/media/online/2015/05/08/21/20/metd_0905_25chosfa_kkeeran_1.ashx/?w=620&h=413&crop=1&hash=24E9A0DBA679F1E75737D0B98DCD936FE0FC9C29",
+			"http://2.bp.blogspot.com/_AtmigDQCfxk/S953qbG0vaI/AAAAAAAAAJM/2J00bDI3U2I/s1600/hor+fun.JPG",
+			"https://www.rotinrice.com/wp-content/uploads/2013/11/IMG_3364.jpg",
+			"https://rasamalaysia.com/wp-content/uploads/2012/07/wontonnoodles_thumb.jpg",
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1uS9W-Y5szflWE0QoeHqSkWPesxxEM4jSVKUaw8oZ9hYThupZ",
+			"http://images.tastespotting.com/uploads/thumbnail/270202.jpg"
 		]
 
 		set2Desc = [
@@ -241,6 +268,19 @@ def getWebhookResult(postReq):
 			"Aiyu Jelly/Oh Kio", "Ais Tingkap/Window Sherbet"
 		]
 
+		set3Img = [
+			"https://i.ytimg.com/vi/ECVpD3gLF3I/maxresdefault.jpg",
+			"https://previews.123rf.com/images/spukkato/spukkato1803/spukkato180300314/97666983-soft-focus-of-ais-kacang-topped-with-basil-seeds-peanuts-corn-and-a-scoop-of-ice-cream-ice-kacang-li.jpg",
+			"https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2017/08/rojak.jpg?itok=y8XZJMoN",
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5J0OqgXMelEizozaGc7dnfImxP9gG4wSYY5YsWqubbkjR75yX",
+			"https://aforchinese.files.wordpress.com/2016/03/muah-chee.jpg",
+			"https://fa-assets-production.cdnedge.bluemix.net/attachments/695435f511d9b1eaf071fd1d44bfa3a8c040e09f/store/fill/800/500/5317331a2610c43393a259ea9c24186fd6d06b878eb30d472e2458e2fe26/featured_image.jpg",
+			"https://uf.cari.com.my/forumx/mforum/portal/201802/07/210210l5lcpbclcnizmyci.jpg",
+			"http://bagus.com.my.ws8.webshaper.com.my/webshaper/pcm/pictures/coconut%20jelly%202.jpg",
+			"https://igx.4sqi.net/img/general/200x200/wMTal50L9gQdPVMg65R7SZD7tl8I1l5ytNPau6QCe04.jpg",
+			"https://media.timeout.com/images/101703185/630/472/image.jpg"
+		]
+
 		set3Desc = [
 			"Iced, sweet dessert. Green rice flour jelly. Coconut milk.",
 			"Shaved ice. Dessert. Topped with various toppings.",
@@ -262,25 +302,28 @@ def getWebhookResult(postReq):
 			if (len(shortlistedFoods) < 2):
 				randomInt = random.randint(0, (len(foodSet1) - 1))
 				
-				foodItem = Food(foodSet1[randomInt], set1Desc[randomInt])
+				foodItem = Food(foodSet1[randomInt], set1Desc[randomInt], set1Img[randomInt])
 				del foodSet1[randomInt]
 				del set1Desc[randomInt]
+				del set1Img[randomInt]
 
 			#if counter is less than 7, take another 3 items from set 2
 			elif (len(shortlistedFoods) < 5):
 				randomInt = random.randint(0, (len(foodSet2) - 1))
 
-				foodItem = Food(foodSet2[randomInt], set2Desc[randomInt])
+				foodItem = Food(foodSet2[randomInt], set2Desc[randomInt], set2Img[randomInt])
 				del foodSet2[randomInt]
 				del set2Desc[randomInt]
+				del set2Img[randomInt]
 
 			#for the remaining loops, take items from set 3	
 			else:
 				randomInt = random.randint(0, (len(foodSet3) - 1))
 
-				foodItem = Food(foodSet3[randomInt], set3Desc[randomInt])
+				foodItem = Food(foodSet3[randomInt], set3Desc[randomInt], set3Img[randomInt])
 				del foodSet3[randomInt]
 				del set3Desc[randomInt]
+				del set3Img[randomInt]
 
 			print(foodItem.getFoodName())
 			shortlistedFoods.append(foodItem)
@@ -306,7 +349,8 @@ def getWebhookResult(postReq):
 					"card": { 
 						 "title": foods.getFoodName(),
 						 "subtitle": foods.getFoodDesc(),
-						 "imageUri": "https://sethlui.com/wp-content/uploads/2015/06/penang-street-hawker-food.jpg",
+						 # "imageUri": "https://sethlui.com/wp-content/uploads/2015/06/penang-street-hawker-food.jpg",
+						 "imageUri": foods.getFoodUrl(),
 						 "buttons": [
 						 	{
 						 		"text": "Find where",
