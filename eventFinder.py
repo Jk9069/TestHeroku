@@ -213,7 +213,7 @@ class eventFinder():
 
 		else:
 			data = {
-				"fulfillmentText": "No results found :("
+				"fulfillmentText": "No event happenings yet :("
 			}
 
 			return data
