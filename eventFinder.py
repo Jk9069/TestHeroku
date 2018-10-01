@@ -19,12 +19,13 @@ class eventFinder():
 		self.date = parameters.get("date")
 
 	def performSearch(self):
-		categories = [
-			"learning_education", "music", "science", 
-			"business", "support", "outdoors_recreation", 
-			"performing_arts", "religion_spirituality",
-			"miscellaneous"
-		]
+		# need to search by category? mostly not more than 9 results de wor
+		# categories = [
+		# 	"learning_education", "music", "science", 
+		# 	"business", "support", "outdoors_recreation", 
+		# 	"performing_arts", "religion_spirituality",
+		# 	"miscellaneous"
+		# ]
 
 		requestLink = "http://api.eventful.com/json/events/search?app_key=ccLj6sppM4RsQ4wX&location=George%20town,Pulau%20Pinang"
 
@@ -68,29 +69,29 @@ class eventFinder():
 
 			for item in events:
 				eventfulUrl = item.get("url")
-				print (eventfulUrl)
 
 				timeDate = item.get("start_time")
-				print (timeDate)
 				#description = item.get("description")
 				eventName = item.get("title")
 
-				if item.get("image").get("small") != None:
-					imageUrl = item.get("image").get("small").get("url")
-					imageUrl = imageUrl.replace('small', 'large')
+				if item.get("image") != None:
+					if item.get("image").get("small") != None:
+						imageUrl = item.get("image").get("small").get("url")
+						imageUrl = imageUrl.replace('small', 'large')
+					else:
+						imageUrl = item.get("image").get("medium").get("url")
+						imageUrl = imageUrl.replace('small', 'large')
 				else:
-					imageUrl = item.get("image").get("medium").get("url")
-					imageUrl = imageUrl.replace('small', 'large')
+					imageUrl = "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium"
 				
 				venue = item.get("venue_name")
-				print(venue)
 
 				newEvent = Event(eventName, venue, timeDate, eventfulUrl, imageUrl)
 
 				allEvents.append(newEvent)
 				counter += 1
 
-				if (counter > 9):
+				if (counter > 7):
 					break
 
 			data = {
@@ -107,7 +108,6 @@ class eventFinder():
 			}
 
 			for x in range(len(allEvents)):
-				print(x)
 				event = allEvents[x]
 
 				# if (x != 8):
@@ -115,8 +115,9 @@ class eventFinder():
 					{
 						"card": { 
 							 "title": event.getEventName(),
-							 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime() + "\n" + "Powered by Eventful",
-							 "imageUri": event.getImgUrl(),
+							 "subtitle": event.getEventVenue() + "\n" + event.getEventDateTime(),
+							 # "imageUri": event.getImgUrl(),
+							 "imageUri": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
 							 "buttons": [
 							 	{
 							 		"text": "View on Eventful",
@@ -128,9 +129,91 @@ class eventFinder():
 					}
 				)
 
+				if counter == 7:
+					break
+
+			# # this section is for LINE platform
+			# lineData = {
+			# 	"payload": {
+			# 		"line":{
+			# 			"type": "template",
+			# 			"altText": "Results found.",
+			# 			"template": {
+			# 				"type": "carousel",
+			# 				"columns": [
+			# 					# {
+			# 					# 	"thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
+			# 					# 	"imageBackgroundColor": "#FFFFFF",
+			# 					# 	"title": "This is the title",
+			# 					# 	"text": "This is the description", #+ "\n" + event.getEventDateTime(),
+			# 					# 	"actions": [
+			# 					# 		{
+			# 					# 			"type": "uri",
+			# 					# 			"label": "Map",
+			# 					# 			"uri": "https://www.google.com/?client=safari&channel=iphone_bm"
+			# 					# 		}
+			# 					# 	]
+			# 					# }
+			# 				],
+							
+			# 				"imageAspectRatio": "rectangle",
+			# 				"imageSize": "cover"
+			# 			}
+			# 		}
+			# 	}				
+			# }
+
+			# lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+
+			# for y in range(len(allEvents)):
+			# 	event = allEvents[y]
+
+			# 	if y < 7:
+			# 		lineCarousel.append(
+			# 			{
+			# 				# image must be https but API do not have https links
+			# 				"thumbnailImageUrl": "https://s3.amazonaws.com/mashape-production-logos/apis/53aa61b1e4b0a798dbd1c000_medium",
+			# 				"imageBackgroundColor": "#FFFFFF",
+			# 				"title": (event.getEventName())[:40],
+			# 				"text": (event.getEventVenue() + "\n" + event.getEventDateTime())[:60],
+			# 				"actions": [
+			# 					{
+			# 						"type": "uri",
+			# 						"label": "Map",
+			# 						"uri": event.getEventUrl()
+			# 					}
+			# 				]
+			# 			}
+			# 		)				
+
+			# data["fulfillmentMessages"].append(lineData)
+
+			data["fulfillmentMessages"].append(
+				{	
+					"text": {
+						"text": [
+							"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
+						]
+					}					
+				}
+			)
+
+			data["fulfillmentMessages"].append(
+				{	
+					"quickReplies": {
+						"title": "What else can I help you with?",
+						"quickReplies": [
+							"Weather", "Travel Purpose", "About Penang", "Bye!"
+						]
+					}					
+				}
+			)
+
+			return data	
+
 		else:
 			data = {
 				"fulfillmentText": "No results found :("
 			}
 
-		return data
+			return data

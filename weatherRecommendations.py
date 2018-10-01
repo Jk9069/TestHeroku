@@ -23,25 +23,28 @@ class weatherPlaceRecommendations():
 	#from placeTypes search for places in Google Places API
 	def requestPlaces(self):
 		placeTypes = [
-			'park', 'amusement_park', 'aquarium', 'art_gallery',
-			'bowling_alley', 'library', 'movie_theater', 'museum',
-			'shopping_mall', 'spa', 'points_of_interest'
+			'park', 'amusement_park', 'art_gallery',
+			'bowling_alley', 'movie_theater', 'museum',
+			'shopping_mall', 'spa', 'street_art', 'arcade',
+			"restaurant", "cafe", "heritage", "lounge"
 		]
 
 		#remove outdoor places from recommendations
 		if ('Rain' in self.weather or 'Thunderstorm' in self.weather):
 			placeTypes.remove('park')
 			placeTypes.remove('amusement_park')
+			placeTypes.remove('street_art')
+			placeTypes.remove('heritage')
 
 		print(self.weather)
 
 		# this one is to search penang when no coordinates provided
 		# hardcode location of penang as 5.4356 (lat), 100.3091 (long)
 		if self.latitude == None or self.longitude == None:
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=8000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&rankby=distance&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=8000&location="
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location="
 			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
 		
 		#both request links will need this
@@ -87,7 +90,7 @@ class weatherPlaceRecommendations():
 			counter = 0;
 
 			for items in results:
-				if (counter < 8):
+				if (counter < 7):
 					if ("opening_hours" in items):
 						openNow = items["opening_hours"].get("open_now")
 						# print(openNow)
@@ -145,7 +148,7 @@ class weatherPlaceRecommendations():
 					shortlistPlaces.append(newPlace)
 					counter += 1
 
-				elif (counter == 8):
+				elif (counter == 7):
 					stringTypes = []
 		
 					#create the Place object containing all required values
@@ -174,10 +177,10 @@ class weatherPlaceRecommendations():
 						{
 							"text":{
 								"text":[
-									"Showing results in Penang"
+									"Showing " + selectedCategory.replace('_', ' ') + " in George Town"
 								]
 							}
-						} 
+						}
 					]
 				}
 
@@ -202,16 +205,17 @@ class weatherPlaceRecommendations():
 									responseText
 								]
 							}
-						} 
+						}
 					]
 				}
 
 			for x in range(len(shortlistPlaces)):
 				place = shortlistPlaces[x]
 
-				if (x < 8):
+				if (x < 7):
 					data["fulfillmentMessages"].append(
 						{
+							# "platform": "FACEBOOK",
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": place.getRating() + "\n" + place.getOpenNow() + "\n" + place.getPlaceTypes(), #+ "\n" + googleLogo.show(),
@@ -226,9 +230,10 @@ class weatherPlaceRecommendations():
 							}
 						}
 					)
-				elif (x == 8):
+				elif (x == 7):
 					data["fulfillmentMessages"].append(
 						{
+							# "platform": "FACEBOOK",
 							"card": { 
 								 "title": place.getPlaceName(),
 								 "subtitle": "Powered by Google",
@@ -243,6 +248,93 @@ class weatherPlaceRecommendations():
 							}
 						}
 					)
+
+			# this section is for LINE platform
+			lineData = {
+				"payload": {
+					"line":{
+						"type": "template",
+						"altText": "Results found.",
+						"template": {
+							"type": "carousel",
+							"columns": [
+								
+							],
+							
+							"imageAspectRatio": "rectangle",
+							"imageSize": "cover"
+						}
+					}
+				}				
+			}
+
+			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+
+			for x in range(len(shortlistPlaces)):
+				place = shortlistPlaces[x]
+				print("PLACE NAAMEE:" + place.getPlaceName())
+				print(len(shortlistPlaces))
+
+				if (x < 7):
+					lineCarousel.append(
+						{
+							"thumbnailImageUrl": place.getPhotoURL(),
+							"imageBackgroundColor": "#FFFFFF",
+							"title": place.getPlaceName(),
+							"text": place.getRating() + "\n" + place.getOpenNow(),
+							"actions": [
+								{
+									"type": "uri",
+									"label": "Map",
+									"uri": "https://www.google.com/maps/search/?api=1&query=" + (place.getPlaceName()).replace(' ', '+') + "&query_place_id=" + place.getPlaceID()
+								}
+							]
+						}
+					)
+				else:
+					break					
+
+			data["fulfillmentMessages"].append(lineData)
+
+			if len(shortlistPlaces) > 7:
+				data["fulfillmentMessages"].append(
+					{
+						"payload":{
+							"line": {
+								"type": "template",
+								"altText": "More results found.",
+								"thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+								"imageAspectRatio": "rectangle",
+								"imageSize": "cover",
+								"template": {
+									"type": "buttons",
+									"imageBackgroundColor": "#FFFFFF",
+									"title": "More results in Google Maps.",
+									"text": "Powered by Google",
+									"actions": [
+										{
+											"type": "uri",
+											"label": "View results",
+											"uri": "https://www.google.com/maps/search/?api=1&query=" + selectedCategory
+										},
+									]
+								}
+							}
+						}
+					}
+				)
+
+			#after showing results, ask if user want to change category
+			data["fulfillmentMessages"].append(
+				{	
+					"quickReplies": {
+						"title": "Not feeling like it? Let's choose other categories.",
+						"quickReplies": [
+							"Other category"
+						]
+					}					
+				}
+			)
 
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("
@@ -293,16 +385,13 @@ class weatherPlaceRecommendations():
 		if chosenCategory == 'More':
 			chosenCategory == 'points_of_interest'
 
-		#initiate search using keyword from nearby search
-		# requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
-
 		# this one is to search penang when no coordinates provided
-		# hardcode location of penang as 5.4356 (lat), 100.3091 (long)
+		# hardcode location of george town as 5.4356 (lat), 100.3091 (long)
 		if self.latitude == None or self.longitude == None:
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=8000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&rankby=distance&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=8000&location="
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location="
 			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude)	
 		
 		requestLink = (requestLink + "&keyword=" + chosenCategory.replace(' ', '%20'))

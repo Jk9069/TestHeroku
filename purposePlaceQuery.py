@@ -17,14 +17,24 @@ class purposePlaceQuery():
 		self.longitude = longitude
 
 	def requestPurposePlace(self):
-		#search based on what purpose user enters
-		# requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=15000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
-		# requestLink = (requestLink + "&keyword=" + self.travelPurpose)
+		#categories that will provide results for attractions in penang
+		generalArray = [
+			"holiday", "sightseeing", "sight seeing", "retirement",
+			"vacation", "trip" 
+		]
 
-		#this one to search when coordinates are provided 
-		requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&radius=8000&location="
-		requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude) + "&keyword=" + self.travelPurpose	
-		
+		# do preset categories
+		if (self.travelPurpose).lower() in generalArray:
+			self.travelPurpose = "attraction near George Town"
+
+		# ssearch when coordinates are provided 
+		if self.latitude != None and self.longitude != None:
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location="
+			requestLink = requestLink + str(self.latitude) + ',' + str(self.longitude) + "&keyword=" + (self.travelPurpose).replace(' ', '+')
+		else:
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=10000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = requestLink + "&keyword=" + (self.travelPurpose).replace(' ' , '+')
+
 		print(requestLink)
 
 		#post url
@@ -56,7 +66,7 @@ class purposePlaceQuery():
 			counter = 0;
 
 			for items in results:
-				if (counter < 8):
+				if (counter < 7):
 					if ("opening_hours" in items):
 						openNow = items["opening_hours"].get("open_now")
 						# print(openNow)
@@ -113,7 +123,7 @@ class purposePlaceQuery():
 					shortlistPlaces.append(newPlace)
 					counter += 1
 
-				elif (counter == 8):
+				elif (counter == 7):
 					stringTypes = []
 		
 					#create the Place object containing all required values
@@ -153,7 +163,7 @@ class purposePlaceQuery():
 			for x in range(len(shortlistPlaces)):
 				place = shortlistPlaces[x]
 
-				if (x < 8):
+				if (x < 7):
 					data["fulfillmentMessages"].append(
 						{
 							"card": { 
@@ -170,7 +180,7 @@ class purposePlaceQuery():
 							}
 						}
 					)
-				elif (x == 8):
+				elif (x == 7):
 					data["fulfillmentMessages"].append(
 						{
 							"card": { 
@@ -181,12 +191,96 @@ class purposePlaceQuery():
 								 	{
 								 		"text": "Show Results",
 								 		#link to open in google maps
-								 		"postback": "https://www.google.com/maps/search/?api=1&query=" + self.travelPurpose
+								 		"postback": "https://www.google.com/maps/search/?api=1&query=" + (self.travelPurpose).replace(' ', '+')
 								 	}
 								 ]
 							}
 						}
 					)
+
+			# this section is for LINE platform
+			lineData = {
+				"payload": {
+					"line":{
+						"type": "template",
+						"altText": "Results found.",
+						"template": {
+							"type": "carousel",
+							"columns": [
+								
+							],
+							
+							"imageAspectRatio": "rectangle",
+							"imageSize": "cover"
+						}
+					}
+				}				
+			}
+
+			lineCarousel = lineData["payload"]["line"]["template"]["columns"]
+
+			for x in range(len(shortlistPlaces)):
+				place = shortlistPlaces[x]
+
+				if (x < 7):
+					lineCarousel.append(
+						{
+							"thumbnailImageUrl": place.getPhotoURL(),
+							"imageBackgroundColor": "#FFFFFF",
+							"title": (place.getPlaceName())[:40],
+							"text": place.getRating() + "\n" + place.getOpenNow(),
+							"actions": [
+								{
+									"type": "uri",
+									"label": "Map",
+									"uri": "https://www.google.com/maps/search/?api=1&query=" + (place.getPlaceName()).replace(' ', '+') + "&query_place_id=" + place.getPlaceID()
+								}
+							]
+						}
+					)
+				else:
+					break					
+
+			data["fulfillmentMessages"].append(lineData)
+
+			if len(shortlistPlaces) > 7:
+				data["fulfillmentMessages"].append(
+					{
+						"payload":{
+							"line": {
+								"type": "template",
+								"altText": "More results found.",
+								# "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+								# "imageAspectRatio": "rectangle",
+								# "imageSize": "cover",
+								"template": {
+									"type": "buttons",
+									"imageBackgroundColor": "#FFFFFF",
+									"title": "More results in Google Maps.",
+									"text": "Powered by Google",
+									"actions": [
+										{
+											"type": "uri",
+											"label": "View results",
+											"uri": "https://www.google.com/maps/search/?api=1&query=" + (self.travelPurpose).replace(' ', '+')
+										},
+									]
+								}
+							}
+						}
+					}
+				)
+
+			data["fulfillmentMessages"].append(
+				{	
+					"quickReplies": {
+						"title": "What else can I help you with?",
+						"quickReplies": [
+							"Weather", "Events this week", "About Penang", "Bye!"
+						]
+					}					
+				}
+			)
 
 		elif (placeResult.get("status") == "ZERO_RESULTS"):
 			responseText = "No results found :("

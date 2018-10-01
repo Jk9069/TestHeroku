@@ -17,19 +17,22 @@ class Place():
 		return self.placeID
 
 	def getRating(self):
-		numRating = float(self.rating)
+		if self.rating != '-':
+			numRating = float(self.rating)
 
-		if (numRating == 5 or numRating >= 4.5):
-			starEmoji = "⭐⭐⭐⭐⭐"
-		elif (numRating == 4 or numRating >= 3.5):
-			starEmoji = "⭐⭐⭐⭐"
-		elif (numRating == 3 or numRating >= 2.5):
-			starEmoji = "⭐⭐⭐"
-		elif (numRating == 2 or numRating >= 1.5):
-			starEmoji = "⭐⭐"
-		elif (numRating == 1 or numRating >= 0.5):
-			starEmoji = "⭐"
-		elif (numRating == 0):
+			if (numRating == 5 or numRating >= 4.5):
+				starEmoji = "⭐⭐⭐⭐⭐"
+			elif (numRating == 4 or numRating >= 3.5):
+				starEmoji = "⭐⭐⭐⭐"
+			elif (numRating == 3 or numRating >= 2.5):
+				starEmoji = "⭐⭐⭐"
+			elif (numRating == 2 or numRating >= 1.5):
+				starEmoji = "⭐⭐"
+			elif (numRating == 1 or numRating >= 0.5):
+				starEmoji = "⭐"
+			elif (numRating == 0):
+				starEmoji = "No ratings yet."
+		else:
 			starEmoji = "No ratings yet."
 
 		return starEmoji

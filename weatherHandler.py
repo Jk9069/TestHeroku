@@ -211,17 +211,6 @@ class weatherResponse():
 								self.weatherEmoji(mainWeather)
 							]
 						}
-						#"card": {
-						#	"title": "Weather forecast",
-						#	"subtitle": speech,
-						#	"imageUri": "http://openweathermap.org/img/w/" + icon + ".png"
-							#"buttons": [
-							#	{
-							#		"text": "button text",
-							#		"postback": ""
-							#	}
-							#]
-						#}
 					},
 					{
 						"text": {
@@ -237,13 +226,20 @@ class weatherResponse():
 							]
 						}
 					},
-					{
-						#have to change to quick replies
-						"text":{
+					{	
+						"text": {
 							"text": [
-								"Do you want me to suggest suitable places to visit?"
+								"💡 Tip: I can help you look for weather forecasts up to the next 5 days. \n\nEg. 'Weather tomorrow', 'Weather on Tuesday night'"
 							]
-						}
+						}				
+					},
+					{	
+						"quickReplies": {
+							"title": "Do you want me to suggest suitable places to visit?",
+							"quickReplies": [
+								"Yes", "No"
+							]
+						}					
 					}
 				],
 				"source": 'OpenWeatherAPI',
