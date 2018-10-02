@@ -25,7 +25,7 @@ class weatherPlaceRecommendations():
 		placeTypes = [
 			'park', 'amusement_park', 'art_gallery',
 			'bowling_alley', 'movie_theater', 'museum',
-			'shopping_mall', 'spa', 'street_art', 'arcade',
+			'shopping_mall', 'spa', 'street_art',
 			"restaurant", "cafe", "heritage", "lounge"
 		]
 
@@ -41,7 +41,7 @@ class weatherPlaceRecommendations():
 		# this one is to search penang when no coordinates provided
 		# hardcode location of penang as 5.4356 (lat), 100.3091 (long)
 		if self.latitude == None or self.longitude == None:
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&rankby=distance&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=10000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
 			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location="
@@ -388,7 +388,7 @@ class weatherPlaceRecommendations():
 		# this one is to search penang when no coordinates provided
 		# hardcode location of george town as 5.4356 (lat), 100.3091 (long)
 		if self.latitude == None or self.longitude == None:
-			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&rankby=distance&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
+			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=5.4356,100.3091&radius=10000&key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI"
 		else:
 			#this one to search when coordinates are provided 
 			requestLink = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyARXZAr7XVLsPTI1e6veB99zuUmjYQEagI&rankby=distance&location="

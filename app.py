@@ -389,7 +389,7 @@ def getWebhookResult(postReq):
 
 			lineCarousel.append(
 				{
-					"thumbnailImageUrl": "https://sethlui.com/wp-content/uploads/2015/06/penang-street-hawker-food.jpg",
+					"thumbnailImageUrl": foods.getFoodUrl(),
 					"imageBackgroundColor": "#FFFFFF",
 					"title": (foods.getFoodName())[:40],
 					"text": (foods.getFoodDesc())[:60],
