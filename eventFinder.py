@@ -188,15 +188,15 @@ class eventFinder():
 
 			# data["fulfillmentMessages"].append(lineData)
 
-			data["fulfillmentMessages"].append(
-				{	
-					"text": {
-						"text": [
-							"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
-						]
-					}					
-				}
-			)
+			# data["fulfillmentMessages"].append(
+			# 	{	
+			# 		"text": {
+			# 			"text": [
+			# 				"💡 Tip: You can search for future events as well. \n\nEg. 'Events next week', 'Events next month'"
+			# 			]
+			# 		}					
+			# 	}
+			# )
 
 			data["fulfillmentMessages"].append(
 				{	
