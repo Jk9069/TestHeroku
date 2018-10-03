@@ -213,7 +213,23 @@ class eventFinder():
 
 		else:
 			data = {
-				"fulfillmentText": "No event happenings yet :("
+				"fulfillmentMessages":[
+					{
+						"text":{
+							"text":[
+								"No event happenings yet :("
+							]
+						}
+					},
+					{
+						"quickReplies": {
+							"title": "Explore other options!",
+							"quickReplies": [
+								"Travel Purpose", "Weather", "About Penang"
+							]
+						}	
+					}
+				]
 			}
 
 			return data

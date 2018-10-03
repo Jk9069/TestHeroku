@@ -340,7 +340,23 @@ class weatherPlaceRecommendations():
 			responseText = "No results found :("
 
 			return {
-				"fulfillmentText": responseText,
+				"fulfillmentMessages":[
+					{
+						"text":{
+							"text":[
+								responseText
+							]
+						}
+					},
+					{
+						"quickReplies": {
+							"title": "Explore other options!",
+							"quickReplies": [
+								"Travel Purpose", "Weather", "About Penang", "Events"
+							]
+						}	
+					}
+				],
 				"source": "Google Places API", 
 				"outputContexts": [
 					{
